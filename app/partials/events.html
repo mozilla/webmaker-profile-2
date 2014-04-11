@@ -1,1 +1,12 @@
-<h2>Events</h2>
+<h2 class="pull-left">Events</h2>
+
+<a href="{{ WMP.config.eventApp }}/#!/add" class="btn btn-primary pull-right margin-top" target="_blank">+ Add an event</a>
+
+<table class="table table-striped">
+  <tr ng-repeat="event in events">
+    <td>{{ event.beginDate | date:'MMM d' }}</td>
+    <td>
+      <a href="{{ WMP.config.eventApp }}/#!/events/{{event.id}}" target="_blank" class="event-title">{{ event.title }}</a>
+    </td>
+  </tr>
+</table>

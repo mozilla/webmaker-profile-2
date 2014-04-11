@@ -1,5 +1,6 @@
 angular.module('wmProfile', [
   'ngRoute',
+  'ngResource',
   'wmProfile.filters',
   'wmProfile.services',
   'wmProfile.directives',
@@ -9,28 +10,43 @@ config(['$routeProvider', '$locationProvider',
   function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!');
 
-    $routeProvider.when('/teaching-resources', {
+    $routeProvider.when('/:username/teaching-resources', {
       templateUrl: 'partials/teaching-resources.html',
       controller: 'teachingResources'
     });
 
-    $routeProvider.when('/makes', {
+    $routeProvider.when('/:username/makes', {
       templateUrl: 'partials/makes.html',
       controller: 'makes'
     });
 
-    $routeProvider.when('/likes', {
+    $routeProvider.when('/:username/likes', {
       templateUrl: 'partials/likes.html',
       controller: 'likes'
     });
 
-    $routeProvider.when('/events', {
+    $routeProvider.when('/:username/events', {
       templateUrl: 'partials/events.html',
       controller: 'events'
     });
 
+    // Route any '/USERNAME' url to '/USERNAME/teaching-resources'
     $routeProvider.otherwise({
-      redirectTo: '/'
+      redirectTo: function (params, path) {
+        return path + (path.match(/\/$/) ? '' : '/') + 'teaching-resources';
+      }
     });
+  }
+]).
+run(['$rootScope',
+  function ($rootScope) {
+    $rootScope.WMP = {
+      // TODO : Externalize config as JSON. Pull via XHR.
+      config: {
+        eventApp: 'http://localhost:1981',
+        eventService: 'http://localhost:1989'
+      },
+      username: window.location.hash.match(/#!\/([^\/]+)/)[1]
+    };
   }
 ]);

@@ -2,8 +2,15 @@
 <html lang="en" ng-app="wmProfile">
 
 <head>
+  <meta name="fragment" content="!">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
   <meta charset="utf-8">
+
   <title>Webmaker Profile</title>
+
+  <link rel="icon" type="image/png" href="img/favicon.ico">
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700">
   <link rel="stylesheet" href="compiled/app.min.ltr.css">
 </head>
@@ -29,7 +36,11 @@
         <img src="img/avatar-default.png" class="img-circle img-responsive">
       </div>
       <div class="solid-bg col-xs-12 col-sm-10">
-        <h1>Username</h1>
+        <h1 class="pull-left">{{ WMP.username }}</h1>
+        <a class="btn btn-secondary pull-right margin-top"><span class="fa fa-pencil"></span>
+        </a>
+
+        <div class="clearfix"></div>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -39,7 +50,7 @@
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
         <div class="margin-bottom">
-          <a href="#">City</a>
+          <a href="#"><span class="fa fa-map-marker"></span> City</a>
         </div>
       </div>
     </div>
@@ -47,12 +58,11 @@
     <div class="row">
       <div class="col-xs-12 tab-nav">
         <div class="btn-group">
-          <a class="btn btn-default" href="#!/teaching-resources">Teaching Resources</a>
-          <a class="btn btn-default" href="#!/makes">Makes</a>
-          <a class="btn btn-default" href="#!/likes">Likes</a>
-          <a class="btn btn-default" href="#!/events">Events</a>
+          <a class="btn btn-default" href="#!/{{ WMP.username }}/teaching-resources">Teaching Resources</a>
+          <a class="btn btn-default" href="#!/{{ WMP.username }}/makes">Makes</a>
+          <a class="btn btn-default" href="#!/{{ WMP.username }}/likes">Likes</a>
+          <a class="btn btn-default" href="#!/{{ WMP.username }}/events">Events</a>
         </div>
-
       </div>
     </div>
 
@@ -63,8 +73,9 @@
     </div>
   </div>
 
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
 
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>

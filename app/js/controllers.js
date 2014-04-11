@@ -14,8 +14,15 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'likes';
     }
   ])
-  .controller('events', ['$scope',
-    function ($scope) {
+  .controller('events', ['$scope', '$rootScope', 'eventService',
+    function ($scope, $rootScope, eventService) {
       $scope.viewID = 'events';
+
+      eventService.query({
+        organizerId: $rootScope.WMP.username
+      }, function (data) {
+        console.log(data);
+        $scope.events = data;
+      });
     }
   ]);
