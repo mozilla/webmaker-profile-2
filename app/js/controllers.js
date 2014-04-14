@@ -9,7 +9,7 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'makes';
 
       makeapi
-        .author($rootScope.WMP.username)
+        .user($rootScope.WMP.username)
         .then(function (err, makes) {
           if (err) {
             console.error(err);

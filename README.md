@@ -25,3 +25,9 @@ npm install
 ```
 
 To run the project simply execute `grunt`.
+
+### Grunt Tasks
+
+- `grunt` - Compile LESS, run web server on port 1134, and recompile LESS as needed.
+- `grunt clean` - Beautify JS and HTML based on **.jsbeautifyrc** and check JS for JSHint compliance based on **.jshintrc**.
+- `grunt validate` - Test that JS and HTML are beautified and JS passes JSHint. Typically this task is run by Travis to verify commits are clean.
