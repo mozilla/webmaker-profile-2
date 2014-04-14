@@ -44,7 +44,8 @@ run(['$rootScope',
       // TODO : Externalize config as JSON. Pull via XHR.
       config: {
         eventApp: 'http://localhost:1981',
-        eventService: 'http://localhost:1989'
+        eventService: 'http://localhost:1989',
+        makeAPI: 'https://makeapi.webmaker.org'
       },
       username: window.location.hash.match(/#!\/([^\/]+)/)[1]
     };

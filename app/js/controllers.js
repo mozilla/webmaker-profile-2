@@ -4,9 +4,22 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'teachingResources';
     }
   ])
-  .controller('makes', ['$scope',
-    function ($scope) {
+  .controller('makes', ['$scope', '$rootScope', 'makeapi',
+    function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'makes';
+
+      makeapi
+        .author($rootScope.WMP.username)
+        .then(function (err, makes) {
+          if (err) {
+            console.error(err);
+          }
+
+          console.log(makes);
+
+          $scope.makes = makes;
+          $scope.$apply();
+        });
     }
   ])
   .controller('likes', ['$scope',
@@ -21,7 +34,6 @@ angular.module('wmProfile.controllers', [])
       eventService.query({
         organizerId: $rootScope.WMP.username
       }, function (data) {
-        console.log(data);
         $scope.events = data;
       });
     }

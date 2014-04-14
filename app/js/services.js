@@ -1,4 +1,10 @@
+// NOTE:
+// Constants are used for dependency injecton of 3rd party JS libs.
+// Although these *currently* exist as global objects,
+//  they should eventually be pulled in by a module loader and removed from the global namespace.
+
 angular.module('wmProfile.services', [])
+  .constant('MakeAPI', window.Make)
   .factory('eventService', ['$rootScope', '$resource',
     function ($rootScope, $resource) {
       return $resource($rootScope.WMP.config.eventService + '/events/:id', {
@@ -9,5 +15,14 @@ angular.module('wmProfile.services', [])
           method: 'PUT'
         }
       });
+    }
+  ])
+  .factory('makeapi', ['$rootScope', '$resource', 'MakeAPI',
+    function ($rootScope, $resource, MakeAPI) {
+      var makeapi = new MakeAPI({
+        apiURL: $rootScope.WMP.config.makeAPI
+      });
+
+      return makeapi;
     }
   ]);

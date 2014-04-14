@@ -1,1 +1,13 @@
 <h2>Makes</h2>
+
+<ul ng-repeat="make in makes">
+  <li>
+    <a href="{{ make.url }}" target="_blank">{{ make.title }}</a>
+    <p>{{ make.contentType }}</p>
+    <p>{{ make.description }}</p>
+    <p>{{ make.likes.length }} Likes</p>
+    <ul ng-repeat="tag in make.tags">
+      <li>{{ tag }}</li>
+    </ul>
+  </li>
+</ul>
