@@ -27,6 +27,9 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'likes';
     }
   ])
+  .controller('userMeta', ['$scope',
+    function ($scope) {}
+  ])
   .controller('events', ['$scope', '$rootScope', 'eventService',
     function ($scope, $rootScope, eventService) {
       $scope.viewID = 'events';
