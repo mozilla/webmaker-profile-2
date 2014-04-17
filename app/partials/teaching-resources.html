@@ -1,1 +1,8 @@
 <h2>Teaching Resources</h2>
+
+<ul ng-repeat="make in makes">
+  <li>
+    <a href="{{ make.url }}" target="_blank">{{ make.title }}</a>
+    <p>{{ make.likes.length }} Likes</p>
+  </li>
+</ul>

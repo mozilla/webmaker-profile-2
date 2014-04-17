@@ -1,7 +1,23 @@
 angular.module('wmProfile.controllers', [])
-  .controller('teachingResources', ['$scope',
-    function ($scope) {
+  .controller('teachingResources', ['$scope', '$rootScope', 'makeapi',
+    function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'teachingResources';
+
+      makeapi
+        .user($rootScope.WMP.username)
+        .find({
+          tags: ['teach']
+        })
+        .then(function (err, makes) {
+          if (err) {
+            console.error(err);
+          }
+
+          console.log(makes);
+
+          $scope.makes = makes;
+          $scope.$apply();
+        });
     }
   ])
   .controller('makes', ['$scope', '$rootScope', 'makeapi',
