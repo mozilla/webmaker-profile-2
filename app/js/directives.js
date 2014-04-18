@@ -12,7 +12,7 @@ angular.module('wmProfile.directives', [])
       }
     };
   })
-  .directive('wmpSortOrder', ['jQuery',
+  .directive('wmpSortFilterBar', ['jQuery',
     function ($) {
       return {
         restrict: 'AE',
@@ -26,9 +26,20 @@ angular.module('wmProfile.directives', [])
             elTriggers.filter('.active').removeClass('active');
             $(this).addClass('active');
 
-            var sortID = $(this).data('sort-id');
+            if ($(this).data('content-filter')) {
+              scope.filterBy = {
+                contentType: 'application/x-' + $(this).data('content-filter')
+              };
+            } else {
+              delete scope.filterBy;
+            }
 
-            scope.sortOrder = sortID;
+            if ($(this).data('sort-id')) {
+              scope.sortOrder = $(this).data('sort-id');
+            } else {
+              delete scope.sortOrder;
+            }
+
             scope.$apply();
           });
         }

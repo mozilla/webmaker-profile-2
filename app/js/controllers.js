@@ -1,4 +1,7 @@
 angular.module('wmProfile.controllers', [])
+  .controller('userMeta', ['$scope',
+    function ($scope) {}
+  ])
   .controller('teachingResources', ['$scope', '$rootScope', 'makeapi',
     function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'teachingResources';
@@ -13,12 +16,7 @@ angular.module('wmProfile.controllers', [])
             console.error(err);
           }
 
-          // Massage make data for easier consumption in view
-          makes.forEach(function (make, index) {
-            makes[index].likeCount = make.likes.length;
-          });
-
-          console.log(makes);
+          makes = makeapi.massage(makes);
 
           $scope.makes = makes;
           $scope.$apply();
@@ -36,7 +34,7 @@ angular.module('wmProfile.controllers', [])
             console.error(err);
           }
 
-          console.log(makes);
+          makes = makeapi.massage(makes);
 
           $scope.makes = makes;
           $scope.$apply();
@@ -47,9 +45,6 @@ angular.module('wmProfile.controllers', [])
     function ($scope) {
       $scope.viewID = 'likes';
     }
-  ])
-  .controller('userMeta', ['$scope',
-    function ($scope) {}
   ])
   .controller('events', ['$scope', '$rootScope', 'eventService',
     function ($scope, $rootScope, eventService) {

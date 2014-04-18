@@ -1,14 +1,14 @@
 <h2>Makes</h2>
 
-<div class="margin-bottom btn-group">
-  <a class="btn" href="#">Newest</a>
-  <a class="btn" href="#">Most liked</a>
-  <a class="btn" href="#">Popcorn</a>
-  <a class="btn" href="#">Thimble</a>
-  <a class="btn" href="#">XRay Goggles</a>
-</div>
+<wmp-sort-filter-bar class="margin-bottom btn-group">
+  <a data-sort-id="-createdAt" class="btn btn-default active" href="#">Newest</a>
+  <a data-sort-id="-likeCount" class="btn btn-default" href="#">Most popular</a>
+  <a data-content-filter="popcorn" class="btn btn-default" href="#">Popcorn</a>
+  <a data-content-filter="thimble" class="btn btn-default" href="#">Thimble</a>
+  <a data-content-filter="x-ray-goggles" class="btn btn-default" href="#">XRay Goggles</a>
+</wmp-sort-filter-bar>
 
-<ul ng-repeat="make in makes">
+<ul ng-repeat="make in makes | filter: filterBy | orderBy: sortOrder || '-createdAt'">
   <li>
     <a href="{{ make.url }}" target="_blank">{{ make.title }}</a>
     <p>{{ make.contentType }}</p>
