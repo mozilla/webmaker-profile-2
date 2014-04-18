@@ -5,6 +5,7 @@
 
 angular.module('wmProfile.services', [])
   .constant('MakeAPI', window.Make)
+  .constant('jQuery', window.$)
   .factory('eventService', ['$rootScope', '$resource',
     function ($rootScope, $resource) {
       return $resource($rootScope.WMP.config.eventService + '/events/:id', {

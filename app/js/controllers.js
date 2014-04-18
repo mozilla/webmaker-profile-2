@@ -13,6 +13,11 @@ angular.module('wmProfile.controllers', [])
             console.error(err);
           }
 
+          // Massage make data for easier consumption in view
+          makes.forEach(function (make, index) {
+            makes[index].likeCount = make.likes.length;
+          });
+
           console.log(makes);
 
           $scope.makes = makes;
