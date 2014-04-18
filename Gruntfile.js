@@ -62,6 +62,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
 
+  // Development mode
   grunt.registerTask('default', ['less:development', 'connect', 'watch']);
 
   // Clean code before a commit
@@ -69,5 +70,8 @@ module.exports = function (grunt) {
 
   // Validate code (read only)
   grunt.registerTask('validate', ['jsbeautifier:validate', 'jshint']);
+
+  // Build for Production
+  grunt.registerTask('build', ['less:production']);
 
 };
