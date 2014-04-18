@@ -3,9 +3,9 @@
   <a href="http://thimble.webmaker.org" class="btn btn-primary pull-right margin-top" target="_blank">+ Add a Resource</a>
 </div>
 
-<wmp-sort-filter-bar class="margin-bottom btn-group">
-  <a data-sort-id="-createdAt" class="btn btn-default active" href="#">Newest</a>
-  <a data-sort-id="-likeCount" class="btn btn-default" href="#">Most popular</a>
+<wmp-sort-filter-bar wmp-toggle-group class="margin-bottom btn-group">
+  <button data-sort-id="-createdAt" class="btn btn-default active">Newest</button>
+  <button data-sort-id="-likeCount" class="btn btn-default">Most popular</button>
 
   <!-- TODO: Need optimized remix query in makeAPI -->
   <!-- <a data-sort-id="remixes" class="btn" href="#">Most remixed</a> -->

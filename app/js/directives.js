@@ -1,17 +1,20 @@
 angular.module('wmProfile.directives', [])
-  .directive('ngClick', function () {
-    // Prevent default on all elements that have ngClick defined
-    return {
-      restrict: 'A',
-      link: function (scope, el, attrs) {
-        if (attrs.href === '#') {
-          el.on('click', function (e) {
-            e.preventDefault();
+  .directive('wmpToggleGroup', ['jQuery',
+    function ($) {
+      return {
+        restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function ($scope, el, attrs) {
+          var elTriggers = $(el).children();
+
+          elTriggers.on('click', function (event) {
+            // Set active class only on current button choice
+            elTriggers.filter('.active').removeClass('active');
+            $(this).addClass('active');
           });
         }
-      }
-    };
-  })
+      };
+    }
+  ])
   .directive('wmpSortFilterBar', ['jQuery',
     function ($) {
       return {
@@ -20,11 +23,9 @@ angular.module('wmProfile.directives', [])
           var elTriggers = $(el).children();
 
           elTriggers.on('click', function (event) {
-            event.preventDefault();
-
-            // Set active class only on current button choice
-            elTriggers.filter('.active').removeClass('active');
-            $(this).addClass('active');
+            // // Set active class only on current button choice
+            // elTriggers.filter('.active').removeClass('active');
+            // $(this).addClass('active');
 
             if ($(this).data('content-filter')) {
               scope.filterBy = {
