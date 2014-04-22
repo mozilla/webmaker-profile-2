@@ -7,6 +7,7 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'teachingResources';
 
       makeapi
+        .getRemixCounts()
         .user($rootScope.WMP.username)
         .find({
           tags: ['teach']
@@ -28,6 +29,7 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'makes';
 
       makeapi
+        .getRemixCounts()
         .user($rootScope.WMP.username)
         .then(function (err, makes) {
           if (err) {
