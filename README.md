@@ -26,6 +26,8 @@ npm install
 
 To run the project simply execute `grunt`.
 
+To see a specific user's profile navigate to [http://localhost:1134/#!/USERNAME](http://localhost:1134/#!/USERNAME).
+
 ### Grunt Tasks
 
 - `grunt` - Compile LESS, run web server on port 1134, and recompile LESS as needed.
