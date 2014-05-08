@@ -43,9 +43,22 @@ angular.module('wmProfile.controllers', [])
         });
     }
   ])
-  .controller('likes', ['$scope',
-    function ($scope) {
+  .controller('likes', ['$scope', '$rootScope', 'makeapi',
+    function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'likes';
+
+      makeapi
+        .likedByUser($rootScope.WMP.username)
+        .then(function (err, makes) {
+          if (err) {
+            console.error(err);
+          }
+
+          makes = makeapi.massage(makes);
+
+          $scope.makes = makes;
+          $scope.$apply();
+        });
     }
   ])
   .controller('events', ['$scope', '$rootScope', 'eventService',
