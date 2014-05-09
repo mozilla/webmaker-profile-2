@@ -53,6 +53,14 @@ module.exports = function (grunt) {
           config: '.jsbeautifyrc'
         }
       }
+    },
+    cson: {
+      glob_to_multiple: {
+        expand: true,
+        src: ['env.cson'],
+        dest: 'app',
+        ext: '.json'
+      }
     }
   });
 
@@ -61,9 +69,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-cson');
 
   // Development mode
-  grunt.registerTask('default', ['less:development', 'connect', 'watch']);
+  grunt.registerTask('default', ['less:development', 'cson', 'connect', 'watch']);
 
   // Clean code before a commit
   grunt.registerTask('clean', ['jsbeautifier:modify', 'jshint']);
@@ -72,6 +81,6 @@ module.exports = function (grunt) {
   grunt.registerTask('validate', ['jsbeautifier:validate', 'jshint']);
 
   // Build for Production
-  grunt.registerTask('build', ['less:production']);
+  grunt.registerTask('build', ['less:production', 'cson']);
 
 };

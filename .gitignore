@@ -7,3 +7,5 @@ tmp
 .idea
 app/compiled/
 TODO.txt
+env.json
+env.cson

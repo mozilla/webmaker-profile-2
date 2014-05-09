@@ -38,16 +38,22 @@ config(['$routeProvider', '$locationProvider',
     });
   }
 ]).
-run(['$rootScope',
-  function ($rootScope) {
+run(['$rootScope', 'jQuery',
+  function ($rootScope, $) {
     $rootScope.WMP = {
-      // TODO : Externalize config as JSON. Pull via XHR.
-      config: {
-        eventApp: 'http://localhost:1981',
-        eventService: 'http://localhost:1989',
-        makeAPI: 'https://makeapi.webmaker.org'
-      },
       username: window.location.hash.match(/#!\/([^\/]+)/)[1]
     };
+
+    $.ajax({
+      async: false,
+      url: 'env.json',
+      dataType: 'json'
+    })
+      .done(function (config) {
+        $rootScope.WMP.config = config;
+      })
+      .fail(function () {
+        console.error('Config failed to load. Did you run grunt?');
+      });
   }
 ]);
