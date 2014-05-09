@@ -13,4 +13,16 @@ angular.module('wmProfile.filters', [])
         return text.replace(/https?:\/\//, '');
       };
     }
-  ]);
+  ])
+  .filter('rfc3339', function () {
+    return function (timestamp) {
+      timestamp = timestamp || '';
+      return new Date(timestamp).toISOString();
+    };
+  })
+  .filter('decode', function () {
+    return function (tag) {
+      tag = tag || '';
+      return decodeURI(tag);
+    };
+  });
