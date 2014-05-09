@@ -18,6 +18,9 @@ module.exports = (grunt) ->
       less:
         files: ["app/less/**/*.less"]
         tasks: ["less:development"]
+      cson:
+        files: ["env.cson"]
+        tasks: ["cson"]
 
     connect:
       server:
