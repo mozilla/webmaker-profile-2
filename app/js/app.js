@@ -4,7 +4,8 @@ angular.module('wmProfile', [
   'wmProfile.filters',
   'wmProfile.services',
   'wmProfile.directives',
-  'wmProfile.controllers'
+  'wmProfile.controllers',
+  'locompleter'
 ]).
 config(['$routeProvider', '$locationProvider',
   function ($routeProvider, $locationProvider) {
