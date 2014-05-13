@@ -1,0 +1,12 @@
+<h2>Badges</h2>
+
+<div ng-repeat="badge in badges" class="col-sm-3" ng-show="badges.length">
+  <div class="thumbnail thumbnail-badges">
+    <a href="{{WMP.config.WEBMAKER_BADGES_URL + '/' + badge.badge.slug}}">
+      <img ng-src="{{badge.badge.imageUrl}}">
+    </a>
+    <h4>{{badge.badge.name}}</h4>
+    <p>Issued by <a href="{{bage.badge.issuer.url}}">{{badge.badge.issuer.name}}</a>
+      <br>{{badge.issuedOn | date : 'mediumDate'}}</p>
+  </div>
+</div>

@@ -6,6 +6,13 @@
 angular.module('wmProfile.services', [])
   .constant('MakeAPI', window.Make)
   .constant('jQuery', window.$)
+  .factory('badgesService', ['$resource',
+    function ($resource) {
+      return $resource('/badges/username/:username', {
+        username: '@username'
+      });
+    }
+  ])
   .factory('eventService', ['$rootScope', '$resource',
     function ($rootScope, $resource) {
       return $resource($rootScope.WMP.config.eventService + '/events/:id', {

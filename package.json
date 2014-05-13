@@ -9,15 +9,23 @@
   },
   "keywords": [],
   "author": "author",
-  "dependencies": {},
+  "dependencies": {
+    "webmaker-user-client": "0.0.2",
+    "express": "^4.2.0",
+    "body-parser": "^1.2.0",
+    "morgan": "^1.0.1",
+    "cson": "^1.4.5",
+    "badgekit-api-client": "git://github.com/mozilla/badgekit-api-client#rename-instance",
+    "async": "^0.8.0",
+    "grunt-shell-spawn": "^0.3.0"
+  },
   "devDependencies": {
     "grunt": "0.4.4",
     "grunt-contrib-jshint": "0.10.0",
     "grunt-jsbeautifier": "0.2.6",
     "grunt-contrib-connect": "0.6.0",
     "grunt-contrib-watch": "0.6.1",
-    "grunt-contrib-less": "0.11.0",
-    "grunt-cson": "0.8.0"
+    "grunt-contrib-less": "0.11.0"
   },
   "engines": {
     "node": ">=0.10"
