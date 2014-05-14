@@ -2,6 +2,19 @@ angular.module('wmProfile.controllers', [])
   .controller('userMeta', ['$scope',
     function ($scope) {}
   ])
+  .controller('badges', ['$scope', '$rootScope', 'badgesService',
+    function ($scope, $rootScope, badgesService) {
+      $scope.viewID = 'badges';
+
+      badgesService.query({
+        username: $rootScope.WMP.username
+      }, function (badges) {
+        $scope.badges = badges;
+      }, function (err) {
+        console.log(err);
+      });
+    }
+  ])
   .controller('teachingResources', ['$scope', '$rootScope', 'makeapi',
     function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'teachingResources';

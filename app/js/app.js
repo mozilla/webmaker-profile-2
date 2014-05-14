@@ -11,6 +11,11 @@ config(['$routeProvider', '$locationProvider',
   function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!');
 
+    $routeProvider.when('/:username/badges', {
+      templateUrl: 'partials/badges.html',
+      controller: 'badges'
+    });
+
     $routeProvider.when('/:username/teaching-resources', {
       templateUrl: 'partials/teaching-resources.html',
       controller: 'teachingResources'

@@ -18,16 +18,12 @@ module.exports = (grunt) ->
       less:
         files: ["app/less/**/*.less"]
         tasks: ["less:development"]
-      cson:
-        files: ["env.cson"]
-        tasks: ["cson"]
 
-    connect:
+    shell:
       server:
         options:
-          base: "app/"
-          port: 1134
-          open: true
+          async: true
+        command: 'node server'
 
     jshint:
       all: [
@@ -57,25 +53,16 @@ module.exports = (grunt) ->
           mode: "VERIFY_ONLY"
           config: ".jsbeautifyrc"
 
-    cson:
-      glob_to_multiple:
-        expand: true
-        src: ["env.cson"]
-        dest: "app"
-        ext: ".json"
-
+  grunt.loadNpmTasks "grunt-shell-spawn"
   grunt.loadNpmTasks "grunt-jsbeautifier"
   grunt.loadNpmTasks "grunt-contrib-jshint"
-  grunt.loadNpmTasks "grunt-contrib-connect"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-less"
-  grunt.loadNpmTasks "grunt-cson"
 
   # Development mode
   grunt.registerTask "default", [
     "less:development"
-    "cson"
-    "connect"
+    "shell"
     "watch"
   ]
 
@@ -94,7 +81,6 @@ module.exports = (grunt) ->
   # Build for Production
   grunt.registerTask "build", [
     "less:production"
-    "cson"
   ]
 
   return
