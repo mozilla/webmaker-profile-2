@@ -5,4 +5,12 @@ angular.module('wmProfile.filters', [])
         return String(text).replace(/\%VERSION\%/mg, version);
       };
     }
+  ])
+  .filter('noProtocol', [
+
+    function () {
+      return function (text) {
+        return text.replace(/https?:\/\//, '');
+      };
+    }
   ]);
