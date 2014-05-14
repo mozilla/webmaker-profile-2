@@ -7,18 +7,18 @@ var BadgeClient = require('badgekit-api-client');
 module.exports = function (config) {
   var router = express.Router();
   var userClient = new UserClient({
-    endpoint: config.LOGIN_URL_WITH_AUTH
+    endpoint: config.loginUrlWithAuth
   });
-  var badgesClient = new BadgeClient(config.BADGEKIT_API_URL, {
-    key: config.BADGEKIT_API_KEY,
-    secret: config.BADGEKIT_API_SECRET
+  var badgesClient = new BadgeClient(config.badgekitApiUrl, {
+    key: config.badgekitApiKey,
+    secret: config.badgekitApiSecret
   });
   var badgesContext = {
     system: 'webmaker'
   };
 
   router.get('/env.json', function (req, res) {
-    res.json(config.PUBLIC);
+    res.json(config.public);
   });
 
   // Returns a list of a user's badges given a username
