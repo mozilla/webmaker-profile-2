@@ -6,11 +6,36 @@
 angular.module('wmProfile.services', [])
   .constant('MakeAPI', window.Make)
   .constant('jQuery', window.$)
-  .factory('badgesService', ['$resource',
-    function ($resource) {
-      return $resource('/user/badges/username/:username', {
+  .factory('badgesService', ['$resource', '$q',
+    function ($resource, $q) {
+      var badgeAPI = $resource('/user/badges/username/:username', {
         username: '@username'
       });
+
+      var badges;
+
+      return {
+        // Only do badges service call once and cache it
+        getBadges: function (username) {
+          var deferred = $q.defer();
+
+          if (badges) {
+            deferred.resolve(badges);
+          } else {
+            badgeAPI.query({
+              username: username
+            }, function (data) {
+              badges = data;
+              deferred.resolve(badges);
+            }, function (err) {
+              deferred.reject(err);
+            });
+          }
+
+          return deferred.promise;
+        }
+      };
+
     }
   ])
   .factory('eventService', ['$rootScope', '$resource',
