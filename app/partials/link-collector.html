@@ -11,10 +11,10 @@
 
 <ul class="user-links clearfix">
   <li ng-repeat="link in annotatedLinkList" ng-if="!link.service">
-    <a href="{{ link.url }}" target="_blank">{{ link.url | noProtocol }}</a>
     <button ng-click="removeLink($index)" ng-show="isEditMode" class="btn btn-xs btn-danger">
       <i class="fa fa-times"></i>
     </button>
+    <a href="{{ link.url }}" target="_blank">{{ link.url | noProtocol }}</a>
   </li>
 </ul>
 
