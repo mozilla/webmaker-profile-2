@@ -38,6 +38,8 @@ Returns a list of a user's badges given username.
 
 ### Grunt Tasks
 
-- `grunt` - Compile LESS, run web server on port 1134, and recompile LESS as needed.
-- `grunt clean` - Beautify JS and HTML based on **.jsbeautifyrc** and check JS for JSHint compliance based on **.jshintrc**.
+- `grunt server` - Compile LESS, run web server on port 1134, and recompile LESS as needed.
+- `grunt livereload` - Runs the above, injects livereload to browser.
+- `grunt lint` - Beautify JS and HTML based on **.jsbeautifyrc** and check JS for JSHint compliance based on **.jshintrc**.
 - `grunt validate` - Test that JS and HTML are beautified and JS passes JSHint. Typically this task is run by Travis to verify commits are clean.
+- `grunt build` - Compiles the front-end for production

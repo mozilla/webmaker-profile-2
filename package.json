@@ -23,9 +23,14 @@
     "grunt": "0.4.4",
     "grunt-contrib-jshint": "0.10.0",
     "grunt-jsbeautifier": "0.2.6",
+    "connect-livereload": "^0.4.0",
+    "grunt-autoprefixer": "^0.7.3",
+    "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-connect": "0.6.0",
     "grunt-contrib-watch": "0.6.1",
-    "grunt-contrib-less": "0.11.0"
+    "grunt-contrib-less": "0.11.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-dom-munger": "^3.4.0"
   },
   "engines": {
     "node": ">=0.10"

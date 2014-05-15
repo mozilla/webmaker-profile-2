@@ -1,29 +1,110 @@
 module.exports = (grunt) ->
   grunt.initConfig
     less:
+      options:
+        sourceMap: true
+        sourceMapBasepath: "app"
+        sourceMapRootpath: "/"
       development:
         files:
-          "app/compiled/app.min.ltr.css": "app/less/app.less"
-
-        options:
-          sourceMap: true
-          sourceMapBasepath: "app"
-          sourceMapRootpath: "/"
-
+          "app/compiled/app.ltr.css": "app/less/app.less"
       production:
         files:
-          "app/compiled/app.min.ltr.css": "app/less/app.less"
-
-    watch:
-      less:
-        files: ["app/less/**/*.less"]
-        tasks: ["less:development"]
+          ".static/css/app.ltr.css": "app/less/app.less"
+      reload:
+        files:
+          ".tmp/css/app.ltr.css": "app/less/app.less"
 
     shell:
       server:
         options:
           async: true
         command: 'node server'
+      reload:
+        options:
+          async: true
+        command: 'node server path=/../.tmp'
+
+    clean: [
+      ".tmp"
+      ".static"
+    ]
+
+    watch:
+      options:
+        cwd: "app"
+        spawn: true
+      passive:
+        files: [
+          'less/**/*.less'
+        ]
+        options:
+          livereload: false
+        tasks: [
+          "less:development"
+        ]
+      reload:
+        options:
+          spawn: false
+          livereload: true
+          interrupt: true
+          atBegin: true
+        files: [
+          'img/**/*.*'
+          'js/**/*.js'
+          'less/**/*.less'
+          'partials/**/*.html'
+          'index.html'
+        ]
+        tasks: [
+          "copy:stageJS"
+          "copy:stagePartials"
+          "less:reload"
+          "dom_munger:reload"
+        ]
+
+    copy:
+      reloadInit:
+        files: [
+          expand: true
+          cwd: "app"
+          src: "bower_components/**/*.*"
+          dest: ".tmp/"
+        ]
+      stageJS:
+        files: [
+          expand: true
+          cwd: "app"
+          src: "js/**/*.js"
+          dest: ".tmp/"
+        ]
+      stagePartials:
+        files: [
+          expand: true
+          cwd: "app"
+          src: "partials/**/*.html"
+          dest: ".tmp/"
+        ]
+
+    dom_munger:
+      reload:
+        options:
+          update:
+            selector: '#main-styles'
+            attribute: 'href'
+            value:'css/app.ltr.css'
+          append:
+            selector: "body"
+            html: "<script src=\"//localhost:35729/livereload.js\" id=\"liveReloadScript\"></script>"
+
+        src: "app/index.html"
+        dest: ".tmp/index.html"
+
+    autoprefixer:
+      options:
+        browsers: ["last 2 versions"]
+      src: ".static/css/app.ltr.css"
+      dest: "app/compiled/app.ltr.css"
 
     jshint:
       all: [
@@ -58,16 +139,33 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-jshint"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-less"
+  grunt.loadNpmTasks "grunt-dom-munger"
+  grunt.loadNpmTasks "grunt-autoprefixer"
+  grunt.loadNpmTasks "grunt-contrib-copy"
+  grunt.loadNpmTasks "grunt-contrib-clean"
 
-  # Development mode
-  grunt.registerTask "default", [
+  # Development server
+  grunt.registerTask "server", [
     "less:development"
-    "shell"
-    "watch"
+    "shell:server"
+    "watch:passive"
+  ]
+
+  # Default task is development server for b-wds compatibility
+  grunt.registerTask "default", [
+    "server"
+  ]
+
+  # Development server + livereload
+  grunt.registerTask "live-server", [
+    "clean"
+    "copy:reloadInit"
+    "shell:reload"
+    "watch:reload"
   ]
 
   # Clean code before a commit
-  grunt.registerTask "clean", [
+  grunt.registerTask "lint", [
     "jsbeautifier:modify"
     "jshint"
   ]
@@ -81,6 +179,6 @@ module.exports = (grunt) ->
   # Build for Production
   grunt.registerTask "build", [
     "less:production"
+    "autoprefixer"
   ]
-
   return

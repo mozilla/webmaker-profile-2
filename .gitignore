@@ -9,3 +9,5 @@ app/compiled/
 TODO.txt
 env.json
 env.cson
+.tmp/
+.static/
