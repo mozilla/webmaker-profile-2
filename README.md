@@ -28,11 +28,11 @@ Clone the `env.cson.example` file to `env.cson` and configure your environment.
 
 To run the project simply execute `grunt`.
 
-To see a specific user's profile navigate to [http://localhost:1969/#!/USERNAME](http://localhost:1969/#!/USERNAME).
+To see a specific user's profile navigate to [http://localhost:1969/user#!/USERNAME](http://localhost:1969/user#!/USERNAME).
 
 ## Server API
 
-### /badges/username/:username
+### /user/badges/username/:username
 
 Returns a list of a user's badges given username.
 

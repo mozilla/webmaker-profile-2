@@ -17,12 +17,12 @@ module.exports = function (config) {
     system: 'webmaker'
   };
 
-  router.get('/env.json', function (req, res) {
+  router.get('/user/env.json', function (req, res) {
     res.json(config.public);
   });
 
   // Returns a list of a user's badges given a username
-  router.get('/badges/username/:username', function (req, res, next) {
+  router.get('/user/badges/username/:username', function (req, res, next) {
     async.waterfall([
       function (callback) {
         userClient.get.byUsername(req.params.username, callback);
