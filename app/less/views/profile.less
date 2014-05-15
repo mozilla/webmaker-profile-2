@@ -1,0 +1,34 @@
+// Profile --------------------------------------------------------------------
+
+.header {
+  background-color: @white;
+  padding: 10px 0;
+  margin-bottom: 40px;
+}
+
+.main {
+  padding: (@grid-gutter-width / 2);
+}
+
+.solid-bg {
+  background-color: @white;
+}
+
+.tab-nav {
+  background-color: @grey;
+
+  a.btn {
+    border: 0;
+    padding: (@grid-gutter-width / 2);
+    &.active,
+    &:hover {
+      box-shadow: none;
+      background-color: @white;
+      color: @grey;
+    }
+  }
+}
+
+h1, h2 {
+  .text-light;
+}
