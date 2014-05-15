@@ -75,41 +75,49 @@ angular.module('wmProfile.directives', [])
           var elWrapper = $(el),
             elInput = elWrapper.find('.link-form input');
 
-          function shortName(targetURL) {
+          function getServiceFromURL(targetURL) {
             var title = targetURL.split('//')[1];
 
-            var socialMediaRegex = {
-              twitter: /^(?:www.)?twitter.com\//,
-              tumblr: /^[a-zA-Z]*.tumblr.com/,
-              facebook: /^(?:www.)?facebook.com\//,
-              googlePlus: /^plus.google.com\//
+            // Each key corresponds to a Font Awesome classname (minus "fa-")
+            var serviceRegexes = {
+              'twitter': /^(?:www.)?twitter\.com\//,
+              'tumblr': /^[a-zA-Z]*\.tumblr\.com/,
+              'facebook-square': /^(?:www.)?facebook\.com\/[^\/\n]*$/m,
+              'google-plus': /^plus\.google\.com\//,
+              'vimeo-square': /vimeo\.com\/[a-zA-Z]/,
+              'github-alt': /^github\.com\/[^\/\n]*$/m,
+              'dribbble': /^dribbble\.com\/[^\/\n]*$/m,
+              'pinterest': /^(?:www.)?pinterest\.com\/[^\/]*(?:\/)?$/m
             };
 
-            if (title.match(socialMediaRegex.twitter)) {
-              return 'twitter';
-            }
-
-            if (title.match(socialMediaRegex.tumblr)) {
-              return 'tumblr';
-            }
-
-            if (title.match(socialMediaRegex.facebook)) {
-              return 'facebook';
-            }
-
-            if (title.match(socialMediaRegex.googlePlus)) {
-              return 'google-plus';
+            // Attempt to match URL to a service
+            for (var service in serviceRegexes) {
+              if (title.match(serviceRegexes[service])) {
+                return service;
+              }
             }
 
             // If the URL doesn't match common social services, just use it verbatim
             return null;
           }
 
-          $scope.linkList = [];
+          // An array of objects with service properties for rendering in proper section of view
+          $scope.annotatedLinkList = [];
+
+          // An array of URL strings for storage on the server
+          $scope.rawLinkList = [];
+
           $scope.showInvalid = false;
           $scope.showDuplicate = false;
 
           $scope.addLink = function () {
+            // If no protocol is set, assume http and prepend it
+            if (!elInput.val().match(/https?:\/\//)) {
+              elInput.val('http://' + elInput.val());
+              elInput.trigger('input'); // Force model update
+            }
+
+            // Don't allow invalid URLs
             if (!$scope.personalLinks.link.$valid) {
               $scope.showInvalid = true;
               return;
@@ -123,9 +131,9 @@ angular.module('wmProfile.directives', [])
             }
 
             // Don't allow duplicate URLs
-            if ($scope.linkList.length) {
-              for (var i = $scope.linkList.length - 1; i >= 0; i--) {
-                if ($scope.userLink === $scope.linkList[i].url) {
+            if ($scope.annotatedLinkList.length) {
+              for (var i = $scope.annotatedLinkList.length - 1; i >= 0; i--) {
+                if ($scope.userLink === $scope.annotatedLinkList[i].url) {
                   $scope.showDuplicate = true;
                   return;
                 }
@@ -135,17 +143,20 @@ angular.module('wmProfile.directives', [])
             }
 
             if ($scope.userLink) {
-              $scope.linkList.push({
+              $scope.annotatedLinkList.push({
                 url: $scope.userLink,
-                service: shortName($scope.userLink)
+                service: getServiceFromURL($scope.userLink)
               });
+
+              $scope.rawLinkList.push($scope.userLink);
 
               elInput.val(null);
             }
           };
 
           $scope.removeLink = function (id) {
-            $scope.linkList.splice(id, 1);
+            $scope.annotatedLinkList.splice(id, 1);
+            $scope.rawLinkList.splice(id, 1);
           };
 
           // Add links when enter is pressed
