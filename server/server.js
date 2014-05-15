@@ -12,7 +12,7 @@ module.exports = function (config) {
   app.use(bodyParser.urlencoded());
   app.use(routes);
   app.use(middleware.errorHandler);
-  app.use(express.static(__dirname + '/../app'));
+  app.use('/user', express.static(__dirname + '/../app'));
 
   return app;
 };

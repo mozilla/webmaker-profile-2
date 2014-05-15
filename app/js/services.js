@@ -8,7 +8,7 @@ angular.module('wmProfile.services', [])
   .constant('jQuery', window.$)
   .factory('badgesService', ['$resource',
     function ($resource) {
-      return $resource('/badges/username/:username', {
+      return $resource('/user/badges/username/:username', {
         username: '@username'
       });
     }
