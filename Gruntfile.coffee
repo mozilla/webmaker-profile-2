@@ -59,6 +59,7 @@ module.exports = (grunt) ->
         tasks: [
           "copy:stageJS"
           "copy:stagePartials"
+          "copy:stageImages"
           "less:reload"
           "dom_munger:reload"
         ]
@@ -83,6 +84,13 @@ module.exports = (grunt) ->
           expand: true
           cwd: "app"
           src: "partials/**/*.html"
+          dest: ".tmp/"
+        ]
+      stageImages:
+        files: [
+          expand: true
+          cwd: "app"
+          src: "img/**/*.*"
           dest: ".tmp/"
         ]
 
