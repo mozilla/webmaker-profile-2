@@ -1,0 +1,240 @@
+// TODO: Implement .editing class on tag `ul` w/ng, append `<li class="cancel">&times;</li>`
+// TODO appended: perhaps should be an li w/ a btn of class fa-times & cancel?
+
+.profile-makes {
+  padding: 0.5rem 1.5rem;
+
+  h2 {
+    color: lighten(@grey, 30%);
+    font-size: 4.2rem;
+    font-weight: 300;
+  }
+}
+
+.makes-list {
+  list-style: none;
+  padding-left: 0;
+  > li {
+    border: lighten(@grey, 58%) solid 0.2rem;
+    margin: 2rem 0;
+    overflow: hidden;
+  }
+}
+
+.make-view {
+  background: lighten(@grey, 65%);
+  border-right: lighten(@grey, 55.5%) solid 0.1rem;
+  overflow: hidden;
+  padding: 0.5rem;
+  &[class*="application/x-thimble"] {
+    .make-title {
+      &::before {
+        background-position: 50% -98px;
+      }
+    }
+  }
+  &[class*="application/x-popcorn"] {
+    .make-title {
+      &::before {
+        background-position: 50% -46px;
+      }
+    }
+  }
+  &[class*="application/x-goggles"] {
+    .make-title {
+      &::before {
+        background-position: 50% -142px;
+      }
+    }
+  }
+  @media screen and (min-width: @screen-sm) {
+    border-right-width: 0.3rem;
+    &[class*="application/x-thimble"] {
+      .make-title {
+        &::before {
+          background-position: 50% -117.5px;
+        }
+      }
+    }
+
+    &[class*="application/x-popcorn"] {
+      .make-title {
+        &::before {
+          background-position: 50% -55px;
+        }
+      }
+    }
+
+    &[class*="application/x-goggles"] {
+      .make-title {
+        &::before {
+          background-position: 50% -177.5px;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: @screen-md) {
+    border-right-width: 0.4rem;
+  }
+  @media screen and (min-width: @screen-lg) {
+    border-right-width: 0.5rem;
+  }
+}
+
+.make-thumbnail {
+  margin: 1rem auto;
+
+  @media screen and (min-width: @screen-sm) {
+    float: left;
+    margin: 0 0.5rem 0 0;
+    width: 15rem;
+  }
+  @media screen and (min-width: @screen-md) {
+    width: 20rem;
+  }
+  @media screen and (min-width: @screen-lg) {
+    width: 25rem;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+}
+
+.make-title {
+  font-size: 2rem;
+  margin-top: 2rem;
+  min-height: 5.65rem;
+  padding: 0.8rem 0 1.2rem 6.2rem;
+  position: relative;
+  text-transform: capitalize;
+  &::before {
+    content: '';
+    background: @white url('../img/tools_sprite.png') center center no-repeat;
+    background-size: 43px 192px;
+    border: lighten(@grey, 56%) solid 0.1rem;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    height: 4.1rem;
+    left: -0.7rem;
+    margin: 0 1rem 0 0.7rem;
+    padding: 3rem 2.9rem 2.4rem 2.4rem;
+    position: absolute;
+    top: 0;
+    width: 3.9rem;
+    @media screen and (min-width: @screen-sm) {
+      background-size: 53.75px 240px;
+      padding: 3.75rem 4rem 3.75rem 3.5rem;
+      top: -1.2rem;
+    }
+  }
+  @media screen and (min-width: @screen-sm) {
+    margin: 3rem 0 0 @sm-margin;
+    min-height: 0;
+    padding: 0.5rem 0 0 7.7rem;
+    text-indent: 1.25rem;
+  }
+  @media screen and (min-width: @screen-md) {
+    margin-left: @md-margin;
+  }
+  @media screen and (min-width: @screen-lg) {
+    margin-left: @lg-margin;
+  }
+  a {
+    &:link, &:visited, &:hover, &:active, &:focus {
+      color: @grey;
+    }
+    &:hover, &:active, &:focus {
+      color: @black;
+    }
+  }
+}
+
+.make-description, .make-meta {
+  color: lighten(@grey, 30%);
+  padding: 0.5rem 2rem;
+  font-weight: 300;
+
+  @media screen and (min-width: @screen-sm) {
+    margin-left: @sm-margin;
+  }
+  @media screen and (min-width: @screen-md) {
+   margin-left: @md-margin;
+  }
+  @media screen and (min-width: @screen-lg) {
+   margin-left: @lg-margin;
+  }
+}
+
+.make-description {
+  @media screen and (min-width: @screen-sm) {
+    min-height: 3rem;
+    padding-left: 9rem;
+  }
+}
+
+.make-likes {
+  margin-right: 1rem;
+  &:link, &:visited, &:hover, &:active, &:focus {
+    color: @grey;
+    font-weight: 700;
+  }
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
+  &::before {
+    .fa-mixin();
+    color: @brand-primary;
+    content: @fa-var-heart;
+    font-weight: 300;
+    margin-right: 0.5rem;
+    &:hover {
+      font-weight: 700;
+    }
+  }
+}
+
+.make-tags {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    a {
+      &:link, &:visited, &:hover, &:active, &:focus {
+        font-size: 1.6rem;
+      }
+    }
+  }
+  &::before {
+    .fa-mixin();
+    .fa-flip-horizontal();
+    color: @brand-primary;
+    content: @fa-var-tag;
+  }
+  &.editing {
+    li {
+      display: inline-block;
+      background: @white;
+      border: 0.1rem lighten(@grey, 58%) solid;
+      padding: 0.2rem 0.9rem 0.3rem;
+      margin: 0 0.2rem;
+      &::after {
+        content: '';
+      }
+    }
+    .cancel {
+      display: inline-block;
+      background: @brand-secondary;
+      color: @white;
+      font-size: large;
+      font-weight: 700;
+      padding: 0 0.9rem 0.1rem;
+    }
+  }
+}
