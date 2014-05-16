@@ -39,7 +39,7 @@ config(['$routeProvider', '$locationProvider',
     // Route any '/USERNAME' url to '/USERNAME/teaching-resources'
     $routeProvider.otherwise({
       redirectTo: function (params, path) {
-        return path + (path.match(/\/$/) ? '' : '/') + 'teaching-resources';
+        return path + (path.match(/\/$/) ? '' : '/') + 'badges';
       }
     });
   }
