@@ -6,6 +6,37 @@
 angular.module('wmProfile.services', [])
   .constant('MakeAPI', window.Make)
   .constant('jQuery', window.$)
+  .factory('userService', ['$resource', '$q',
+    function ($resource, $q) {
+      var userAPI = $resource('/user/user-data/:username', {
+        username: '@username'
+      });
+
+      var userData;
+
+      return {
+        getUserData: function (username) {
+          var deferred = $q.defer();
+
+          if (userData) {
+            deferred.resolve(userData);
+          } else {
+            userAPI.get({
+              username: username
+            }, function (data) {
+              userData = data;
+              deferred.resolve(userData);
+            }, function (err) {
+              console.error('User ' + username + ' doesn\'t exist.');
+              deferred.reject(err);
+            });
+          }
+
+          return deferred.promise;
+        }
+      };
+    }
+  ])
   .factory('badgesService', ['$resource', '$q',
     function ($resource, $q) {
       var badgeAPI = $resource('/user/badges/username/:username', {

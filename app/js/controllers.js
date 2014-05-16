@@ -1,7 +1,11 @@
 angular.module('wmProfile.controllers', [])
-  .controller('userMeta', ['$scope', '$rootScope', 'badgesService',
-    function ($scope, $rootScope, badgesService) {
+  .controller('userMeta', ['$scope', '$rootScope', 'badgesService', 'userService',
+    function ($scope, $rootScope, badgesService, userService) {
       $scope.hasFeaturedBadge = false;
+
+      $scope.userData = userService.getUserData($rootScope.WMP.username).then(function (userData) {
+        $scope.userData = userData;
+      });
 
       badgesService.getBadges($rootScope.WMP.username).then(function (badges) {
         var featuredBadge = 23; // Super mentor

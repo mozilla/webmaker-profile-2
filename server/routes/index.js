@@ -48,5 +48,18 @@ module.exports = function (config) {
 
   });
 
+  // Get a user's public data subset
+  router.get('/user/user-data/:username', function (req, res, next) {
+    userClient.get.byUsername(req.params.username, function (err, data) {
+      if (!data.error) {
+        res.json({
+          avatar: 'https://secure.gravatar.com/avatar/' + data.user.emailHash + '?s=400&d=https%3A%2F%2Fstuff.webmaker.org%2Favatars%2Fwebmaker-avatar-200x200.png'
+        });
+      } else {
+        res.send(404);
+      }
+    })
+  });
+
   return router;
 };
