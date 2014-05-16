@@ -111,8 +111,9 @@ module.exports = (grunt) ->
     autoprefixer:
       options:
         browsers: ["last 2 versions"]
-      src: ".static/css/app.ltr.css"
-      dest: "app/compiled/app.ltr.css"
+      build:
+        src: ".static/css/app.ltr.css"
+        dest: "app/compiled/app.ltr.css"
 
     jshint:
       all: [
@@ -187,6 +188,6 @@ module.exports = (grunt) ->
   # Build for Production
   grunt.registerTask "build", [
     "less:production"
-    "autoprefixer"
+    "autoprefixer:build"
   ]
   return
