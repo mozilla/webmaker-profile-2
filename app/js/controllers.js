@@ -1,17 +1,25 @@
 angular.module('wmProfile.controllers', [])
-  .controller('userMeta', ['$scope',
-    function ($scope) {}
+  .controller('userMeta', ['$scope', '$rootScope', 'badgesService',
+    function ($scope, $rootScope, badgesService) {
+      $scope.hasFeaturedBadge = false;
+
+      badgesService.getBadges($rootScope.WMP.username).then(function (badges) {
+        var featuredBadge = 23; // Super mentor
+
+        for (var i = 0, ii = badges.length; i < ii && !$scope.hasFeaturedBadge; i++) {
+          if (badges[i].badge.id === featuredBadge) {
+            $scope.hasFeaturedBadge = true;
+          }
+        }
+      });
+    }
   ])
   .controller('badges', ['$scope', '$rootScope', 'badgesService',
     function ($scope, $rootScope, badgesService) {
       $scope.viewID = 'badges';
 
-      badgesService.query({
-        username: $rootScope.WMP.username
-      }, function (badges) {
+      badgesService.getBadges($rootScope.WMP.username).then(function (badges) {
         $scope.badges = badges;
-      }, function (err) {
-        console.log(err);
       });
     }
   ])
