@@ -16,6 +16,7 @@
     "cson": "^1.4.5",
     "express": "^4.2.0",
     "grunt-shell-spawn": "^0.3.0",
+    "messina": "^0.1.2",
     "morgan": "^1.0.1",
     "newrelic": "^1.5.5",
     "webmaker-user-client": "0.0.2"
