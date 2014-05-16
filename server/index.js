@@ -1,3 +1,7 @@
+if (process.env.NEW_RELIC_HOME) {
+  require('newrelic');
+}
+
 var cson = require('cson');
 
 var config = cson.parseFileSync('env.cson');

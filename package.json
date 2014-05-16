@@ -10,14 +10,15 @@
   "keywords": [],
   "author": "author",
   "dependencies": {
-    "webmaker-user-client": "0.0.2",
-    "express": "^4.2.0",
-    "body-parser": "^1.2.0",
-    "morgan": "^1.0.1",
-    "cson": "^1.4.5",
-    "badgekit-api-client": "git://github.com/mozilla/badgekit-api-client#rename-instance",
     "async": "^0.8.0",
-    "grunt-shell-spawn": "^0.3.0"
+    "badgekit-api-client": "git://github.com/mozilla/badgekit-api-client#rename-instance",
+    "body-parser": "^1.2.0",
+    "cson": "^1.4.5",
+    "express": "^4.2.0",
+    "grunt-shell-spawn": "^0.3.0",
+    "morgan": "^1.0.1",
+    "newrelic": "^1.5.5",
+    "webmaker-user-client": "0.0.2"
   },
   "devDependencies": {
     "grunt": "0.4.4",
