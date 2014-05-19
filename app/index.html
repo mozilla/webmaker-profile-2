@@ -31,12 +31,12 @@
 
   <div class="container double-margin-bottom">
 
-    <div class="row double-margin-bottom">
+    <div ng-controller="userMeta" class="row double-margin-bottom">
       <div class="col-xs-12 col-sm-2">
-        <img src="img/avatar-default.png" class="img-circle img-responsive">
+        <img ng-src="{{ userData.avatar }}" class="img-circle img-responsive">
       </div>
 
-      <div ng-controller="userMeta" class="user-metadata solid-bg col-xs-12 col-sm-10">
+      <div class="user-metadata solid-bg col-xs-12 col-sm-10">
         <div ng-class="{'row': hasFeaturedBadge}">
           <div ng-class="{'col-sm-10': hasFeaturedBadge}">
             <div class="clearfix">
