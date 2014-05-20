@@ -69,11 +69,22 @@ angular.module('wmProfile.directives', [])
     function ($) {
       return {
         restrict: 'AE',
-        scope: true,
+        scope: {
+          isEditMode: '=wmpEditMode',
+          linkList: '=ngModel'
+        },
         templateUrl: 'partials/link-collector.html',
         link: function ($scope, el, attrs, controller) {
           var elWrapper = $(el),
             elInput = elWrapper.find('.link-form input');
+
+          $scope.linkList = $scope.linkList || [];
+
+          // An array of objects with service names for custom rendering
+          $scope.annotatedLinkList = [];
+
+          $scope.showInvalid = false;
+          $scope.showDuplicate = false;
 
           function getServiceFromURL(targetURL) {
             var title = targetURL.split('//')[1];
@@ -101,73 +112,80 @@ angular.module('wmProfile.directives', [])
             return null;
           }
 
-          // An array of objects with service properties for rendering in proper section of view
-          $scope.annotatedLinkList = [];
+          function validateURL(url) {
+            // Don't allow empty or null strings
+            if (!url || url.trim() === '') {
+              return false;
+            }
 
-          // An array of URL strings for storage on the server
-          $scope.rawLinkList = [];
-
-          $scope.showInvalid = false;
-          $scope.showDuplicate = false;
-
-          $scope.addLink = function () {
             // If no protocol is set, assume http and prepend it
-            if (!elInput.val().match(/https?:\/\//)) {
-              elInput.val('http://' + elInput.val());
-              elInput.trigger('input'); // Force model update
-            }
-
-            // Don't allow invalid URLs
-            if (!$scope.personalLinks.link.$valid) {
-              $scope.showInvalid = true;
-              return;
-            } else {
-              $scope.showInvalid = false;
-            }
-
-            // Don't add empty or null strings
-            if (!$scope.userLink || $scope.userLink.trim() === '') {
-              return;
+            if (!url.match(/https?:\/\//)) {
+              url = 'http://' + url;
             }
 
             // Don't allow duplicate URLs
-            if ($scope.annotatedLinkList.length) {
-              for (var i = $scope.annotatedLinkList.length - 1; i >= 0; i--) {
-                if ($scope.userLink === $scope.annotatedLinkList[i].url) {
+            if ($scope.linkList.length) {
+              for (var i = $scope.linkList.length - 1; i >= 0; i--) {
+                if (url === $scope.linkList[i]) {
                   $scope.showDuplicate = true;
-                  return;
+                  return false;
                 }
               }
 
               $scope.showDuplicate = false;
             }
 
-            if ($scope.userLink) {
-              $scope.annotatedLinkList.push({
-                url: $scope.userLink,
-                service: getServiceFromURL($scope.userLink)
-              });
+            return url;
+          }
 
-              $scope.rawLinkList.push($scope.userLink);
+          $scope.addLink = function (url) {
+            url = validateURL(url);
 
+            if (url) {
+              $scope.linkList.push(url);
+              return true;
+            } else {
+              return false;
+            }
+          };
+
+          // Clear the input when a link is added
+          $scope.addLinkUI = function (url) {
+            if ($scope.addLink(url)) {
               elInput.val(null);
             }
           };
 
-          $scope.removeLink = function (id) {
-            $scope.annotatedLinkList.splice(id, 1);
-            $scope.rawLinkList.splice(id, 1);
+          $scope.removeLinkUI = function (index) {
+            $scope.linkList.splice(index, 1);
           };
+
+          function updateUI (links) {
+            $scope.annotatedLinkList = [];
+
+            for (var index = 0, length = links.length; index < length; index++ ) {
+              $scope.annotatedLinkList.push({
+                url: links[index],
+                service: getServiceFromURL(links[index])
+              });
+            }
+          }
+
+          // EVENT DELEGATION -------------------------------------------------
 
           // Add links when enter is pressed
           elInput.on('keypress', function (event) {
             if (event.keyCode === 13) {
               event.preventDefault();
-              $scope.addLink();
+              $scope.addLinkUI($scope.userLink);
               $scope.$apply();
             }
           });
 
+          // All UI link list changes are driven by changes to the linkList model
+          $scope.$watch('linkList', function (newValue) {
+            updateUI(newValue);
+          }, true);
         }
       };
     }

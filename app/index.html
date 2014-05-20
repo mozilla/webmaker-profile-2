@@ -31,7 +31,7 @@
 
   <div class="container double-margin-bottom">
 
-    <div ng-controller="userMeta" class="row double-margin-bottom">
+    <div ng-controller="userMeta as user" class="row double-margin-bottom">
       <div class="col-xs-12 col-sm-2">
         <img ng-src="{{ userData.avatar }}" class="img-circle img-responsive">
       </div>
@@ -49,16 +49,16 @@
             </div>
 
             <div class="margin-bottom">
-              <textarea class="form-control" ng-show="isEditMode" placeholder="Write a little about yourself!" ng-model="userIntro"></textarea>
-              <p ng-hide="isEditMode">{{ userIntro }}</p>
+              <textarea class="form-control" ng-show="isEditMode" placeholder="Write a little about yourself!" ng-model="user.bio"></textarea>
+              <p ng-hide="isEditMode">{{ user.bio }}</p>
             </div>
 
             <div class="margin-bottom">
-              <input autocomplete-location class="form-control" ng-show="isEditMode" ng-model="userLocation" placeholder="Where do you live?">
-              <a ng-hide="isEditMode || !userLocation " href="#"><span class="fa fa-map-marker nbsp-right"></span>{{ userLocation }}</a>
+              <input autocomplete-location class="form-control" ng-show="isEditMode" ng-model="user.location" placeholder="Where do you live?">
+              <a ng-hide="isEditMode || !user.location " href="#"><span class="fa fa-map-marker nbsp-right"></span>{{ user.location }}</a>
             </div>
 
-            <wmp-link-collector class="margin-bottom">
+            <wmp-link-collector wmp-edit-mode="isEditMode" ng-model="user.linkList" class="margin-bottom">
           </div>
 
           <div ng-if="hasFeaturedBadge" class="featured-badge hidden-xs col-sm-2">
