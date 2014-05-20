@@ -1,16 +1,17 @@
 angular.module('wmProfile.controllers', [])
-  .controller('userMeta', ['$scope', '$rootScope', 'badgesService', 'userService',
-    function ($scope, $rootScope, badgesService, userService) {
+  .controller('userMeta', ['$scope', '$rootScope', 'badgesService', 'userService', 'loginService',
+    function ($scope, $rootScope, badgesService, userService, loginService) {
       // Scope defaults
       $scope.hasFeaturedBadge = false;
       $scope.isEditMode = false;
+      $scope.canEdit = false;
 
       // Pull in user's saved editable metadata
       var rehydratedData = JSON.parse(localStorage.getItem('userData') || '{}');
 
       // TODO – Hack. How can this work w/out setTimeout?
       //        Using setTimeout because otherwise there is a collision error
-      setTimeout(function() {
+      setTimeout(function () {
         if (rehydratedData) {
           $scope.user.bio = rehydratedData.bio || null;
           $scope.user.location = rehydratedData.location || null;
@@ -39,6 +40,20 @@ angular.module('wmProfile.controllers', [])
             $scope.hasFeaturedBadge = true;
           }
         }
+      });
+
+      // Show and hide edit button based on logged in user matching profile owner
+
+      $scope.$on('userLoggedIn', function (event, data) {
+        if ($rootScope.WMP.username === data.username) {
+          $scope.canEdit = true;
+          $scope.$digest();
+        }
+      });
+
+      $scope.$on('userLoggedOut', function (event, data) {
+        $scope.canEdit = false;
+        $scope.$digest();
       });
     }
   ])

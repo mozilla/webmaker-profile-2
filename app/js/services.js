@@ -6,6 +6,7 @@
 angular.module('wmProfile.services', [])
   .constant('MakeAPI', window.Make)
   .constant('jQuery', window.$)
+  .constant('WebmakerAuthClient', window.WebmakerAuthClient)
   .factory('userService', ['$resource', '$q',
     function ($resource, $q) {
       var userAPI = $resource('/user/user-data/:username', {
@@ -33,6 +34,40 @@ angular.module('wmProfile.services', [])
           }
 
           return deferred.promise;
+        }
+      };
+    }
+  ])
+  .factory('loginService', ['$rootScope', 'WebmakerAuthClient',
+    function ($rootScope, WebmakerAuthClient) {
+      var visitorData;
+      var auth = new WebmakerAuthClient();
+
+      auth.on('login', function (user, debuggingInfo) {
+        visitorData = user;
+        $rootScope.$broadcast('userLoggedIn', visitorData);
+      });
+
+      auth.on('logout', function () {
+        visitorData = undefined;
+        $rootScope.$broadcast('userLoggedOut');
+      });
+
+      auth.on('error', function (errorMessage) {
+        console.error(errorMessage);
+      });
+
+      auth.verify();
+
+      return {
+        login: function () {
+          auth.login();
+        },
+        logout: function () {
+          auth.logout();
+        },
+        getData: function () {
+          return visitorData;
         }
       };
     }

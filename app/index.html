@@ -20,10 +20,11 @@
   <header class="header">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 clearfix">
           <a href="https://webmaker.org" class="logo webmaker-logo">
             <img src="bower_components/makerstrap/images/logo.png">
           </a>
+          <wmp-login class="pull-right">
         </div>
       </div>
     </div>
@@ -42,7 +43,7 @@
             <div class="clearfix">
               <h1 class="pull-left">{{ WMP.username }}</h1>
 
-              <button ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
+              <button ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
                 <span ng-hide="isEditMode" class="fa fa-pencil"></span>
                 <span ng-show="isEditMode" class="fa fa-save"></span>
               </button>
@@ -89,6 +90,9 @@
     </div>
   </div>
 
+  <script src="https://login.persona.org/include.js"></script>
+
+  <script src="bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js"></script>
   <script src="bower_components/makeapi-client/src/make-api.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
 

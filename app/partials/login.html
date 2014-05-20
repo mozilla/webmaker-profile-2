@@ -1,0 +1,4 @@
+<p ng-if="userInfo.displayName">Hi, <strong>{{ userInfo.displayName }}</strong></p>
+
+<button class="btn btn-default btn-xs" ng-if="!userLoggedIn" ng-click="login()">Log In</button>
+<button class="btn btn-default btn-xs" ng-if="userLoggedIn" ng-click="logout()">Log Out</button>
