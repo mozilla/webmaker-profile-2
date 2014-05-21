@@ -1,4 +1,32 @@
 angular.module('wmProfile.directives', [])
+  .directive('wmpLogin', ['WebmakerAuthClient', 'loginService',
+    function (WebmakerAuthClient, loginService) {
+      return {
+        restrict: 'E',
+        scope: false,
+        templateUrl: 'partials/login.html',
+        link: function ($scope, el, attrs) {
+          $scope.userInfo = loginService.getData();
+          $scope.userLoggedIn = !!$scope.userInfo; // No user info means not logged in
+
+          $scope.$on('userLoggedIn', function (event, data) {
+            $scope.userLoggedIn = true;
+            $scope.userInfo = data;
+            $scope.$digest();
+          });
+
+          $scope.$on('userLoggedOut', function (event, data) {
+            $scope.userLoggedIn = false;
+            $scope.userInfo = undefined;
+            $scope.$digest();
+          });
+
+          $scope.login = loginService.login;
+          $scope.logout = loginService.logout;
+        }
+      };
+    }
+  ])
   .directive('wmpToggleGroup', ['jQuery',
     // Put an "active" class on only the last clicked element in a group
     function ($) {
@@ -160,10 +188,10 @@ angular.module('wmProfile.directives', [])
             $scope.linkList.splice(index, 1);
           };
 
-          function updateUI (links) {
+          function updateUI(links) {
             $scope.annotatedLinkList = [];
 
-            for (var index = 0, length = links.length; index < length; index++ ) {
+            for (var index = 0, length = links.length; index < length; index++) {
               $scope.annotatedLinkList.push({
                 url: links[index],
                 service: getServiceFromURL(links[index])

@@ -4,7 +4,7 @@ var fs = require('fs');
 var UserClient = require('webmaker-user-client');
 var BadgeClient = require('badgekit-api-client');
 
-module.exports = function (config) {
+module.exports = function (config, webmakerAuth) {
   var router = express.Router();
   var userClient = new UserClient({
     endpoint: config.loginUrlWithAuth
@@ -60,6 +60,12 @@ module.exports = function (config) {
       }
     })
   });
+
+  router.post('/verify', webmakerAuth.handlers.verify);
+  router.post('/authenticate', webmakerAuth.handlers.authenticate);
+  router.post('/create', webmakerAuth.handlers.create);
+  router.post('/logout', webmakerAuth.handlers.logout);
+  router.post('/check-username', webmakerAuth.handlers.exists);
 
   return router;
 };

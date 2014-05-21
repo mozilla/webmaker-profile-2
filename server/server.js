@@ -3,9 +3,21 @@ module.exports = function (config) {
   var bodyParser = require('body-parser');
   var morgan = require('morgan');
   var messina = require('messina')('webmaker-profile-2-' + config.nodeEnv);
+  var WebmakerAuth = require('webmaker-auth');
+
+  var webmakerAuth = new WebmakerAuth({
+    // required
+    loginURL: config.loginUrlWithAuth,
+    secretKey: config.sessionSecret,
+
+    // optional
+    domain: config.cookieDomain, // default undefined
+    forceSSL: config.forceSSL, // default false
+    maxAge: config.maxAge // default 365 days
+  });
 
   var app = express();
-  var routes = require('./routes')(config);
+  var routes = require('./routes')(config, webmakerAuth);
   var middleware = require('./middleware')(config);
 
   var reloadFiles = process.argv[2] !== undefined && process.argv[2].split('=').length > 1 && process.argv[2].split('=')[0] === 'path' ? __dirname + process.argv[2].split('=')[1] : undefined;
@@ -15,8 +27,11 @@ module.exports = function (config) {
   } else {
     app.use(morgan('dev'));
   }
+
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded());
+  app.use(webmakerAuth.cookieParser());
+  app.use(webmakerAuth.cookieSession());
   app.use(routes);
   app.use(middleware.errorHandler);
   app.use('/user', express.static(reloadFiles || __dirname + '/../app'));
