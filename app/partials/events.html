@@ -1,14 +1,22 @@
-<div class="clearfix">
+<div class="clearfix margin-bottom">
   <h2 class="pull-left">Events</h2>
 
   <a href="{{ WMP.config.eventApp }}/#!/add" class="btn btn-primary pull-right margin-top" target="_blank">+ Add an event</a>
 </div>
-
-<table class="table table-striped">
+<table class="table table-striped events">
   <tr ng-repeat="event in events">
-    <td>{{ event.beginDate | date:'MMM d' }}</td>
-    <td>
-      <a href="{{ WMP.config.eventApp }}/#!/events/{{event.id}}" target="_blank" class="event-title">{{ event.title }}</a>
+    <td class="event-date-time">
+      <div class="event-time">
+        <time datetime="{{ event.beginDate }}">
+          {{ event.beginDate | date:'MMM d' }}
+        </time>
+      </div>
+    </td>
+    <td class="event-title-location">
+      <h2>
+        <a href="{{ WMP.config.eventApp }}/#!/events/{{event.id}}" target="_blank" class="event-title">{{ event.title }}</a>
+        <span>({{ event.address}}</span>
+      </h2>
     </td>
   </tr>
 </table>
