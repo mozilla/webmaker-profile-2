@@ -1,44 +1,43 @@
 <section class="profile-makes">
   <h2>Makes</h2>
-<wmp-sort-filter-bar wmp-toggle-group class="margin-bottom btn-group">
-  <button data-sort-id="-createdAt" class="btn btn-default active">Newest
-  </button>
-  <button data-sort-id="-likeCount" class="btn btn-default">Most popular
-  </button>
-  <button data-content-filter="popcorn" class="btn btn-default">Popcorn</button>
-  <button data-content-filter="thimble" class="btn btn-default">Thimble</button>
-  <button data-content-filter="x-ray-goggles" class="btn btn-default">XRay
-    Goggles
-  </button>
-</wmp-sort-filter-bar>
+  <wmp-sort-filter-bar wmp-toggle-group class="margin-bottom btn-group">
+    <button data-sort-id="-createdAt" class="btn btn-default active">Newest
+    </button>
+    <button data-sort-id="-likeCount" class="btn btn-default">Most popular
+    </button>
+    <button data-content-filter="popcorn" class="btn btn-default">Popcorn</button>
+    <button data-content-filter="thimble" class="btn btn-default">Thimble</button>
+    <button data-content-filter="x-ray-goggles" class="btn btn-default">XRay Goggles
+    </button>
+  </wmp-sort-filter-bar>
 
-<ul class="makes-list">
-  <li ng-repeat="make in makes | filter: filterBy | orderBy: sortOrder || '-createdAt'">
-    <article class="make-view {{ make.contentType }}" id="id_{{ make._id }}">
-      <time datetime="{{ make.createdAt | rfc3339 }}" pubdate></time>
-      <figure class="make-thumbnail">
-        <img ng-src="{{ make.thumbnail }}">
-      </figure>
+  <ul class="makes-list">
+    <li ng-repeat="make in makes | filter: filterBy | orderBy: sortOrder || '-createdAt'">
+      <article class="make-view {{ make.contentType }}" id="id_{{ make._id }}">
+        <time datetime="{{ make.createdAt | rfc3339 }}" pubdate></time>
+        <figure class="make-thumbnail">
+          <img ng-src="{{ make.thumbnail }}">
+        </figure>
 
-      <h1 class="make-title">
-        <a href="{{ make.url }}" target="_blank">
-          {{ make.title }}
-        </a>
-      </h1>
+        <h1 class="make-title">
+          <a href="{{ make.url }}" target="_blank">
+            {{ make.title }}
+          </a>
+        </h1>
 
-      <p class="make-description">
-        {{ make.description }}
-      </p>
+        <p class="make-description">
+          {{ make.description }}
+        </p>
 
-      <div class="make-meta">
-        <a class="make-likes" href="#">{{ make.likes.length }}</a>
-        <ul class="make-tags" ng-if="make.tags.length">
-          <li ng-repeat="tag in make.tags">
-            <a href="#">{{ tag | decode }}</a><span ng-class="{hidden:$last}">,</span>
-          </li>
-        </ul>
-      </div>
-    </article>
-  </li>
-</ul>
+        <div class="make-meta">
+          <a class="make-likes" href="#">{{ make.likes.length }}</a>
+          <ul class="make-tags" ng-if="make.tags.length">
+            <li ng-repeat="tag in make.tags">
+              <a href="#">{{ tag | decode }}</a><span ng-class="{hidden:$last}">,</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </li>
+  </ul>
 </section>
