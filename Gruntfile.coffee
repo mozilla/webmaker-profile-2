@@ -97,10 +97,6 @@ module.exports = (grunt) ->
     dom_munger:
       reload:
         options:
-          update:
-            selector: '#main-styles'
-            attribute: 'href'
-            value:'css/app.ltr.css'
           append:
             selector: "body"
             html: "<script src=\"//localhost:35729/livereload.js\" id=\"liveReloadScript\"></script>"
