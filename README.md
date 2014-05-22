@@ -26,20 +26,36 @@ npm install
 
 Clone the `env.cson.example` file to `env.cson` and configure your environment.
 
-To run the project simply execute `grunt`.
+To run the project simply execute `grunt`, or if you'd like live reload `grunt live-server`.
 
-To see a specific user's profile navigate to [http://localhost:1969/user#!/USERNAME](http://localhost:1969/user#!/USERNAME).
+To see a specific user's profile navigate to [http://localhost:1969/user/#!/USERNAME](http://localhost:1969/user#!/USERNAME).
 
-## Server API
+### Server API Routes
 
-### /user/badges/username/:username
+##### /user/badges/username/:username
 
-Returns a list of a user's badges given username.
+Returns a list of a user's badges given `username`.
+
+##### /user/user-data/:username
+
+Returns public user metadata for given `username`.
+
+##### /user/env.json
+
+Returns JSON of public app configuration for use on client side.
+
+#### Routes used for login (webmaker-user-client):
+
+- /verify
+- /authenticate
+- /create
+- /logout
+- /check-username
 
 ### Grunt Tasks
 
-- `grunt server` - Compile LESS, run web server on port 1134, and recompile LESS as needed.
-- `grunt livereload` - Runs the above, injects livereload to browser.
+- `grunt server` - Compile LESS, run web server on port 1969, and recompile LESS as needed.
+- `grunt live-server` - Runs `grunt server` and injects livereload to browser.
 - `grunt lint` - Beautify JS and HTML based on **.jsbeautifyrc** and check JS for JSHint compliance based on **.jshintrc**.
 - `grunt validate` - Test that JS and HTML are beautified and JS passes JSHint. Typically this task is run by Travis to verify commits are clean.
-- `grunt build` - Compiles the front-end for production
+- `grunt build` - Compiles the front-end for production.
