@@ -13,7 +13,7 @@ module.exports = (grunt) ->
           ".static/css/app.ltr.css": "app/less/app.less"
       reload:
         files:
-          ".tmp/css/app.ltr.css": "app/less/app.less"
+          ".tmp/compiled/app.ltr.css": "app/less/app.less"
 
     shell:
       server:
