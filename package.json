@@ -1,6 +1,6 @@
 {
   "name": "webmaker-angular-seed",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Webmaker Angular Seed",
   "main": "app/js/app.js",
   "scripts": {
