@@ -12,8 +12,7 @@ module.exports = function (config) {
 
     // optional
     domain: config.cookieDomain, // default undefined
-    forceSSL: config.forceSSL, // default false
-    maxAge: config.maxAge // default 365 days
+    forceSSL: config.forceSSL // default false
   });
 
   var app = express();
