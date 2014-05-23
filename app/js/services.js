@@ -41,7 +41,15 @@ angular.module('wmProfile.services', [])
   .factory('loginService', ['$rootScope', 'WebmakerAuthClient',
     function ($rootScope, WebmakerAuthClient) {
       var visitorData;
-      var auth = new WebmakerAuthClient();
+      var auth = new WebmakerAuthClient({
+        paths: {
+          authenticate: '/user/authenticate',
+          checkUsername: '/user/checkUsername',
+          create: '/user/create',
+          logout: '/user/logout',
+          verify: '/user/verify',
+        }
+      });
 
       auth.on('login', function (user, debuggingInfo) {
         visitorData = user;

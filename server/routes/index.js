@@ -61,11 +61,11 @@ module.exports = function (config, webmakerAuth) {
     })
   });
 
-  router.post('/verify', webmakerAuth.handlers.verify);
-  router.post('/authenticate', webmakerAuth.handlers.authenticate);
-  router.post('/create', webmakerAuth.handlers.create);
-  router.post('/logout', webmakerAuth.handlers.logout);
-  router.post('/check-username', webmakerAuth.handlers.exists);
+  router.post('/user/verify', webmakerAuth.handlers.verify);
+  router.post('/user/authenticate', webmakerAuth.handlers.authenticate);
+  router.post('/user/create', webmakerAuth.handlers.create);
+  router.post('/user/logout', webmakerAuth.handlers.logout);
+  router.post('/user/check-username', webmakerAuth.handlers.exists);
 
   return router;
 };
