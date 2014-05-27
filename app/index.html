@@ -7,11 +7,16 @@
 
   <meta charset="utf-8">
 
-  <title>{{ WMP.username }} | Webmaker</title>
+  <title ng-bind="WMP.username + ' | Webmaker'"></title>
 
   <link rel="icon" type="image/png" href="img/favicon.ico">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700">
+  <style>
+     html, body {
+       display: none;
+     }
+   </style>
   <link rel="stylesheet" href="compiled/app.ltr.css">
 </head>
 
