@@ -10,7 +10,7 @@
 </div>
 
 <ul class="user-links clearfix">
-  <li ng-repeat="link in annotatedLinkList" ng-if="!link.service">
+  <li ng-repeat="link in annotatedlinks" ng-if="!link.service">
     <button ng-click="removeLinkUI($index)" ng-show="isEditMode" class="btn btn-xs btn-danger">
       <i class="fa fa-times"></i>
     </button>
@@ -19,7 +19,7 @@
 </ul>
 
 <ul class="user-links service-links clearfix pull-right">
-  <li ng-repeat="link in annotatedLinkList" ng-if="link.service">
+  <li ng-repeat="link in annotatedlinks" ng-if="link.service">
     <a href="{{ link.url }}" target="_blank">
       <i class="fa fa-{{ link.service }}"></i>
     </a>

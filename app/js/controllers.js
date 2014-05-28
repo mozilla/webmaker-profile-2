@@ -6,29 +6,16 @@ angular.module('wmProfile.controllers', [])
       $scope.isEditMode = false;
       $scope.canEdit = false;
 
-      // Pull in user's saved editable metadata
-      var rehydratedData = JSON.parse(localStorage.getItem('userData') || '{}');
-
-      // TODO – Hack. How can this work w/out setTimeout?
-      //        Using setTimeout because otherwise there is a collision error
-      setTimeout(function () {
-        if (rehydratedData) {
-          $scope.user.bio = rehydratedData.bio || null;
-          $scope.user.location = rehydratedData.location || null;
-          $scope.user.linkList = rehydratedData.linkList || [];
-          $scope.$apply();
-        }
-      }, 1);
-
-      // TODO – Periodically persist this data to the server
-      $scope.$watch('user', function (newValue) {
-        localStorage.setItem('userData', JSON.stringify(newValue));
-      }, true);
-
       // Extrapolate user information from username
-      // Currently this is needed to get an avatar IMG URL
       userService.getUserData($rootScope.WMP.username).then(function (userData) {
-        $scope.userData = userData;
+        $scope.user = userData.user;
+      });
+
+      $scope.$watch('isEditMode', function(newValue, oldValue) {
+        // Save when we exit edit mode
+        if (newValue === false && oldValue === true) {
+          userService.setUserData($rootScope.WMP.username, $scope.user);
+        }
       });
 
       // Show the featured badge if user has it

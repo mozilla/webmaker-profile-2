@@ -51,14 +51,41 @@ module.exports = function (config, webmakerAuth) {
   // Get a user's public data subset
   router.get('/user/user-data/:username', function (req, res, next) {
     userClient.get.byUsername(req.params.username, function (err, data) {
-      if (!data.error) {
-        res.json({
-          avatar: 'https://secure.gravatar.com/avatar/' + data.user.emailHash + '?s=400&d=https%3A%2F%2Fstuff.webmaker.org%2Favatars%2Fwebmaker-avatar-200x200.png'
+      if (err) {
+        return res.json(500, {
+          error: err.toString()
         });
-      } else {
-        res.send(404);
       }
+
+      // Make the returned avatar be 400x400
+      data.avatar = data.avatar + "s=400";
+
+      res.json(data);
     })
+  });
+
+  router.put('/user/user-data/:username', function (req, res, next) {
+    if (req.params.username !== req.session.user.username) {
+      return res.json(403, {
+        "error": "You do not have permission to modify " + req.params.username
+      })
+    }
+
+    var filteredData = {
+      bio: req.body.bio,
+      location: req.body.location,
+      links: req.body.links
+    }
+
+    userClient.update.byUsername(req.params.username, filteredData, function (err, data) {
+      if (err) {
+        return res.json(500, {
+          error: err
+        });
+      }
+
+      res.json(data);
+    });
   });
 
   router.post('/user/verify', webmakerAuth.handlers.verify);

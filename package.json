@@ -19,7 +19,7 @@
     "messina": "0.1.2",
     "morgan": "1.0.1",
     "newrelic": "1.5.5",
-    "webmaker-user-client": "0.0.2",
+    "webmaker-user-client": "0.1.0",
     "webmaker-auth": "0.0.14"
   },
   "devDependencies": {

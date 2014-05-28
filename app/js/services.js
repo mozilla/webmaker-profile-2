@@ -11,6 +11,8 @@ angular.module('wmProfile.services', [])
     function ($resource, $q) {
       var userAPI = $resource('/user/user-data/:username', {
         username: '@username'
+      }, {
+        put: { method: 'PUT' }
       });
 
       var userData;
@@ -34,6 +36,23 @@ angular.module('wmProfile.services', [])
           }
 
           return deferred.promise;
+        },
+        setUserData: function(username, data) {
+          var deferred = $q.defer();
+
+          userAPI.put({
+            username: username
+          }, {
+            bio: data.bio,
+            location: data.location,
+            links: data.links
+          }, function (returnedData) {
+            userData = data;
+            deferred.resolve(userData);
+          }, function (err) {
+            console.error('Failed to update user ' + username, err);
+            deferred.reject(err);
+          });
         }
       };
     }

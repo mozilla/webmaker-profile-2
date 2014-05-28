@@ -39,7 +39,7 @@
 
     <div ng-controller="userMeta as user" class="row double-margin-bottom">
       <div class="col-xs-12 col-sm-2">
-        <img ng-src="{{ userData.avatar }}" class="img-circle img-responsive">
+        <img ng-src="{{ user.avatar }}" class="img-circle img-responsive">
       </div>
 
       <div class="user-metadata solid-bg col-xs-12 col-sm-10">
@@ -64,7 +64,7 @@
               <a ng-hide="isEditMode || !user.location " href="#"><span class="fa fa-map-marker nbsp-right"></span>{{ user.location }}</a>
             </div>
 
-            <wmp-link-collector wmp-edit-mode="isEditMode" ng-model="user.linkList" class="margin-bottom">
+            <wmp-link-collector wmp-edit-mode="isEditMode" ng-model="user.links" class="margin-bottom">
           </div>
 
           <div ng-if="hasFeaturedBadge" class="featured-badge hidden-xs col-sm-2">

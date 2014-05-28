@@ -99,17 +99,17 @@ angular.module('wmProfile.directives', [])
         restrict: 'AE',
         scope: {
           isEditMode: '=wmpEditMode',
-          linkList: '=ngModel'
+          links: '=ngModel'
         },
         templateUrl: 'partials/link-collector.html',
         link: function ($scope, el, attrs, controller) {
           var elWrapper = $(el),
             elInput = elWrapper.find('.link-form input');
 
-          $scope.linkList = $scope.linkList || [];
+          $scope.links = $scope.links || [];
 
           // An array of objects with service names for custom rendering
-          $scope.annotatedLinkList = [];
+          $scope.annotatedlinks = [];
 
           $scope.showInvalid = false;
           $scope.showDuplicate = false;
@@ -152,9 +152,9 @@ angular.module('wmProfile.directives', [])
             }
 
             // Don't allow duplicate URLs
-            if ($scope.linkList.length) {
-              for (var i = $scope.linkList.length - 1; i >= 0; i--) {
-                if (url === $scope.linkList[i]) {
+            if ($scope.links.length) {
+              for (var i = $scope.links.length - 1; i >= 0; i--) {
+                if (url === $scope.links[i]) {
                   $scope.showDuplicate = true;
                   return false;
                 }
@@ -170,7 +170,7 @@ angular.module('wmProfile.directives', [])
             url = validateURL(url);
 
             if (url) {
-              $scope.linkList.push(url);
+              $scope.links.push(url);
               return true;
             } else {
               return false;
@@ -185,14 +185,14 @@ angular.module('wmProfile.directives', [])
           };
 
           $scope.removeLinkUI = function (index) {
-            $scope.linkList.splice(index, 1);
+            $scope.links.splice(index, 1);
           };
 
           function updateUI(links) {
-            $scope.annotatedLinkList = [];
+            $scope.annotatedlinks = [];
 
             for (var index = 0, length = links.length; index < length; index++) {
-              $scope.annotatedLinkList.push({
+              $scope.annotatedlinks.push({
                 url: links[index],
                 service: getServiceFromURL(links[index])
               });
@@ -210,9 +210,11 @@ angular.module('wmProfile.directives', [])
             }
           });
 
-          // All UI link list changes are driven by changes to the linkList model
-          $scope.$watch('linkList', function (newValue) {
-            updateUI(newValue);
+          // All UI link list changes are driven by changes to the links model
+          $scope.$watch('links', function (newValue) {
+            if (newValue) {
+              updateUI(newValue);
+            }
           }, true);
         }
       };
