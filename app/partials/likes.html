@@ -7,19 +7,4 @@
   <button data-sort-id="-likeCount" class="btn btn-default">Most popular</button>
 </wmp-sort-filter-bar>
 
-<ul ng-repeat="make in makes | orderBy: sortOrder || '-createdAt'">
-  <li>
-    <img ng-src="{{ make.thumbnail }}" style="width: 100px;">
-
-    <a href="{{ make.url }}" target="_blank">{{ make.title }}</a>
-
-    <p>{{ make.contentType }}</p>
-    <p>{{ make.description }}</p>
-    <p>{{ make.likes.length }} Likes</p>
-    <p>{{ make.remixCount }} Remixes</p>
-
-    <ul ng-repeat="tag in make.tags">
-      <li>{{ tag }}</li>
-    </ul>
-  </li>
-</ul>
+<wmp-makes-list>

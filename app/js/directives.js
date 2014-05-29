@@ -93,6 +93,13 @@ angular.module('wmProfile.directives', [])
       };
     }
   ])
+  .directive('wmpMakesList', function () {
+    return {
+      restrict: 'E',
+      scope: false,
+      templateUrl: 'partials/makes-list.html'
+    };
+  })
   .directive('wmpLinkCollector', ['jQuery',
     function ($) {
       return {
