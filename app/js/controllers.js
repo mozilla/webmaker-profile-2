@@ -11,7 +11,7 @@ angular.module('wmProfile.controllers', [])
         $scope.user = userData.user;
       });
 
-      $scope.$watch('isEditMode', function(newValue, oldValue) {
+      $scope.$watch('isEditMode', function (newValue, oldValue) {
         // Save when we exit edit mode
         if (newValue === false && oldValue === true) {
           userService.setUserData($rootScope.WMP.username, $scope.user);

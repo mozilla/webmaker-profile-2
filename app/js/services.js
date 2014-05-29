@@ -12,7 +12,9 @@ angular.module('wmProfile.services', [])
       var userAPI = $resource('/user/user-data/:username', {
         username: '@username'
       }, {
-        put: { method: 'PUT' }
+        put: {
+          method: 'PUT'
+        }
       });
 
       var userData;
@@ -37,7 +39,7 @@ angular.module('wmProfile.services', [])
 
           return deferred.promise;
         },
-        setUserData: function(username, data) {
+        setUserData: function (username, data) {
           var deferred = $q.defer();
 
           userAPI.put({
