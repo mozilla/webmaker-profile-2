@@ -58,7 +58,10 @@ module.exports = function (config, webmakerAuth) {
       }
 
       // Make the returned avatar be 400x400
-      data.avatar = data.avatar + "s=400";
+      data.user.avatar = data.user.avatar + '&s=400';
+
+      // Don't expose PII publicly
+      delete data.user.email;
 
       res.json(data);
     })

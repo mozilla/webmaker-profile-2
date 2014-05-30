@@ -3,7 +3,17 @@
 .header {
   background-color: @white;
   padding: 10px 0;
-  margin-bottom: 40px;
+
+  @media screen and (min-width: @screen-sm) {
+    margin-bottom: 40px;
+  }
+
+  wmp-login {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
 }
 
 .main {
