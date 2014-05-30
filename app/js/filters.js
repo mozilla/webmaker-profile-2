@@ -23,6 +23,6 @@ angular.module('wmProfile.filters', [])
   .filter('decode', function () {
     return function (tag) {
       tag = tag || '';
-      return decodeURI(tag);
+      return decodeURIComponent(tag);
     };
   });
