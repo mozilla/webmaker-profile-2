@@ -57,6 +57,10 @@ module.exports = function (config, webmakerAuth) {
         });
       }
 
+      if (!data.user) {
+        return res.send(404);
+      }
+
       // Make the returned avatar be 400x400
       data.user.avatar = data.user.avatar + '&s=400';
 
