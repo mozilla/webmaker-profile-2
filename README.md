@@ -16,6 +16,15 @@
 - [make-api](https://github.com/mozilla/makeapi)
 - [webmaker-events-service](https://github.com/mozilla/webmaker-events-service)
 
+### Required Server Configuration
+
+The following configuration variables are required in `env.cson`:
+
+`badgekitApiUrl`: The URL for badgekit-api. For dev, this is probably `'https://badgekit-api.mofostaging.net'`
+`badgekitApiKey`: The key for accessing badgekit-api. For dev, this is probably `'master'`
+`badgekitApiSecret`: The secret key for accessing badgekit-api. You should ask `@k88hudson` or `@echristensen` for this
+`loginUrlWithAuth`: The full-qualified login URL. Probably `http://testuser:password@localhost:3000`
+
 ### Installation
 
 ```bash
