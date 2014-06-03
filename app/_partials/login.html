@@ -1,4 +1,22 @@
-<p ng-if="userInfo.displayName">Hi, <strong>{{ userInfo.displayName }}</strong></p>
-
-<button class="btn btn-default btn-xs" ng-if="!userLoggedIn" ng-click="login()">Log In</button>
-<button class="btn btn-default btn-xs" ng-if="userLoggedIn" ng-click="logout()">Log Out</button>
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown" ng-class="{open: ddOpen}" ng-cloak ng-show="userInfo.email">
+    <button class="navbar-user-info dropdown-toggle no-style" ng-click="ddOpen = !ddOpen">
+      <span class="sr-only">User links dropdown</span>
+      <img class="user-info-avatar" ng-src="{{ userInfo.avatar }}">
+      <span>Hi, </span>
+      <strong>{{ userInfo.username }}</strong> <span class="label label-primary" ng-show="userInfo.isAdmin">admin</span>  <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{{ WMP.config.accountSettingsURL }}" target="_blank"><span class="fa fa-cog"></span> Settings</a>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a href="#" ng-click="logout(); ddOpen = false;"><span class="fa fa-sign-out"></span> Log Out</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <button ng-cloak ng-show="!userInfo.email" class="btn btn-primary btn-sm navbar-btn" ng-click="login()">Log In</button>
+  </li>
+</ul>
