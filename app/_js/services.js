@@ -9,7 +9,7 @@ angular.module('wmProfile.services', [])
   .constant('WebmakerAuthClient', window.WebmakerAuthClient)
   .factory('userService', ['$resource', '$q',
     function ($resource, $q) {
-      var userAPI = $resource('/user/user-data/:username', {
+      var userAPI = $resource('/user/_service/user-data/:username', {
         username: '@username'
       }, {
         put: {
@@ -64,11 +64,11 @@ angular.module('wmProfile.services', [])
       var visitorData;
       var auth = new WebmakerAuthClient({
         paths: {
-          authenticate: '/user/authenticate',
-          checkUsername: '/user/checkUsername',
-          create: '/user/create',
-          logout: '/user/logout',
-          verify: '/user/verify',
+          authenticate: '/user/_service/login/authenticate',
+          checkUsername: '/user/_service/login/checkUsername',
+          create: '/user/_service/login/create',
+          logout: '/user/_service/login/logout',
+          verify: '/user/_service/login/verify',
         }
       });
 
@@ -103,7 +103,7 @@ angular.module('wmProfile.services', [])
   ])
   .factory('badgesService', ['$resource', '$q',
     function ($resource, $q) {
-      var badgeAPI = $resource('/user/badges/username/:username', {
+      var badgeAPI = $resource('/user/_service/badges/username/:username', {
         username: '@username'
       });
 

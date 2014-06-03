@@ -9,50 +9,55 @@ angular.module('wmProfile', [
 ]).
 config(['$routeProvider', '$locationProvider',
   function ($routeProvider, $locationProvider) {
-    $locationProvider.hashPrefix('!');
+    $locationProvider.html5Mode(true);
 
     $routeProvider.when('/:username/badges', {
-      templateUrl: 'partials/badges.html',
+      templateUrl: '_partials/badges.html',
       controller: 'badges'
     });
 
     $routeProvider.when('/:username/teaching-resources', {
-      templateUrl: 'partials/teaching-resources.html',
+      templateUrl: '_partials/teaching-resources.html',
       controller: 'teachingResources'
     });
 
     $routeProvider.when('/:username/makes', {
-      templateUrl: 'partials/makes.html',
+      templateUrl: '_partials/makes.html',
       controller: 'makes'
     });
 
     $routeProvider.when('/:username/likes', {
-      templateUrl: 'partials/likes.html',
+      templateUrl: '_partials/likes.html',
       controller: 'likes'
     });
 
     $routeProvider.when('/:username/events', {
-      templateUrl: 'partials/events.html',
+      templateUrl: '_partials/events.html',
       controller: 'events'
     });
 
-    // Route any '/USERNAME' url to '/USERNAME/teaching-resources'
-    $routeProvider.otherwise({
-      redirectTo: function (params, path) {
-        return path + (path.match(/\/$/) ? '' : '/') + 'badges';
-      }
+    $routeProvider.when('/:username', {
+      templateUrl: '_partials/badges.html',
+      controller: 'badges'
     });
+
+    // TODO - "404" for malformed routes / missing users
+
   }
 ]).
 run(['$rootScope', 'jQuery',
   function ($rootScope, $) {
+    var extractedUsername = window.location.pathname.match(/(?:\/user\/)([^/]+)/);
+
+    extractedUsername = extractedUsername ? extractedUsername[1] : undefined;
+
     $rootScope.WMP = {
-      username: window.location.hash.match(/#!\/([^\/]+)/)[1]
+      username: extractedUsername
     };
 
     $.ajax({
       async: false,
-      url: 'env.json',
+      url: '_service/env.json',
       dataType: 'json'
     })
       .done(function (config) {

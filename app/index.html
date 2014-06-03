@@ -2,17 +2,16 @@
 <html lang="en" ng-app="wmProfile">
 
 <head>
-  <meta name="fragment" content="!">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
   <meta charset="utf-8">
 
   <title ng-bind="WMP.username + ' | Webmaker'"></title>
 
-  <link rel="icon" type="image/png" href="img/favicon.ico">
+  <link rel="icon" type="image/png" href="_img/favicon.ico">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700">
-  <link rel="stylesheet" href="compiled/app.ltr.css">
+  <link rel="stylesheet" href="/user/_compiled/app.ltr.css">
 
   <style type="text/css">
     [ng\:cloak],
@@ -24,6 +23,8 @@
       display: none !important;
     }
   </style>
+
+  <base href="/user/">
 </head>
 
 <body ng-cloak>
@@ -33,7 +34,7 @@
       <div class="row">
         <div class="col-xs-12 clearfix">
           <a href="https://webmaker.org" class="logo webmaker-logo">
-            <img src="bower_components/makerstrap/images/logo.png">
+            <img src="_bower_components/makerstrap/images/logo.png">
           </a>
           <wmp-login class="pull-right">
         </div>
@@ -85,11 +86,11 @@
     <div class="row">
       <div class="tab-nav col-xs-12">
         <div wmp-toggle-group wmp-activate-child class="btn-group">
-          <a class="btn" href="#!/{{ WMP.username }}/badges">Badges</a>
-          <a class="btn" href="#!/{{ WMP.username }}/teaching-resources">Teaching Resources</a>
-          <a class="btn" href="#!/{{ WMP.username }}/makes">Makes</a>
-          <a class="btn" href="#!/{{ WMP.username }}/likes">Likes</a>
-          <a class="btn" href="#!/{{ WMP.username }}/events">Events</a>
+          <a class="btn" href="/user/{{ WMP.username }}/badges">Badges</a>
+          <a class="btn" href="/user/{{ WMP.username }}/teaching-resources">Teaching Resources</a>
+          <a class="btn" href="/user/{{ WMP.username }}/makes">Makes</a>
+          <a class="btn" href="/user/{{ WMP.username }}/likes">Likes</a>
+          <a class="btn" href="/user/{{ WMP.username }}/events">Events</a>
         </div>
       </div>
     </div>
@@ -103,21 +104,21 @@
 
   <script src="https://login.persona.org/include.js"></script>
 
-  <script src="bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js"></script>
-  <script src="bower_components/makeapi-client/src/make-api.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js"></script>
+  <script src="_bower_components/makeapi-client/src/make-api.js"></script>
+  <script src="_bower_components/jquery/dist/jquery.min.js"></script>
 
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="_bower_components/angular/angular.min.js"></script>
+  <script src="_bower_components/angular-route/angular-route.min.js"></script>
+  <script src="_bower_components/angular-resource/angular-resource.min.js"></script>
 
-  <script src="bower_components/locompleter/locompleter.js"></script>
+  <script src="_bower_components/locompleter/locompleter.js"></script>
 
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+  <script src="_js/app.js"></script>
+  <script src="_js/services.js"></script>
+  <script src="_js/controllers.js"></script>
+  <script src="_js/filters.js"></script>
+  <script src="_js/directives.js"></script>
 
 </body>
 
