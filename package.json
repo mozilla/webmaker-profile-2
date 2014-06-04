@@ -1,7 +1,7 @@
 {
-  "name": "webmaker-angular-seed",
-  "version": "0.2.1",
-  "description": "Webmaker Angular Seed",
+  "name": "webmaker-profile-2",
+  "version": "0.2.2",
+  "description": "Webmaker Profile 2",
   "main": "app/js/app.js",
   "scripts": {
     "test": "grunt validate",
