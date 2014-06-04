@@ -5,7 +5,7 @@ var UserClient = require('webmaker-user-client');
 var BadgeClient = require('badgekit-api-client');
 var path = require('path');
 
-module.exports = function (config, webmakerAuth) {
+module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
   var router = express.Router();
   var userClient = new UserClient({
     endpoint: config.loginUrlWithAuth
@@ -21,7 +21,11 @@ module.exports = function (config, webmakerAuth) {
   // Match any URL that doesn't fall under an underscore prefixed subdirectory and serve index.html
   // eg: /user/joe/*  NOT  /user/_less/app.less
   router.get(/^\/user(?!\/_)/, function (req, res) {
-    res.sendfile(path.resolve(__dirname, '../../app/index.html'));
+    if (liveReloadRelativePath) {
+      res.sendfile(path.resolve(__dirname, '../', liveReloadRelativePath, 'index.html'));
+    } else {
+      res.sendfile(path.resolve(__dirname, '../../app/index.html'));
+    }
   })
 
   router.get('/user/_service/env.json', function (req, res) {
