@@ -7,8 +7,8 @@ angular.module('wmProfile.services', [])
   .constant('MakeAPI', window.Make)
   .constant('jQuery', window.$)
   .constant('WebmakerAuthClient', window.WebmakerAuthClient)
-  .factory('userService', ['$resource', '$q',
-    function ($resource, $q) {
+  .factory('userService', ['$resource', '$q', '$rootScope',
+    function ($resource, $q, $rootScope) {
       var userAPI = $resource('/user/_service/user-data/:username', {
         username: '@username'
       }, {
@@ -29,10 +29,12 @@ angular.module('wmProfile.services', [])
             userAPI.get({
               username: username
             }, function (data) {
+              $rootScope.userExists = true;
               userData = data;
               deferred.resolve(userData);
             }, function (err) {
               console.error('User ' + username + ' doesn\'t exist.');
+              $rootScope.userExists = false;
               deferred.reject(err);
             });
           }
@@ -75,11 +77,13 @@ angular.module('wmProfile.services', [])
       auth.on('login', function (user, debuggingInfo) {
         visitorData = user;
         $rootScope.$broadcast('userLoggedIn', visitorData);
+        $rootScope.userLoggedIn = true;
       });
 
       auth.on('logout', function () {
         visitorData = undefined;
         $rootScope.$broadcast('userLoggedOut');
+        $rootScope.userLoggedIn = false;
       });
 
       auth.on('error', function (errorMessage) {
