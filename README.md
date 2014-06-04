@@ -20,15 +20,15 @@
 
 The following configuration variables are required in `env.cson`:
 
-`badgekitApiUrl`: The URL for badgekit-api. For dev, this is probably `'https://badgekit-api.mofostaging.net'`
-`badgekitApiKey`: The key for accessing badgekit-api. For dev, this is probably `'master'`
-`badgekitApiSecret`: The secret key for accessing badgekit-api. You should ask `@k88hudson` or `@echristensen` for this
-`loginUrlWithAuth`: The full-qualified login URL. Probably `http://testuser:password@localhost:3000`
+- `badgekitApiUrl`: The URL for badgekit-api. For dev, this is probably `'https://badgekit-api.mofostaging.net'`
+- `badgekitApiKey`: The key for accessing badgekit-api. For dev, this is probably `'master'`
+- `badgekitApiSecret`: The secret key for accessing badgekit-api. You should ask `@k88hudson` or `@echristensen` for this
+- `loginUrlWithAuth`: The full-qualified login URL. Probably `http://testuser:password@localhost:3000`
 
 ### Installation
 
 ```bash
-git clone https://github.com/gvn/webmaker-profile-2.git
+git clone https://github.com/mozilla/webmaker-profile-2.git
 cd webmaker-profile-2
 npm install
 ```
