@@ -23,7 +23,7 @@ module.exports = (grunt) ->
       reload:
         options:
           async: true
-        command: 'node server path=/../.tmp'
+        command: 'node server --path=../.tmp'
 
     clean: [
       ".tmp"

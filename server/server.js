@@ -4,6 +4,8 @@ module.exports = function (config) {
   var morgan = require('morgan');
   var messina = require('messina')('webmaker-profile-2-' + config.nodeEnv);
   var WebmakerAuth = require('webmaker-auth');
+  var path = require('path');
+  var argv = require('optimist').argv;
 
   var webmakerAuth = new WebmakerAuth({
     // required
@@ -15,11 +17,13 @@ module.exports = function (config) {
     forceSSL: config.forceSSL // default false
   });
 
-  var app = express();
-  var routes = require('./routes')(config, webmakerAuth);
-  var middleware = require('./middleware')(config);
+  // Determine paths for temporary files used by Live Reload task (if used)
+  var lrRelativePath = argv.path;
+  var lrAbsolutePath = lrRelativePath ? path.resolve(__dirname, lrRelativePath) : undefined;
 
-  var reloadFiles = process.argv[2] !== undefined && process.argv[2].split('=').length > 1 && process.argv[2].split('=')[0] === 'path' ? __dirname + process.argv[2].split('=')[1] : undefined;
+  var app = express();
+  var routes = require('./routes')(config, webmakerAuth, lrRelativePath);
+  var middleware = require('./middleware')(config);
 
   if (config.enableGELFLogs) {
     app.use(messina.middleware());
@@ -33,7 +37,7 @@ module.exports = function (config) {
   app.use(webmakerAuth.cookieSession());
   app.use(routes);
   app.use(middleware.errorHandler);
-  app.use('/user', express.static(reloadFiles || __dirname + '/../app'));
+  app.use('/user', express.static(lrAbsolutePath || __dirname + '/../app'));
 
   return app;
 };
