@@ -10,10 +10,10 @@ module.exports = (grunt) ->
           "app/_compiled/app.ltr.css": "app/_less/app.less"
       production:
         files:
-          ".static/css/app.ltr.css": "app/_less/app.less"
+          ".static/_css/app.ltr.css": "app/_less/app.less"
       reload:
         files:
-          ".tmp/compiled/app.ltr.css": "app/_less/app.less"
+          ".tmp/_compiled/app.ltr.css": "app/_less/app.less"
 
     shell:
       server:
@@ -108,7 +108,7 @@ module.exports = (grunt) ->
       options:
         browsers: ["last 2 versions"]
       build:
-        src: ".static/css/app.ltr.css"
+        src: ".static/_css/app.ltr.css"
         dest: "app/_compiled/app.ltr.css"
 
     jshint:
