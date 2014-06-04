@@ -7,13 +7,13 @@ module.exports = (grunt) ->
         sourceMapRootpath: "/"
       development:
         files:
-          "app/compiled/app.ltr.css": "app/less/app.less"
+          "app/_compiled/app.ltr.css": "app/_less/app.less"
       production:
         files:
-          ".static/css/app.ltr.css": "app/less/app.less"
+          ".static/css/app.ltr.css": "app/_less/app.less"
       reload:
         files:
-          ".tmp/compiled/app.ltr.css": "app/less/app.less"
+          ".tmp/compiled/app.ltr.css": "app/_less/app.less"
 
     shell:
       server:
@@ -36,7 +36,7 @@ module.exports = (grunt) ->
         spawn: true
       passive:
         files: [
-          'less/**/*.less'
+          '_less/**/*.less'
         ]
         options:
           livereload: false
@@ -50,10 +50,10 @@ module.exports = (grunt) ->
           interrupt: true
           atBegin: true
         files: [
-          'img/**/*.*'
-          'js/**/*.js'
-          'less/**/*.less'
-          'partials/**/*.html'
+          '_img/**/*.*'
+          '_js/**/*.js'
+          '_less/**/*.less'
+          '_partials/**/*.html'
           'index.html'
         ]
         tasks: [
@@ -69,28 +69,28 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: "app"
-          src: "bower_components/**/*.*"
+          src: "_bower_components/**/*.*"
           dest: ".tmp/"
         ]
       stageJS:
         files: [
           expand: true
           cwd: "app"
-          src: "js/**/*.js"
+          src: "_js/**/*.js"
           dest: ".tmp/"
         ]
       stagePartials:
         files: [
           expand: true
           cwd: "app"
-          src: "partials/**/*.html"
+          src: "_partials/**/*.html"
           dest: ".tmp/"
         ]
       stageImages:
         files: [
           expand: true
           cwd: "app"
-          src: "img/**/*.*"
+          src: "_img/**/*.*"
           dest: ".tmp/"
         ]
 
@@ -109,12 +109,12 @@ module.exports = (grunt) ->
         browsers: ["last 2 versions"]
       build:
         src: ".static/css/app.ltr.css"
-        dest: "app/compiled/app.ltr.css"
+        dest: "app/_compiled/app.ltr.css"
 
     jshint:
       all: [
         "Gruntfile.js"
-        "app/js/**/*.js"
+        "app/_js/**/*.js"
       ]
       options:
         jshintrc: ".jshintrc"
@@ -122,18 +122,18 @@ module.exports = (grunt) ->
     jsbeautifier:
       modify:
         src: [
-          "app/js/**/*.js"
+          "app/_js/**/*.js"
           "app/index.html"
-          "app/partials/**/*.html"
+          "app/_partials/**/*.html"
         ]
         options:
           config: ".jsbeautifyrc"
 
       validate:
         src: [
-          "app/js/**/*.js"
+          "app/_js/**/*.js"
           "app/index.html"
-          "app/partials/**/*.html"
+          "app/_partials/**/*.html"
         ]
         options:
           mode: "VERIFY_ONLY"

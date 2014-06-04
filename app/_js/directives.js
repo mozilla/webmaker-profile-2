@@ -4,7 +4,7 @@ angular.module('wmProfile.directives', [])
       return {
         restrict: 'E',
         scope: false,
-        templateUrl: 'partials/login.html',
+        templateUrl: '_partials/login.html',
         link: function ($scope, el, attrs) {
           $scope.userInfo = loginService.getData();
           $scope.userLoggedIn = !!$scope.userInfo; // No user info means not logged in
@@ -97,7 +97,7 @@ angular.module('wmProfile.directives', [])
     return {
       restrict: 'E',
       scope: false,
-      templateUrl: 'partials/makes-list.html'
+      templateUrl: '_partials/makes-list.html'
     };
   })
   .directive('wmpLinkCollector', ['jQuery',
@@ -108,7 +108,7 @@ angular.module('wmProfile.directives', [])
           isEditMode: '=wmpEditMode',
           links: '=ngModel'
         },
-        templateUrl: 'partials/link-collector.html',
+        templateUrl: '_partials/link-collector.html',
         link: function ($scope, el, attrs, controller) {
           var elWrapper = $(el),
             elInput = elWrapper.find('.link-form input');

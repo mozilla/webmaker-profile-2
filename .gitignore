@@ -1,11 +1,11 @@
 logs/*
 !.gitkeep
 node_modules/
-bower_components/
+_bower_components/
 tmp
 .DS_Store
 .idea
-app/compiled/
+app/_compiled/
 TODO.txt
 env.json
 env.cson

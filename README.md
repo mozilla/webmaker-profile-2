@@ -41,25 +41,25 @@ To see a specific user's profile navigate to [http://localhost:1969/user/#!/USER
 
 ### Server API Routes
 
-##### /user/badges/username/:username
+##### /user/_service/badges/username/:username
 
 Returns a list of a user's badges given `username`.
 
-##### /user/user-data/:username
+##### /user/_service/user-data/:username
 
 Returns public user metadata for given `username`.
 
-##### /user/env.json
+##### /user/_service/env.json
 
 Returns JSON of public app configuration for use on client side.
 
 #### Routes used for login (webmaker-user-client):
 
-- /verify
-- /authenticate
-- /create
-- /logout
-- /check-username
+- /_service/login/verify
+- /_service/login/authenticate
+- /_service/login/create
+- /_service/login/logout
+- /_service/login/check-username
 
 ### Grunt Tasks
 

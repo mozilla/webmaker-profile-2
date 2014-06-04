@@ -3,6 +3,7 @@ var async = require('async');
 var fs = require('fs');
 var UserClient = require('webmaker-user-client');
 var BadgeClient = require('badgekit-api-client');
+var path = require('path');
 
 module.exports = function (config, webmakerAuth) {
   var router = express.Router();
@@ -17,12 +18,18 @@ module.exports = function (config, webmakerAuth) {
     system: 'webmaker'
   };
 
-  router.get('/user/env.json', function (req, res) {
+  // Match any URL that doesn't fall under an underscore prefixed subdirectory and serve index.html
+  // eg: /user/joe/*  NOT  /user/_less/app.less
+  router.get(/^\/user(?!\/_)/, function (req, res) {
+    res.sendfile(path.resolve(__dirname, '../../app/index.html'));
+  })
+
+  router.get('/user/_service/env.json', function (req, res) {
     res.json(config.public);
   });
 
   // Returns a list of a user's badges given a username
-  router.get('/user/badges/username/:username', function (req, res, next) {
+  router.get('/user/_service/badges/username/:username', function (req, res, next) {
     async.waterfall([
       function (callback) {
         userClient.get.byUsername(req.params.username, callback);
@@ -49,7 +56,7 @@ module.exports = function (config, webmakerAuth) {
   });
 
   // Get a user's public data subset
-  router.get('/user/user-data/:username', function (req, res, next) {
+  router.get('/user/_service/user-data/:username', function (req, res, next) {
     userClient.get.byUsername(req.params.username, function (err, data) {
       if (err) {
         return res.json(500, {
@@ -71,7 +78,7 @@ module.exports = function (config, webmakerAuth) {
     })
   });
 
-  router.put('/user/user-data/:username', function (req, res, next) {
+  router.put('/user/_service/user-data/:username', function (req, res, next) {
     if (req.params.username !== req.session.user.username) {
       return res.json(403, {
         "error": "You do not have permission to modify " + req.params.username
@@ -95,11 +102,11 @@ module.exports = function (config, webmakerAuth) {
     });
   });
 
-  router.post('/user/verify', webmakerAuth.handlers.verify);
-  router.post('/user/authenticate', webmakerAuth.handlers.authenticate);
-  router.post('/user/create', webmakerAuth.handlers.create);
-  router.post('/user/logout', webmakerAuth.handlers.logout);
-  router.post('/user/check-username', webmakerAuth.handlers.exists);
+  router.post('/user/_service/login/verify', webmakerAuth.handlers.verify);
+  router.post('/user/_service/login/authenticate', webmakerAuth.handlers.authenticate);
+  router.post('/user/_service/login/create', webmakerAuth.handlers.create);
+  router.post('/user/_service/login/logout', webmakerAuth.handlers.logout);
+  router.post('/user/_service/login/check-username', webmakerAuth.handlers.exists);
 
   return router;
 };
