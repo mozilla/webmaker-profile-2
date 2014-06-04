@@ -37,7 +37,7 @@ Clone the `env.cson.example` file to `env.cson` and configure your environment.
 
 To run the project simply execute `grunt`, or if you'd like live reload `grunt live-server`.
 
-To see a specific user's profile navigate to [http://localhost:1969/user/#!/USERNAME](http://localhost:1969/user#!/USERNAME).
+To see a specific user's profile navigate to [http://localhost:1969/user/USERNAME](http://localhost:1969/user/USERNAME).
 
 ### Server API Routes
 
