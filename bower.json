@@ -17,6 +17,6 @@
     "locompleter": "0.1.2",
     "makeapi-client": "https://github.com/mozilla/makeapi-client.git#v0.5.24",
     "makerstrap": "0.1.3",
-    "webmaker-auth-client": "0.1.2"
+    "webmaker-auth-client": "0.1.5"
   }
 }
