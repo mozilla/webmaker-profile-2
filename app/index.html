@@ -29,6 +29,15 @@
 
 <body ng-cloak>
 
+  <div class="alert alert-info top-banner" ng-hide="userLoggedIn">
+    <div class="container">
+      <strong>
+        Want your own Webmaker profile? <span ng-if="!userExists && WMP.username">{{ WMP.username }} is available!</span>
+      </strong>
+      <button class="btn btn-sm btn-info" ng-click="login()">Sign up today!</button>
+    </div>
+  </div>
+
   <header class="header">
     <div class="container">
       <div class="row">
@@ -43,61 +52,69 @@
   </header>
 
   <div class="container double-margin-bottom">
+    <div ng-if="!userExists">
+      <div class="error row">
+        <h1><span class="fa fa-frown-o"></span> 404</h1>
+        <div class="alert alert-danger">User {{ WMP.username }} was not found.</div>
+      </div>
+    </div>
 
-    <div ng-controller="userMeta as user" class="row double-margin-bottom">
-      <div class="user-avatar col-xs-12 col-sm-2">
-        <img ng-src="{{ user.avatar }}" class="img-circle img-responsive">
+    <div ng-show="userExists">
+      <div ng-controller="userMeta as user" class="row double-margin-bottom">
+        <div class="user-avatar col-xs-12 col-sm-2">
+          <img ng-src="{{ user.avatar }}" class="img-circle img-responsive">
+        </div>
+
+        <div class="user-metadata solid-bg col-xs-12 col-sm-10">
+          <div ng-class="{'row': hasFeaturedBadge, 'match-child-heights-min-sm': hasFeaturedBadge}">
+            <div ng-class="{'col-sm-10': hasFeaturedBadge}">
+              <div class="clearfix">
+                <h1 class="pull-left">{{ WMP.username }}</h1>
+
+                <button ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
+                  <span ng-hide="isEditMode" class="fa fa-pencil"></span>
+                  <span ng-show="isEditMode" class="fa fa-save"></span>
+                </button>
+              </div>
+
+              <div class="margin-bottom">
+                <textarea class="form-control" ng-show="isEditMode" placeholder="Write a little about yourself!" ng-model="user.bio"></textarea>
+                <p ng-hide="isEditMode">{{ user.bio }}</p>
+              </div>
+
+              <div class="margin-bottom">
+                <input autocomplete-location class="form-control" ng-show="isEditMode" ng-model="user.location" placeholder="Where do you live?">
+                <a ng-hide="isEditMode || !user.location " href="#"><span class="fa fa-map-marker nbsp-right"></span>{{ user.location }}</a>
+              </div>
+
+              <wmp-link-collector wmp-edit-mode="isEditMode" ng-model="user.links" class="margin-bottom">
+            </div>
+
+            <div ng-if="hasFeaturedBadge" class="featured-badge hidden-xs col-sm-2">
+              <img src="https://badgekit.mofostaging.net/images/badge/132">
+              <p>Super Mentor</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="user-metadata solid-bg col-xs-12 col-sm-10">
-        <div ng-class="{'row': hasFeaturedBadge, 'match-child-heights-min-sm': hasFeaturedBadge}">
-          <div ng-class="{'col-sm-10': hasFeaturedBadge}">
-            <div class="clearfix">
-              <h1 class="pull-left">{{ WMP.username }}</h1>
-
-              <button ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
-                <span ng-hide="isEditMode" class="fa fa-pencil"></span>
-                <span ng-show="isEditMode" class="fa fa-save"></span>
-              </button>
-            </div>
-
-            <div class="margin-bottom">
-              <textarea class="form-control" ng-show="isEditMode" placeholder="Write a little about yourself!" ng-model="user.bio"></textarea>
-              <p ng-hide="isEditMode">{{ user.bio }}</p>
-            </div>
-
-            <div class="margin-bottom">
-              <input autocomplete-location class="form-control" ng-show="isEditMode" ng-model="user.location" placeholder="Where do you live?">
-              <a ng-hide="isEditMode || !user.location " href="#"><span class="fa fa-map-marker nbsp-right"></span>{{ user.location }}</a>
-            </div>
-
-            <wmp-link-collector wmp-edit-mode="isEditMode" ng-model="user.links" class="margin-bottom">
-          </div>
-
-          <div ng-if="hasFeaturedBadge" class="featured-badge hidden-xs col-sm-2">
-            <img src="https://badgekit.mofostaging.net/images/badge/132">
-            <p>Super Mentor</p>
+      <div class="row">
+        <div class="tab-nav col-xs-12">
+          <div wmp-toggle-group wmp-activate-child class="btn-group">
+            <a class="btn" href="/user/{{ WMP.username }}/badges">Badges</a>
+            <a class="btn" href="/user/{{ WMP.username }}/teaching-resources">Teaching Resources</a>
+            <a class="btn" href="/user/{{ WMP.username }}/makes">Makes</a>
+            <a class="btn" href="/user/{{ WMP.username }}/likes">Likes</a>
+            <a class="btn" href="/user/{{ WMP.username }}/events">Events</a>
           </div>
         </div>
       </div>
 
-    </div>
-
-    <div class="row">
-      <div class="tab-nav col-xs-12">
-        <div wmp-toggle-group wmp-activate-child class="btn-group">
-          <a class="btn" href="/user/{{ WMP.username }}/badges">Badges</a>
-          <a class="btn" href="/user/{{ WMP.username }}/teaching-resources">Teaching Resources</a>
-          <a class="btn" href="/user/{{ WMP.username }}/makes">Makes</a>
-          <a class="btn" href="/user/{{ WMP.username }}/likes">Likes</a>
-          <a class="btn" href="/user/{{ WMP.username }}/events">Events</a>
+      <div class="row">
+        <div class="col-xs-12 solid-bg">
+          <div ng-view class="main"></div>
         </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 solid-bg">
-        <div ng-view class="main"></div>
       </div>
     </div>
   </div>
