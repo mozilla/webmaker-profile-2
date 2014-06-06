@@ -122,4 +122,66 @@ angular.module('wmProfile.controllers', [])
         $scope.events = data;
       });
     }
+  ])
+  .controller('createUserController', ['$scope', '$http', '$modal', 'loginService',
+    function ($scope, $http, $modal, loginService) {
+
+      loginService.auth.on('newuser', function (assertion) {
+        $modal.open({
+          templateUrl: '/user/_partials/create-user-form.html',
+          controller: createUserCtrl,
+          resolve: {
+            assertion: function () {
+              return assertion;
+            }
+          }
+        });
+      });
+
+      var createUserCtrl = function ($scope, $modalInstance, loginService, assertion) {
+
+        $scope.form = {};
+        $scope.user = {};
+
+        // TODO: Finish localization and remove hard coded variables.
+        $scope.supported_languages = 'en-US';
+        $scope.currentLang = 'en-US';
+        $scope.langmap = {'en-US': { 'nativeName':'English (United State)','englishName':'English (United State)'}};
+
+        $scope.checkUsername = function () {
+          if (!$scope.form.user.username) {
+            return;
+          }
+          $http
+            .post(loginService.auth.urls.checkUsername, {
+              username: $scope.form.user.username.$viewValue
+            })
+            .success(function (username) {
+              $scope.form.user.username.$setValidity('taken', !username.exists);
+            })
+            .error(function (err) {
+              console.log(err);
+              $scope.form.user.username.$setValidity('taken', true);
+            });
+        };
+
+        $scope.createUser = function () {
+          $scope.submit = true;
+          if ($scope.form.user.$valid && $scope.form.agree) {
+            loginService.auth.createUser({
+              assertion: assertion,
+              user: $scope.user
+            });
+            $modalInstance.close();
+          }
+        };
+
+        $scope.cancel = function () {
+          loginService.auth.analytics.webmakerNewUserCancelled();
+          $modalInstance.dismiss('cancel');
+        };
+      };
+
+      loginService.auth.verify();
+    }
   ]);

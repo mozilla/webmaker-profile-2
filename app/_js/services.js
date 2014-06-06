@@ -65,9 +65,10 @@ angular.module('wmProfile.services', [])
     function ($rootScope, WebmakerAuthClient) {
       var visitorData;
       var auth = new WebmakerAuthClient({
+        handleNewUserUI: false,
         paths: {
           authenticate: '/user/_service/login/authenticate',
-          checkUsername: '/user/_service/login/checkUsername',
+          checkUsername: '/user/_service/login/check-username',
           create: '/user/_service/login/create',
           logout: '/user/_service/login/logout',
           verify: '/user/_service/login/verify',
@@ -90,15 +91,8 @@ angular.module('wmProfile.services', [])
         console.error(errorMessage);
       });
 
-      auth.verify();
-
       return {
-        login: function () {
-          auth.login();
-        },
-        logout: function () {
-          auth.logout();
-        },
+        auth: auth,
         getData: function () {
           return visitorData;
         }

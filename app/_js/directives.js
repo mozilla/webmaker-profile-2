@@ -34,12 +34,37 @@ angular.module('wmProfile.directives', [])
             $scope.$digest();
           });
 
-          $scope.login = loginService.login;
-          $scope.logout = loginService.logout;
+          $scope.login = loginService.auth.login;
+          $scope.logout = loginService.auth.logout;
         }
       };
     }
   ])
+  .directive('selectize', function () {
+    return {
+      restrict: 'A',
+      link: function ($scope, $element) {
+        var options = [];
+
+        for (var i = 0; i <= 0; i++) {
+          // TODO: This can be done only after localization for profile is completed [1] Uncomment line below [2] Don't hard code id and title
+          // var title = config.langmap[config.supported_languages[i]] ? config.langmap[config.supported_languages[i]].nativeName : 'unknown';
+          options.push({
+            id: 'en-US',
+            title: 'English (United State)'
+          });
+        }
+
+        $element.selectize({
+          options: options,
+          labelField: 'title',
+          valueField: 'id'
+        });
+        var selectize = $element[0].selectize;
+        selectize.setValue('en-US');
+      }
+    };
+  })
   .directive('wmpToggleGroup', ['jQuery',
     // Put an "active" class on only the last clicked element in a group
     function ($) {

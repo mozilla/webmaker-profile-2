@@ -1,6 +1,7 @@
 angular.module('wmProfile', [
   'ngRoute',
   'ngResource',
+  'ui.bootstrap',
   'wmProfile.filters',
   'wmProfile.services',
   'wmProfile.directives',
