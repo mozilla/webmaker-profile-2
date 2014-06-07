@@ -24,7 +24,6 @@
     }
   </style>
 
-  <base href="/user/">
 </head>
 
 <body ng-cloak>
@@ -44,7 +43,7 @@
       <div class="row">
         <div class="col-xs-12 clearfix">
           <a href="/{{lang}}" class="logo webmaker-logo">
-            <img src="_bower_components/makerstrap/images/logo.png">
+            <img src="/user/_bower_components/makerstrap/images/logo.png">
           </a>
           <wmp-login>
         </div>
@@ -103,11 +102,11 @@
       <div class="row">
         <div class="tab-nav col-xs-12">
           <div wmp-toggle-group wmp-activate-child class="btn-group">
-            <a class="btn" href="/user/{{ WMP.username }}/makes">Makes</a>
-            <a class="btn" href="/user/{{ WMP.username }}/teaching-resources">Teaching Resources</a>
-            <a class="btn" href="/user/{{ WMP.username }}/badges">Badges</a>
-            <a class="btn" href="/user/{{ WMP.username }}/events">Events</a>
-            <a class="btn" href="/user/{{ WMP.username }}/likes">Likes</a>
+            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/badges">{{ 'Badges' | i18n }}</a>
+            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/teaching-resources">Teaching Resources</a>
+            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/makes">Makes</a>
+            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/likes">Likes</a>
+            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/events">{{ 'Events' | i18n }}</a>
           </div>
         </div>
       </div>
@@ -122,24 +121,26 @@
 
   <script src="https://login.persona.org/include.js"></script>
 
-  <script src="_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js"></script>
-  <script src="_bower_components/makeapi-client/src/make-api.js"></script>
-  <script src="_bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="_bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
+  <script src="/user/_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js"></script>
+  <script src="/user/_bower_components/makeapi-client/src/make-api.js"></script>
+  <script src="/user/_bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/user/_bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
 
-  <script src="_bower_components/angular/angular.min.js"></script>
-  <script src="_bower_components/angular-route/angular-route.min.js"></script>
-  <script src="_bower_components/angular-resource/angular-resource.min.js"></script>
-  <script src="_bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-  <script src="_bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="/user/_bower_components/angular/angular.min.js"></script>
+  <script src="/user/_bower_components/angular-route/angular-route.min.js"></script>
+  <script src="/user/_bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="/user/_bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="/user/_bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="/user/_bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 
-  <script src="_bower_components/locompleter/locompleter.js"></script>
+  <script src="/user/_bower_components/locompleter/locompleter.js"></script>
 
-  <script src="_js/app.js"></script>
-  <script src="_js/services.js"></script>
-  <script src="_js/controllers.js"></script>
-  <script src="_js/filters.js"></script>
-  <script src="_js/directives.js"></script>
+  <script src="/user/_js/app.js"></script>
+  <script src="/user/_js/services.js"></script>
+  <script src="/user/_js/controllers.js"></script>
+  <script src="/user/_js/filters.js"></script>
+  <script src="/user/_js/directives.js"></script>
+  <script src="/user/_js/i18n.js"></script>
 
 </body>
 

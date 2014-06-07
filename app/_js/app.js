@@ -4,43 +4,45 @@ angular.module('wmProfile', [
   'ui.bootstrap',
   'wmProfile.filters',
   'wmProfile.services',
+  'localization',
   'wmProfile.directives',
   'wmProfile.controllers',
   'locompleter'
 ]).
 config(['$routeProvider', '$locationProvider',
   function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
-
-    $routeProvider.when('/:username/badges', {
-      templateUrl: '_partials/badges.html',
+    $routeProvider.when('/:locale?/user/:username/badges', {
+      templateUrl: '/user/_partials/badges.html',
+      controller: 'badges'
+    })
+    .when('/:locale?/user/:username/badges', {
+      templateUrl: '/user/_partials/badges.html',
+      controller: 'badges'
+    })
+    .when('/:locale?/user/:username/teaching-resources', {
+      templateUrl: '/user/_partials/teaching-resources.html',
+      controller: 'teachingResources'
+    })
+    .when('/:locale?/user/:username/makes', {
+      templateUrl: '/user/_partials/makes.html',
+      controller: 'makes'
+    })
+    .when('/:locale?/user/:username/likes', {
+      templateUrl: '/user/_partials/likes.html',
+      controller: 'likes'
+    })
+    .when('/:locale?/user/:username/events', {
+      templateUrl: '/user/_partials/events.html',
+      controller: 'events'
+    })
+    .when('/:locale?/user/:username', {
+      templateUrl: '/user/_partials/badges.html',
       controller: 'badges'
     });
 
-    $routeProvider.when('/:username/teaching-resources', {
-      templateUrl: '_partials/teaching-resources.html',
-      controller: 'teachingResources'
-    });
+    // TODO - "404" for malformed routes / missing users
+    $locationProvider.html5Mode(true);
 
-    $routeProvider.when('/:username/makes', {
-      templateUrl: '_partials/makes.html',
-      controller: 'makes'
-    });
-
-    $routeProvider.when('/:username/likes', {
-      templateUrl: '_partials/likes.html',
-      controller: 'likes'
-    });
-
-    $routeProvider.when('/:username/events', {
-      templateUrl: '_partials/events.html',
-      controller: 'events'
-    });
-
-    $routeProvider.when('/:username', {
-      templateUrl: '_partials/makes.html',
-      controller: 'makes'
-    });
   }
 ]).
 run(['$rootScope', 'jQuery',
@@ -55,11 +57,19 @@ run(['$rootScope', 'jQuery',
 
     $.ajax({
       async: false,
-      url: '_service/env.json',
+      url: '/user/_service/env.json',
       dataType: 'json'
     })
       .done(function (config) {
         $rootScope.WMP.config = config;
+        // Set locale information
+        if (config.l10n.supported_languages.indexOf(config.l10n.lang) > 0) {
+          $rootScope.lang = config.l10n.lang;
+        } else {
+          $rootScope.lang = config.l10n.defaultLang;
+        }
+        $rootScope.direction = config.l10n.direction;
+        $rootScope.arrowDir = config.l10n.direction === 'rtl' ? "left" : "right";
       })
       .fail(function () {
         console.error('Config failed to load. Did you run grunt?');

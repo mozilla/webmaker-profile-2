@@ -19,9 +19,11 @@
     "messina": "0.1.2",
     "morgan": "1.0.1",
     "newrelic": "1.5.5",
-    "webmaker-user-client": "0.1.0",
-    "webmaker-auth": "0.1.1",
-    "optimist": "0.6.1"
+    "optimist": "0.6.1",
+    "webmaker-auth": "0.0.14",
+    "webmaker-i18n": "0.3.22",
+    "webmaker-locale-mapping": "0.0.4",
+    "webmaker-user-client": "0.1.0"
   },
   "devDependencies": {
     "grunt": "0.4.4",

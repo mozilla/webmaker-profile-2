@@ -6,6 +6,8 @@ module.exports = function (config) {
   var WebmakerAuth = require('webmaker-auth');
   var path = require('path');
   var argv = require('optimist').argv;
+  var i18n = require('webmaker-i18n');
+  var defaultLang = 'en-US';
 
   var webmakerAuth = new WebmakerAuth({
     // required
@@ -35,6 +37,15 @@ module.exports = function (config) {
   app.use(bodyParser.urlencoded());
   app.use(webmakerAuth.cookieParser());
   app.use(webmakerAuth.cookieSession());
+
+  // Setup locales with i18n
+  app.use( i18n.middleware({
+    supported_languages: config.SUPPORTED_LANGS || [defaultLang],
+    default_lang: defaultLang,
+    mappings: require('webmaker-locale-mapping'),
+    translation_directory: path.resolve(__dirname, '../locale')
+  }));
+
   app.use(routes);
   app.use(middleware.errorHandler);
   app.use('/user', express.static(lrAbsolutePath || __dirname + '/../app'));

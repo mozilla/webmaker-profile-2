@@ -4,6 +4,7 @@ var fs = require('fs');
 var UserClient = require('webmaker-user-client');
 var BadgeClient = require('badgekit-api-client');
 var path = require('path');
+var i18n = require('webmaker-i18n');
 
 module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
   var router = express.Router();
@@ -18,6 +19,9 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
     system: 'webmaker'
   };
 
+  // Localized Strings
+  router.get("/localized/strings/:lang?", i18n.stringsRoute("en-US"));
+
   // Match any URL that doesn't fall under an underscore prefixed subdirectory and serve index.html
   // eg: /user/joe/*  NOT  /user/_less/app.less
   router.get(/^\/user(?!\/_)/, function (req, res) {
@@ -29,6 +33,13 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
   })
 
   router.get('/user/_service/env.json', function (req, res) {
+    var env = config.public;
+    env.l10n = {
+      supported_languages: i18n.getSupportLanguages(),
+      lang: req.localeInfo.lang,
+      defaultLang: 'en-US',
+      direction: req.localeInfo.direction
+    };
     res.json(config.public);
   });
 
