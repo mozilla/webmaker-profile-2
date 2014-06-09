@@ -32,7 +32,7 @@
   <div class="alert alert-info top-banner" ng-hide="userLoggedIn">
     <div class="container">
       <strong>
-        Want your own Webmaker profile? <span ng-if="!userExists && WMP.username">{{ WMP.username }} is available!</span>
+        Want your own Webmaker profile? <span ng-if="userExists === false && WMP.username">{{ WMP.username }} is available!</span>
       </strong>
       <button class="btn btn-sm btn-info" ng-click="login()">Sign up today!</button>
     </div>
@@ -52,7 +52,7 @@
   </header>
 
   <div class="container double-margin-bottom">
-    <div ng-if="!userExists">
+    <div ng-if="userExists === false">
       <div class="error row">
         <h1><span class="fa fa-frown-o"></span> 404</h1>
         <div class="alert alert-danger">User {{ WMP.username }} was not found.</div>
