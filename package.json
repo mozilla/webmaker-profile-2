@@ -20,7 +20,7 @@
     "morgan": "1.0.1",
     "newrelic": "1.5.5",
     "webmaker-user-client": "0.1.0",
-    "webmaker-auth": "0.0.14",
+    "webmaker-auth": "0.1.1",
     "optimist": "0.6.1"
   },
   "devDependencies": {
