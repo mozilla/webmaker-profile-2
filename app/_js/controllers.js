@@ -146,7 +146,12 @@ angular.module('wmProfile.controllers', [])
         // TODO: Finish localization and remove hard coded variables.
         $scope.supported_languages = 'en-US';
         $scope.currentLang = 'en-US';
-        $scope.langmap = {'en-US': { 'nativeName':'English (United State)','englishName':'English (United State)'}};
+        $scope.langmap = {
+          'en-US': {
+            'nativeName': 'English (United States)',
+            'englishName': 'English (United States)'
+          }
+        };
 
         $scope.checkUsername = function () {
           if (!$scope.form.user.username) {

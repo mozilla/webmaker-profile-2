@@ -1,6 +1,6 @@
 <div class="modal-header">
   <button ng-click="cancel()" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h3 class="modal-title" >Welcome to Webmaker!</h3>
+  <h3 class="modal-title">Welcome to Webmaker!</h3>
 </div>
 <div class="modal-body">
   <form class="form" name="form.user" novalidate>
@@ -18,12 +18,14 @@
     </div>
     <div class="checkbox">
       <label>
-        <input ng-model="user.mailingList" name="mailingList" type="checkbox"> Send me email updates about Mozilla Webmaker and other projects
+        <input ng-model="user.mailingList" name="mailingList" type="checkbox">Send me email updates about Mozilla Webmaker and other projects
       </label>
     </div>
     <div class="checkbox" ng-class="{'has-error': submit && !form.agree }">
       <label>
-        <input ng-model="form.agree" name="agree" type="checkbox">I agree to your <a href="https://webmaker.org/{{lang}}/terms">terms</a> and <a href="https://webmaker.org/{{lang}}/privacy">conditions</a>
+        <input ng-model="form.agree" name="agree" type="checkbox">I agree to your
+        <a href="https://webmaker.org/{{lang}}/terms">terms</a>and
+        <a href="https://webmaker.org/{{lang}}/privacy">conditions</a>
         <span class="help-block" ng-show="submit && !form.agree">You must agree to our terms and conditions</span>
       </label>
     </div>
