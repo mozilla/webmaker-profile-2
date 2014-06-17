@@ -89,14 +89,21 @@ angular.module('wmProfile.directives', [])
         restrict: 'AE',
         link: function ($scope, el, attrs, controller) {
           var elChildren = $(el).children();
+          var urlView = window.location.pathname.match(/\/([^\/]+)\/?$/)[1];
+          var viewMatched = false;
 
           for (var i = 0, ii = elChildren.length; i < ii; i += 1) {
-            var view = elChildren.eq(i).attr('href').split('#!/{{ WMP.username }}/')[1];
+            var linkedView = elChildren.eq(i).attr('href').match(/\/([^\/]+)\/?$/)[1];
 
-            if (window.location.hash.match(view)) {
+            if (linkedView === urlView) {
               elChildren.eq(i).addClass('active');
+              viewMatched = true;
               break;
             }
+          }
+
+          if (!viewMatched) {
+            elChildren.eq(0).addClass('active');
           }
         }
       };

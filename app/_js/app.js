@@ -38,12 +38,9 @@ config(['$routeProvider', '$locationProvider',
     });
 
     $routeProvider.when('/:username', {
-      templateUrl: '_partials/badges.html',
-      controller: 'badges'
+      templateUrl: '_partials/makes.html',
+      controller: 'makes'
     });
-
-    // TODO - "404" for malformed routes / missing users
-
   }
 ]).
 run(['$rootScope', 'jQuery',
