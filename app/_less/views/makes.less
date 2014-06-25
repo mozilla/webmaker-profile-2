@@ -178,13 +178,6 @@
 
 .make-likes {
   margin-right: 1rem;
-  &:link, &:visited, &:hover, &:active, &:focus {
-    color: @grey;
-    font-weight: 700;
-  }
-  &:hover, &:active, &:focus {
-    text-decoration: none;
-  }
   &::before {
     .fa-mixin();
     color: @brand-primary;
@@ -216,6 +209,7 @@
     .fa-flip-horizontal();
     color: @brand-primary;
     content: @fa-var-tag;
+    margin-right: 0.5rem;
   }
   &.editing {
     li {
