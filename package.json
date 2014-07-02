@@ -23,7 +23,8 @@
     "webmaker-auth": "0.0.14",
     "webmaker-i18n": "0.3.22",
     "webmaker-locale-mapping": "0.0.4",
-    "webmaker-user-client": "0.1.0"
+    "webmaker-user-client": "0.1.0",
+    "csurf": "^1.2.2"
   },
   "devDependencies": {
     "grunt": "0.4.4",

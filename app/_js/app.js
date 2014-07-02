@@ -45,8 +45,8 @@ config(['$routeProvider', '$locationProvider',
 
   }
 ]).
-run(['$rootScope', 'jQuery',
-  function ($rootScope, $) {
+run(['$rootScope', '$http', 'jQuery',
+  function ($rootScope, $http, $) {
     var extractedUsername = window.location.pathname.match(/(?:\/user\/)([^/]+)/);
 
     extractedUsername = extractedUsername ? extractedUsername[1] : undefined;
@@ -70,6 +70,9 @@ run(['$rootScope', 'jQuery',
         }
         $rootScope.direction = config.l10n.direction;
         $rootScope.arrowDir = config.l10n.direction === 'rtl' ? "left" : "right";
+
+        // Configure CSRF token
+        $http.defaults.headers.common['X-CSRF-Token'] = config.csrf;
       })
       .fail(function () {
         console.error('Config failed to load. Did you run grunt?');

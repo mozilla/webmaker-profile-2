@@ -65,6 +65,7 @@ angular.module('wmProfile.services', [])
     function ($rootScope, WebmakerAuthClient) {
       var visitorData;
       var auth = new WebmakerAuthClient({
+        csrfToken: $rootScope.WMP.config.csrf,
         handleNewUserUI: false,
         paths: {
           authenticate: '/user/_service/login/authenticate',

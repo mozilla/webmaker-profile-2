@@ -34,6 +34,7 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
 
   router.get('/user/_service/env.json', function (req, res) {
     var env = config.public;
+    env.csrf = req.csrfToken();
     env.l10n = {
       supported_languages: i18n.getSupportLanguages(),
       lang: req.localeInfo.lang,
