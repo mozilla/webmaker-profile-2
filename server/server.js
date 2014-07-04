@@ -2,6 +2,7 @@ module.exports = function (config) {
   var express = require('express');
   var bodyParser = require('body-parser');
   var morgan = require('morgan');
+  var csrf = require('csurf');
   var messina = require('messina')('webmaker-profile-2-' + config.nodeEnv);
   var WebmakerAuth = require('webmaker-auth');
   var path = require('path');
@@ -37,6 +38,7 @@ module.exports = function (config) {
   app.use(bodyParser.urlencoded());
   app.use(webmakerAuth.cookieParser());
   app.use(webmakerAuth.cookieSession());
+  app.use(csrf());
 
   // Setup locales with i18n
   app.use( i18n.middleware({
