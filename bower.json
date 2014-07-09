@@ -23,7 +23,6 @@
     "webmaker-auth-client": "0.1.7"
   },
   "resolutions": {
-    "angular": "1.2.17",
-    "webmaker-analytics": "~0.1.0"
+    "angular": "1.2.17"
   }
 }

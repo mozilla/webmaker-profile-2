@@ -12,10 +12,11 @@ module.exports = function (config) {
 
   var webmakerAuth = new WebmakerAuth({
     // required
-    loginURL: config.loginUrlWithAuth,
+    loginURL: config.loginUrl,
     secretKey: config.sessionSecret,
 
     // optional
+    authLoginURL: config.loginUrlWithAuth,
     domain: config.cookieDomain, // default undefined
     forceSSL: config.forceSSL // default false
   });
