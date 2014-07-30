@@ -36,8 +36,8 @@ config(['$routeProvider', '$locationProvider',
       controller: 'events'
     })
     .when('/:locale?/user/:username', {
-      templateUrl: '/user/_partials/badges.html',
-      controller: 'badges'
+      templateUrl: '/user/_partials/makes.html',
+      controller: 'makes'
     });
 
     // TODO - "404" for malformed routes / missing users
