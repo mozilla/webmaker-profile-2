@@ -63,6 +63,7 @@
       <div ng-controller="userMeta as user" class="row double-margin-bottom">
         <div class="user-avatar col-xs-12 col-sm-2">
           <img ng-src="{{ user.avatar }}" class="img-circle img-responsive">
+          <span class="text-center gravatar" ng-show="isEditMode" ng-bind-html="'Gravatar' | i18n "></span>
         </div>
 
         <div class="user-metadata solid-bg col-xs-12 col-sm-10">
