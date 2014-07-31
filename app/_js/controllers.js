@@ -117,7 +117,7 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'events';
 
       eventService.query({
-        organizerId: $rootScope.WMP.username
+        username: $rootScope.WMP.username
       }, function (data) {
         $scope.events = data;
       });
