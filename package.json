@@ -1,6 +1,6 @@
 {
   "name": "webmaker-profile-2",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Webmaker Profile 2",
   "main": "app/js/app.js",
   "scripts": {
