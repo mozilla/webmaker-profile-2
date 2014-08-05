@@ -73,8 +73,8 @@
                 <h1 class="pull-left">{{ WMP.username }}</h1>
 
                 <button ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
-                  <span ng-hide="isEditMode" class="fa fa-pencil"></span>
-                  <span ng-show="isEditMode" class="fa fa-save"></span>
+                  <span ng-hide="isEditMode" class="fa fa-pencil"> {{ 'Edit' | i18n }}</span>
+                  <span ng-show="isEditMode" class="fa fa-save"> {{ 'Save' | i18n }}</span>
                 </button>
               </div>
 
