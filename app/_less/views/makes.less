@@ -190,6 +190,20 @@
   }
 }
 
+.make-likes-empty {
+  margin-right: 1rem;
+  &::before {
+    .fa-mixin();
+    color: @brand-primary;
+    content: @fa-var-heart-o;
+    font-weight: 300;
+    margin-right: 0.5rem;
+    &:hover {
+      font-weight: 700;
+    }
+  }
+}
+
 .make-tags {
   display: inline;
   margin: 0;
