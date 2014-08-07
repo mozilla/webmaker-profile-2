@@ -17,7 +17,8 @@
       </p>
 
       <div class="make-meta">
-        <span class="make-likes">{{ make.likes.length }}</span>
+        <span class="make-likes" ng-if="make.likes.length">{{ make.likes.length }}</span>
+        <span class="make-likes-empty" ng-if="!make.likes.length"></span>
         <ul class="make-tags" ng-if="make.tags.length">
           <li ng-repeat="tag in make.tags">
             <a href="/{{ lang }}/search?type=tags&q={{ tag }}">{{ tag | decode }}</a><span ng-class="{hidden:$last}">,</span>
