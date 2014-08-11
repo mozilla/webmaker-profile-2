@@ -1,25 +1,25 @@
 <ul class="nav navbar-nav navbar-right">
   <li class="dropdown" ng-class="{open: ddOpen}" ng-cloak ng-show="userInfo.email">
     <button class="navbar-user-info dropdown-toggle no-style" ng-click="ddOpen = !ddOpen">
-      <span class="sr-only">User links dropdown</span>
+      <span class="sr-only">{{ 'userlinks' | i18n }}</span>
       <img class="user-info-avatar" ng-src="{{ userInfo.avatar }}">
-      <span>Hi, </span>
-      <strong>{{ userInfo.username }}</strong> <span class="label label-primary" ng-show="userInfo.isAdmin">admin</span>  <span class="caret"></span>
+      <span>{{ 'Hi' | i18n }}, </span>
+      <strong>{{ userInfo.username }}</strong> <span class="label label-primary" ng-show="userInfo.isAdmin">{{ 'admin' | i18n }}</span>  <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
       <li>
-        <a href="/user/{{ userInfo.username }}" target="_self"><span class="fa fa-user"></span> My Profile</a>
+        <a href="/user/{{ userInfo.username }}" target="_self"><span class="fa fa-user"></span> {{ 'myprofile' | i18n }}</a>
       </li>
       <li>
-        <a href="{{ WMP.config.accountSettingsURL }}" target="_blank"><span class="fa fa-cog"></span> Settings</a>
+        <a href="{{ WMP.config.accountSettingsURL }}" target="_blank"><span class="fa fa-cog"></span> {{ 'Settings' | i18n }}</a>
       </li>
       <li class="divider"></li>
       <li>
-        <a href="#" ng-click="logout(); ddOpen = false;"><span class="fa fa-sign-out"></span> Log Out</a>
+        <a href="#" ng-click="logout(); ddOpen = false;"><span class="fa fa-sign-out"></span> {{ 'logout' | i18n }}</a>
       </li>
     </ul>
   </li>
   <li>
-    <button ng-cloak ng-show="!userInfo.email" class="btn btn-primary btn-sm navbar-btn" ng-click="login()">Log In</button>
+    <button ng-cloak ng-show="!userInfo.email" class="btn btn-primary btn-sm navbar-btn" ng-click="login()">{{ 'login' | i18n }}</button>
   </li>
 </ul>

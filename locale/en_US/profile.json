@@ -3,5 +3,12 @@
   "Badges": "Badges",
   "Edit": "Edit",
   "Save": "Save",
+  "userlinks": "User links dropdown",
+  "Hi": "Hi",
+  "admin": "admin",
+  "myprofile": "My Profile",
+  "Settings": "Settings",
+  "logout": "Log Out",
+  "login": "Log In",
   "Gravatar" : "<a href='http://gravatar.com/'>Change profile picture</a>"
 }
