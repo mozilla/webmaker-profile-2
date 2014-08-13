@@ -4,19 +4,26 @@
   <a href="{{ WMP.config.eventApp }}/#!/add" class="btn btn-primary pull-right margin-top" target="_blank">+ Add an event</a>
 </div>
 <table class="table table-striped events">
-  <tr ng-repeat="event in events">
-    <td class="event-date-time">
-      <div class="event-time">
-        <time datetime="{{ event.beginDate }}">
-          {{ event.beginDate | date:'MMM d' }}
-        </time>
-      </div>
-    </td>
-    <td class="event-title-location">
-      <h2>
-        <a href="{{ WMP.config.eventApp }}/#!/events/{{event.id}}" target="_blank" class="event-title">{{ event.title }}</a>
-        <span>({{ event.address}})</span>
-      </h2>
-    </td>
-  </tr>
+  <tbody ng-repeat="event in events">
+    <tr ng-show="isDiffYear($index)">
+      <th colspan="2">
+        {{ event.beginDate| date: 'y' }}
+      </th>
+    </tr>
+    <tr>
+      <td class="event-date-time">
+        <div class="event-time">
+          <time datetime="{{ event.beginDate }}">
+            {{ event.beginDate | date:'MMM d' }}
+          </time>
+        </div>
+      </td>
+      <td class="event-title-location">
+        <h2>
+          <a href="{{ WMP.config.eventApp }}/#!/events/{{event.id}}" target="_blank" class="event-title">{{ event.title }}</a>
+          <span>({{ event.address}})</span>
+        </h2>
+      </td>
+    </tr>
+  </tbody>
 </table>
