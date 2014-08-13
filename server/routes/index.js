@@ -20,7 +20,7 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
   };
 
   // Localized Strings
-  router.get("/localized/strings/:lang?", i18n.stringsRoute("en-US"));
+  router.get("/user/localized/strings/:lang?", i18n.stringsRoute("en-US"));
 
   // Match any URL that doesn't fall under an underscore prefixed subdirectory and serve index.html
   // eg: /user/joe/*  NOT  /user/_less/app.less
