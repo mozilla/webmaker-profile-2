@@ -27,7 +27,7 @@ angular.module('localization', ['ngSanitize'])
 
       // builds the url for locating the resource file
       buildUrl: function () {
-        return '/localized/strings/' + $rootScope.lang;
+        return '/user/localized/strings/' + $rootScope.lang;
       },
 
       // loads the language resource file from the server
