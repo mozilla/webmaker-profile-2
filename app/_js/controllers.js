@@ -119,8 +119,21 @@ angular.module('wmProfile.controllers', [])
       eventService.query({
         username: $rootScope.WMP.username
       }, function (data) {
-        $scope.events = data;
+        $scope.events = data.sort(function (a, b) {
+          return (new Date(b.beginDate).getTime() - new Date(a.beginDate).getTime());
+        });
       });
+
+      $scope.isDiffYear = function(idx) {
+        var curYear = new Date($scope.events[idx].beginDate).getFullYear();
+
+        if (idx === 0) {
+          return true;
+        }
+
+        var prevYear = new Date($scope.events[idx-1].beginDate).getFullYear();
+        return curYear !== prevYear;
+      };
     }
   ])
   .controller('createUserController', ['$scope', '$http', '$modal', 'loginService',
