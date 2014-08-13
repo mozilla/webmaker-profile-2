@@ -1,6 +1,6 @@
 <div class="link-form margin-bottom clearfix" ng-show="isEditMode">
   <form novalidate name="personalLinks">
-    <input class="form-control margin-bottom" ng-model="userLink" placeholder="Add a personal link – eg: w3.org" name="link">
+    <input class="form-control margin-bottom" ng-model="userLink" placeholder="Add a personal link – eg: blog, Twitter, etc" name="link">
 
     <div class="alert alert-warning" ng-show="showDuplicate"><span class="fa fa-exclamation-circle"></span> You already added that link!</div>
     <div class="alert alert-danger" ng-show="personalLinks.link.$invalid && showInvalid"><span class="fa fa-exclamation-circle"></span> Invalid URL formatting.</div>
