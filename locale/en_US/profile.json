@@ -1,14 +1,62 @@
 {
-  "Events": "Events",
-  "Badges": "Badges",
-  "Edit": "Edit",
-  "Save": "Save",
-  "userlinks": "User links dropdown",
-  "Hi": "Hi",
-  "admin": "admin",
-  "myprofile": "My Profile",
-  "Settings": "Settings",
-  "logout": "Log Out",
-  "login": "Log In",
-  "Gravatar" : "<a href='http://gravatar.com/'>Change profile picture</a>"
+  "Makes": {
+    "message": "Makes",
+    "description": ""
+  },
+  "Badges": {
+    "message": "Badges",
+    "description": ""
+  },
+  "Likes": {
+    "message": "Likes",
+    "description": ""
+  },
+  "Events": {
+    "message": "Events",
+    "description": ""
+  },
+  "Teaching_Resources": {
+    "message": "Teaching Resources",
+    "description": ""
+  },
+  "Edit": {
+    "message": "Edit",
+    "description": ""
+  },
+  "Save": {
+    "message": "Save",
+    "description": ""
+  },
+  "userlinks": {
+    "message": "User links dropdown",
+    "description": "Text for screen readers to explain the user links dropdown"
+  },
+  "Hi": {
+    "message": "Hi",
+    "description": ""
+  },
+  "admin": {
+    "message": "admin",
+    "description": ""
+  },
+  "myprofile": {
+    "message": "My Profile",
+    "description": ""
+  },
+  "Settings": {
+    "message": "Settings",
+    "description": ""
+  },
+  "logout": {
+    "message": "Log Out",
+    "description": ""
+  },
+  "login": {
+    "message": "Log In",
+    "description": ""
+  },
+  "Gravatar": {
+    "message": "<a href='http://gravatar.com/'>Change profile picture</a>",
+    "description": "Link to gravatar to change profile photo"
+  }
 }
