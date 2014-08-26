@@ -85,7 +85,7 @@
 
               <div class="margin-bottom">
                 <input autocomplete-location class="form-control" ng-show="isEditMode" ng-model="user.location" placeholder="Where do you live?">
-                <a ng-hide="isEditMode || !user.location " href="#"><span class="fa fa-map-marker nbsp-right"></span>{{ user.location }}</a>
+                <a ng-hide="isEditMode || !user.location " href="https://maps.google.com/?q={{ user.location | uriEncode }}" target="_blank"><span class="fa fa-map-marker nbsp-right"></span>{{ user.location }}</a>
               </div>
 
               <wmp-link-collector wmp-edit-mode="isEditMode" ng-model="user.links" class="margin-bottom">
