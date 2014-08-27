@@ -44,9 +44,10 @@ angular.module('wmProfile.controllers', [])
       });
     }
   ])
-  .controller('badges', ['$scope', '$rootScope', 'badgesService',
-    function ($scope, $rootScope, badgesService) {
+  .controller('badges', ['$scope', '$rootScope', '$sce', 'badgesService',
+    function ($scope, $rootScope, $sce, badgesService) {
       $scope.viewID = 'badges';
+      $scope.backpackURL = $sce.trustAsResourceUrl($rootScope.WMP.config.backpackURL);
 
       badgesService.getBadges($rootScope.WMP.username).then(function (badges) {
         $scope.badges = badges;
