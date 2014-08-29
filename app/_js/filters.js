@@ -25,4 +25,7 @@ angular.module('wmProfile.filters', [])
       tag = tag || '';
       return decodeURIComponent(tag);
     };
-  });
+  })
+  .filter('uriEncode', [ '$window', function ($window) {
+    return $window.encodeURIComponent;
+  }]);
