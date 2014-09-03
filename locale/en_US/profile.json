@@ -1,31 +1,31 @@
 {
   "Makes": {
     "message": "Makes",
-    "description": ""
+    "description": "Content that the user has created on webmaker.org"
   },
   "Badges": {
     "message": "Badges",
-    "description": ""
+    "description": "Badges that the user has earned on webmaker.org"
   },
   "Likes": {
     "message": "Likes",
-    "description": ""
+    "description": "Makes that the user has liked or favourited on webmaker.org"
   },
   "Events": {
     "message": "Events",
-    "description": ""
+    "description": "Events that the user has hosted on webmaker.org"
   },
   "Teaching_Resources": {
     "message": "Teaching Resources",
-    "description": ""
+    "description": "Makes that the user has tagged as a teaching kit or teaching resource"
   },
   "Edit": {
     "message": "Edit",
-    "description": ""
+    "description": "The button to edit their user profile"
   },
   "Save": {
     "message": "Save",
-    "description": ""
+    "description": "The button to save their user profile"
   },
   "userlinks": {
     "message": "User links dropdown",
@@ -33,27 +33,27 @@
   },
   "Hi": {
     "message": "Hi",
-    "description": ""
+    "description": "Greeting the signed-in user, followed by their username"
   },
   "admin": {
     "message": "admin",
-    "description": ""
+    "description": "A text string indicating that the signed-in user is an administrator account"
   },
   "myprofile": {
     "message": "My Profile",
-    "description": ""
+    "description": "A link in the user dropdown menu to visit their own user profile on webmaker.org"
   },
   "Settings": {
     "message": "Settings",
-    "description": ""
+    "description": "A link in the user dropdown menu to visit the settings page on webmaker.org"
   },
   "logout": {
     "message": "Log Out",
-    "description": ""
+    "description": "A link in the user dropdown menu to log out of their account"
   },
   "login": {
     "message": "Log In",
-    "description": ""
+    "description": "A button to log in to their account"
   },
   "Gravatar": {
     "message": "<a href='http://gravatar.com/'>Change profile picture</a>",
