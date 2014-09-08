@@ -51,7 +51,7 @@ angular.module('wmProfile.directives', [])
           // var title = config.langmap[config.supported_languages[i]] ? config.langmap[config.supported_languages[i]].nativeName : 'unknown';
           options.push({
             id: 'en-US',
-            title: 'English (United State)'
+            title: 'English (United States)'
           });
         }
 
