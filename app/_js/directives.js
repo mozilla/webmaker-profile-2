@@ -179,7 +179,7 @@ angular.module('wmProfile.directives', [])
               'github-alt': /^github\.com\/[^\/\n]*$/m,
               'dribbble': /^dribbble\.com\/[^\/\n]*$/m,
               'pinterest': /^(?:www.)?pinterest\.com\/[^\/]*(?:\/)?$/m,
-              'linkedin': /^(https?://)?[^.]+\.linkedin\.com(/[^\r\n\s]+)?/m
+              'linkedin': /((https?:\/\/)?[^.]+(\.)?linkedin\.com(\/[^\r\n\s]+)?)/m
             };
 
             // Attempt to match URL to a service
