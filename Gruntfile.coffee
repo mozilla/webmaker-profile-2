@@ -61,6 +61,7 @@ module.exports = (grunt) ->
           "copy:stagePartials"
           "copy:stageImages"
           "less:reload"
+          "uglify:reload"
           "dom_munger:reload"
         ]
 
@@ -140,7 +141,7 @@ module.exports = (grunt) ->
           config: ".jsbeautifyrc"
 
     uglify:
-      dependencies:
+      development:
         options:
           sourceMap: true
           mangle: false
@@ -163,12 +164,55 @@ module.exports = (grunt) ->
 
             'app/_bower_components/webmaker-analytics/analytics.js'
           ]
-      app:
+          'app/_compiled/app.min.js': 'app/_js/**/*.js'
+      production:
         options:
           sourceMap: true
           mangle: false
         files:
+          'app/_compiled/dependencies.min.js': [
+
+            'app/_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js'
+            'app/_bower_components/makeapi-client/src/make-api.js'
+            'app/_bower_components/jquery/dist/jquery.js'
+            'app/_bower_components/selectize/dist/js/standalone/selectize.js'
+
+            'app/_bower_components/angular/angular.js'
+            'app/_bower_components/angular-route/angular-route.js'
+            'app/_bower_components/angular-resource/angular-resource.js'
+            'app/_bower_components/angular-bootstrap/ui-bootstrap.js'
+            'app/_bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+            'app/_bower_components/angular-sanitize/angular-sanitize.js'
+
+            'app/_bower_components/locompleter/locompleter.js'
+
+            'app/_bower_components/webmaker-analytics/analytics.js'
+          ]
           'app/_compiled/app.min.js': 'app/_js/**/*.js'
+      reload:
+        options:
+          sourceMap: true
+          mangle: false
+        files:
+          '.tmp/_compiled/dependencies.min.js': [
+
+            'app/_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js'
+            'app/_bower_components/makeapi-client/src/make-api.js'
+            'app/_bower_components/jquery/dist/jquery.js'
+            'app/_bower_components/selectize/dist/js/standalone/selectize.js'
+
+            'app/_bower_components/angular/angular.js'
+            'app/_bower_components/angular-route/angular-route.js'
+            'app/_bower_components/angular-resource/angular-resource.js'
+            'app/_bower_components/angular-bootstrap/ui-bootstrap.js'
+            'app/_bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+            'app/_bower_components/angular-sanitize/angular-sanitize.js'
+
+            'app/_bower_components/locompleter/locompleter.js'
+
+            'app/_bower_components/webmaker-analytics/analytics.js'
+          ]
+          '.tmp/_compiled/app.min.js': 'app/_js/**/*.js'
 
   grunt.loadNpmTasks "grunt-shell-spawn"
   grunt.loadNpmTasks "grunt-jsbeautifier"
@@ -184,7 +228,7 @@ module.exports = (grunt) ->
   # Development server
   grunt.registerTask "server", [
     "less:development"
-    "uglify"
+    "uglify:development"
     "shell:server"
     "watch:passive"
   ]
@@ -217,7 +261,7 @@ module.exports = (grunt) ->
   # Build for Production
   grunt.registerTask "build", [
     "less:production"
-    "uglify"
+    "uglify:production"
     "autoprefixer:build"
   ]
   return
