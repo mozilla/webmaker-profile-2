@@ -178,7 +178,8 @@ angular.module('wmProfile.directives', [])
               'vimeo-square': /vimeo\.com\/[a-zA-Z]/,
               'github-alt': /^github\.com\/[^\/\n]*$/m,
               'dribbble': /^dribbble\.com\/[^\/\n]*$/m,
-              'pinterest': /^(?:www.)?pinterest\.com\/[^\/]*(?:\/)?$/m
+              'pinterest': /^(?:www.)?pinterest\.com\/[^\/]*(?:\/)?$/m,
+              'linkedin': /^(https?://)?[^.]+\.linkedin\.com(/[^\r\n\s]+)?/m
             };
 
             // Attempt to match URL to a service
