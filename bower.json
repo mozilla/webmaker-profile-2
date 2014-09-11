@@ -1,6 +1,6 @@
 {
   "name": "webmaker-profile-2",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "ignore": [
     "**/.*",
     "node_modules",
