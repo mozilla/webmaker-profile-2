@@ -11,3 +11,4 @@ env.json
 env.cson
 .tmp/
 .static/
+app/index.html

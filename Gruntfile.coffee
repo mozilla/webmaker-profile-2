@@ -1,4 +1,39 @@
 module.exports = (grunt) ->
+  scripts =
+  [
+
+    'app/_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js'
+    'app/_bower_components/makeapi-client/src/make-api.js'
+    'app/_bower_components/jquery/dist/jquery.js'
+    'app/_bower_components/selectize/dist/js/standalone/selectize.js'
+
+    'app/_bower_components/angular/angular.js'
+    'app/_bower_components/angular-route/angular-route.js'
+    'app/_bower_components/angular-resource/angular-resource.js'
+    'app/_bower_components/angular-bootstrap/ui-bootstrap.js'
+    'app/_bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+    'app/_bower_components/angular-sanitize/angular-sanitize.js'
+
+    'app/_bower_components/locompleter/locompleter.js'
+    'app/_bower_components/webmaker-analytics/analytics.js'
+
+    'app/_js/app.js'
+    'app/_js/services.js'
+    'app/_js/controllers.js'
+    'app/_js/filters.js'
+    'app/_js/directives.js'
+    'app/_js/i18n.js'
+  ]
+
+  devScript = ''
+
+  for script in scripts
+    script = script.replace('app/', 'user/')
+    devScript += "<script src='/" + script + "'></script>"
+
+  prodScript = '<script src="/user/_compiled/dependencies.min.js"></script>
+                <script src="/user/_compiled/app.min.js"></script>'
+
   grunt.initConfig
     less:
       options:
@@ -13,7 +48,7 @@ module.exports = (grunt) ->
           ".static/_css/app.ltr.css": "app/_less/app.less"
       reload:
         files:
-          ".tmp/_compiled/app.ltr.css": "app/_less/app.less"
+          "app/_compiled/app.ltr.css": "app/_less/app.less"
 
     shell:
       server:
@@ -32,37 +67,21 @@ module.exports = (grunt) ->
 
     watch:
       options:
-        cwd: "app"
-        spawn: true
-      passive:
-        files: [
-          '_less/**/*.less'
-        ]
-        options:
-          livereload: false
-        tasks: [
-          "less:development"
-        ]
-      reload:
-        options:
-          spawn: false
-          livereload: true
-          interrupt: true
-          atBegin: true
-        files: [
-          '_img/**/*.*'
-          '_js/**/*.js'
-          '_less/**/*.less'
-          '_partials/**/*.html'
-          'index.html'
-        ]
-        tasks: [
-          "copy:stageJS"
-          "copy:stagePartials"
-          "copy:stageImages"
-          "less:reload"
-          "dom_munger:reload"
-        ]
+        spawn: false
+        livereload: true
+        cwd: 'app'
+        interrupt: true
+        atBegin: true
+      files: [
+        '_img/**/*.*'
+        '_js/**/*.js'
+        '_less/**/*.less'
+        '_partials/**/*.html'
+        'index.html'
+      ]
+      tasks: [
+        "less:reload"
+      ]
 
     copy:
       reloadInit:
@@ -93,16 +112,6 @@ module.exports = (grunt) ->
           src: "_img/**/*.*"
           dest: ".tmp/"
         ]
-
-    dom_munger:
-      reload:
-        options:
-          append:
-            selector: "body"
-            html: "<script src=\"//localhost:35729/livereload.js\" id=\"liveReloadScript\"></script>"
-
-        src: "app/index.html"
-        dest: ".tmp/index.html"
 
     autoprefixer:
       options:
@@ -138,7 +147,35 @@ module.exports = (grunt) ->
         options:
           mode: "VERIFY_ONLY"
           config: ".jsbeautifyrc"
-
+    'string-replace':
+      production:
+        files:
+          'app/index.html': 'app/index.template'
+        options:
+          replacements: [
+            {
+              pattern: '%_APP_JS_%'
+              replacement: prodScript
+            },
+            {
+              pattern: '%_LIVE_RELOAD_%'
+              replacement: ''
+            }
+          ]
+      development:
+        files:
+          'app/index.html': 'app/index.template'
+        options:
+          replacements: [
+            {
+              pattern: '%_APP_JS_%'
+              replacement: devScript
+            },
+            {
+              pattern: '%_LIVE_RELOAD_%'
+              replacement: "<script src=\"//localhost:35729/livereload.js\" id=\"liveReloadScript\"></script>"
+            }
+          ]
     uglify:
       dependencies:
         options:
@@ -175,31 +212,18 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-jshint"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-less"
-  grunt.loadNpmTasks "grunt-dom-munger"
   grunt.loadNpmTasks "grunt-autoprefixer"
   grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-uglify"
+  grunt.loadNpmTasks "grunt-string-replace"
 
   # Development server
-  grunt.registerTask "server", [
-    "less:development"
-    "uglify"
-    "shell:server"
-    "watch:passive"
-  ]
-
-  # Default task is development server for b-wds compatibility
   grunt.registerTask "default", [
-    "server"
-  ]
-
-  # Development server + livereload
-  grunt.registerTask "live-server", [
-    "clean"
-    "copy:reloadInit"
-    "shell:reload"
-    "watch:reload"
+    "string-replace:development"
+    "less:development"
+    "shell:server"
+    "watch"
   ]
 
   # Clean code before a commit
@@ -216,6 +240,7 @@ module.exports = (grunt) ->
 
   # Build for Production
   grunt.registerTask "build", [
+    "string-replace:production"
     "less:production"
     "uglify"
     "autoprefixer:build"

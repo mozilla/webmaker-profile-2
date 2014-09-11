@@ -122,9 +122,9 @@
 
   <script src="https://login.persona.org/include.js"></script>
 
-  <script src="/user/_compiled/dependencies.min.js"></script>
-  <script src="/user/_compiled/app.min.js"></script>
+  %_APP_JS_%
 
+  %_LIVE_RELOAD_%
 </body>
 
 </html>
