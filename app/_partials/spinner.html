@@ -1,0 +1,9 @@
+<i ng-hide="dataFailed" class="fa fa-cog fa-spin fa-3x"></i>
+
+<div ng-show="isTimedOut && !dataFailed" class="alert alert-warning margin-top" role="alert">
+  <i class="fa fa-exclamation-triangle"></i> Our server is under heavy load. Please continue waiting or try again later!
+</div>
+
+<div ng-show="dataFailed" class="alert alert-danger margin-top" role="alert">
+  <i class="fa fa-exclamation-triangle"></i> Service connection failed! Please retry later.
+</div>

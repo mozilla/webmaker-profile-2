@@ -145,6 +145,41 @@ angular.module('wmProfile.directives', [])
       templateUrl: '/user/_partials/makes-list.html'
     };
   })
+  .directive('wmpSpinner', function () {
+    return {
+      restrict: 'E',
+      scope: {
+        dataFailed: '=wmpSpinnerDataFailed', // Truthy value will cause an error message to show
+        delay: '=wmpSpinnerDelay', // Delay before showing spinner (In MS)
+        data: '=wmpSpinnerData', // Spinner will only show if this data is undefined
+        timeout: '=wmpSpinnerTimeout' // How long the spinner will show before a warning appears (In MS)
+      },
+      templateUrl: '/user/_partials/spinner.html',
+      link: function ($scope, el) {
+        $scope.isTimedOut = false;
+
+        el.hide().fadeTo(0,0);
+
+        var revealDelay = setTimeout(function() {
+          el.fadeTo(200, 1);
+        }, $scope.delay);
+
+        var errorDelay = setTimeout(function () {
+          $scope.isTimedOut = true;
+          $scope.$apply();
+        }, $scope.timeout)
+
+        $scope.$watch('data', function () {
+          if (typeof $scope.data !== 'undefined') {
+            clearTimeout(revealDelay);
+            clearTimeout(errorDelay);
+
+            el.hide();
+          }
+        });
+      }
+    };
+  })
   .directive('wmpLinkCollector', ['jQuery',
     function ($) {
       return {
