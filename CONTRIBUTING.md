@@ -29,7 +29,7 @@ Additionally, JS files need to be run through [JSBeautify](https://github.com/ei
 ### HTML
 
 - 2 space indentation
-- Class names use hypenated case (e.g. `my-class-name`)
+- Class names use hyphenated case (e.g. `my-class-name`)
 
 ### LESS / CSS
 
