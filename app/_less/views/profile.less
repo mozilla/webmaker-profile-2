@@ -10,7 +10,11 @@
 }
 
 .main {
-  padding: (@grid-gutter-width / 2);
+  padding: 0;
+
+  @media screen and (min-width: @screen-sm) {
+    padding: (@grid-gutter-width / 2);
+  }
 }
 
 .solid-bg {
@@ -103,7 +107,7 @@ wmp-login {
   padding: 30px;
 }
 
-span.gravatar { 
+span.gravatar {
   width: 100%;
   display: block;
 }

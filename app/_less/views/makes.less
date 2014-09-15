@@ -15,7 +15,7 @@
   list-style: none;
   padding-left: 0;
   > li {
-    border: lighten(@grey, 58%) solid 0.2rem;
+    border: lighten(@grey, 55%) solid 1px;
     margin: 2rem 0;
     overflow: hidden;
   }
@@ -23,9 +23,8 @@
 
 .make-view {
   background: lighten(@grey, 65%);
-  border-right: lighten(@grey, 55.5%) solid 0.1rem;
   overflow: hidden;
-  padding: 0.5rem;
+  padding: 2rem;
   &[class*="application/x-thimble"] {
     .make-title {
       &::before {
@@ -48,7 +47,6 @@
     }
   }
   @media screen and (min-width: @screen-sm) {
-    border-right-width: 0.3rem;
     &[class*="application/x-thimble"] {
       .make-title {
         &::before {
@@ -72,12 +70,6 @@
         }
       }
     }
-  }
-  @media screen and (min-width: @screen-md) {
-    border-right-width: 0.4rem;
-  }
-  @media screen and (min-width: @screen-lg) {
-    border-right-width: 0.5rem;
   }
 }
 
