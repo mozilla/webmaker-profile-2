@@ -48,15 +48,19 @@ angular.module('wmProfile.controllers', [])
     function ($scope, $rootScope, $sce, badgesService) {
       $scope.viewID = 'badges';
       $scope.backpackURL = $sce.trustAsResourceUrl($rootScope.WMP.config.backpackURL);
+      $scope.didServiceFail = false;
 
-      badgesService.getBadges($rootScope.WMP.username).then(function (badges) {
+      badgesService.getBadges($rootScope.WMP.username).then(function success (badges) {
         $scope.badges = badges;
+      }, function fail (error) {
+        $scope.didServiceFail = true;
       });
     }
   ])
   .controller('teachingResources', ['$scope', '$rootScope', 'makeapi',
     function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'teachingResources';
+      $scope.didServiceFail = false;
 
       makeapi
         .getRemixCounts()
@@ -64,65 +68,79 @@ angular.module('wmProfile.controllers', [])
         .find({
           tags: ['teach']
         })
-        .then(function (err, makes) {
+        .then(function success (err, makes) {
           if (err) {
             console.error(err);
+            $scope.didServiceFail = true;
           }
 
           makes = makeapi.massage(makes);
 
           $scope.makes = makes;
           $scope.$apply();
+        }, function fail (error) {
+          $scope.didServiceFail = true;
         });
     }
   ])
   .controller('makes', ['$scope', '$rootScope', 'makeapi',
     function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'makes';
+      $scope.didServiceFail = false;
 
       makeapi
         .getRemixCounts()
         .user($rootScope.WMP.username)
-        .then(function (err, makes) {
+        .then(function success (err, makes) {
           if (err) {
             console.error(err);
+            $scope.didServiceFail = true;
           }
 
           makes = makeapi.massage(makes);
 
           $scope.makes = makes;
           $scope.$apply();
+        }, function fail (error) {
+          $scope.didServiceFail = true;
         });
     }
   ])
   .controller('likes', ['$scope', '$rootScope', 'makeapi',
     function ($scope, $rootScope, makeapi) {
       $scope.viewID = 'likes';
+      $scope.didServiceFail = false;
 
       makeapi
         .likedByUser($rootScope.WMP.username)
-        .then(function (err, makes) {
+        .then(function success (err, makes) {
           if (err) {
             console.error(err);
+            $scope.didServiceFail = true;
           }
 
           makes = makeapi.massage(makes);
 
           $scope.makes = makes;
           $scope.$apply();
+        }, function fail (error) {
+          $scope.didServiceFail = true;
         });
     }
   ])
   .controller('events', ['$scope', '$rootScope', 'eventService',
     function ($scope, $rootScope, eventService) {
       $scope.viewID = 'events';
+      $scope.didServiceFail = false;
 
       eventService.query({
         username: $rootScope.WMP.username
-      }, function (data) {
+      }, function success (data) {
         $scope.events = data.sort(function (a, b) {
           return (new Date(b.beginDate).getTime() - new Date(a.beginDate).getTime());
         });
+      }, function fail (error) {
+        $scope.didServiceFail = true;
       });
 
       $scope.isDiffYear = function(idx) {

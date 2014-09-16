@@ -3,6 +3,14 @@
 
   <a href="{{ WMP.config.eventApp }}/add" class="btn btn-primary pull-right margin-top" target="_blank">+ Add an event</a>
 </div>
+
+<wmp-spinner
+  wmp-spinner-data-failed="didServiceFail"
+  wmp-spinner-delay="500"
+  wmp-spinner-data="events"
+  wmp-spinner-timeout="5000">
+</wmp-spinner>
+
 <table class="table table-striped events">
   <tbody ng-repeat="event in events">
     <tr ng-show="isDiffYear($index)">
