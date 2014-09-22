@@ -49,11 +49,14 @@ angular.module('wmProfile.controllers', [])
       $scope.viewID = 'badges';
       $scope.backpackURL = $sce.trustAsResourceUrl($rootScope.WMP.config.backpackURL);
       $scope.didServiceFail = false;
+      $scope.dataLoading = true;
 
       badgesService.getBadges($rootScope.WMP.username).then(function success(badges) {
         $scope.badges = badges;
-      }, function fail(error) {
+        $scope.dataLoading = false;
+      }, function fail (error) {
         $scope.didServiceFail = true;
+        $scope.dataLoading = false;
       });
     }
   ])
@@ -70,6 +73,7 @@ angular.module('wmProfile.controllers', [])
     function ($scope, $rootScope, eventService) {
       $scope.viewID = 'events';
       $scope.didServiceFail = false;
+      $scope.dataLoading = true;
 
       eventService.query({
         username: $rootScope.WMP.username
@@ -77,8 +81,11 @@ angular.module('wmProfile.controllers', [])
         $scope.events = data.sort(function (a, b) {
           return (new Date(b.beginDate).getTime() - new Date(a.beginDate).getTime());
         });
-      }, function fail(error) {
+
+        $scope.dataLoading = false;
+      }, function fail (error) {
         $scope.didServiceFail = true;
+        $scope.dataLoading = false;
       });
 
       $scope.isDiffYear = function (idx) {

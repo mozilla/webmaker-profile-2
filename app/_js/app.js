@@ -8,7 +8,8 @@ angular.module('wmProfile', [
   'wmProfile.directives',
   'wmProfile.controllers',
   'locompleter',
-  'infinite-scroll'
+  'infinite-scroll',
+  'rad.spiiin'
 ]).
 config(['$routeProvider', '$locationProvider',
   function ($routeProvider, $locationProvider) {

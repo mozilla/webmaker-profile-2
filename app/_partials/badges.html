@@ -1,7 +1,12 @@
 <h2 class="margin-bottom">Badges</h2>
 
-<wmp-spinner wmp-spinner-data-failed="didServiceFail" wmp-spinner-delay="500" wmp-spinner-data="badges" wmp-spinner-timeout="5000">
-</wmp-spinner>
+<rad-spinner
+  rad-spinner-template="/user/_bower_components/spiiin/src/spinner.html"
+  rad-spinner-timeout="5000"
+  rad-spinner-data="badges"
+  rad-spinner-data-loading="dataLoading"
+  rad-spinner-data-failed="didServiceFail">
+</rad-spinner>
 
 <div class="row">
   <div ng-repeat="badge in badges" class="col-sm-3" ng-show="badges.length">

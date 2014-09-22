@@ -3,8 +3,13 @@
   <a href="http://thimble.webmaker.org" class="btn btn-primary pull-right margin-top" target="_blank">+ Add a Resource</a>
 </div>
 
-<wmp-spinner wmp-spinner-data-failed="didServiceFail" wmp-spinner-delay="500" wmp-spinner-data="makes" wmp-spinner-timeout="5000">
-</wmp-spinner>
+<rad-spinner
+  rad-spinner-template="/user/_bower_components/spiiin/src/spinner.html"
+  rad-spinner-timeout="5000"
+  rad-spinner-data="makes"
+  rad-spinner-data-loading="dataLoading"
+  rad-spinner-data-failed="didServiceFail">
+</rad-spinner>
 
 <wmp-makes-list wmp-makes-list-for="WMP.username" wmp-makes-list-kind="teach" wmp-makes-list-data="makes">
 </wmp-makes-list>
