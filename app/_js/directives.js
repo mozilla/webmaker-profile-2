@@ -204,17 +204,18 @@ angular.module('wmProfile.directives', [])
           function getServiceFromURL(targetURL) {
             var title = targetURL.split('//')[1];
 
-            // Each key corresponds to a Font Awesome classname (minus "fa-")
+            // IMPORTANT:
+            // If you add or modify a service be sure to update `stop-adblock.less`
             var serviceRegexes = {
-              'twitter': /^(?:www.)?twitter\.com\//,
-              'tumblr': /^[a-zA-Z]*\.tumblr\.com/,
-              'facebook-square': /^(?:www.)?facebook\.com\/[^\/\n]*$/m,
-              'google-plus': /^plus\.google\.com\//,
-              'vimeo-square': /vimeo\.com\/[a-zA-Z]/,
-              'github-alt': /^github\.com\/[^\/\n]*$/m,
-              'dribbble': /^dribbble\.com\/[^\/\n]*$/m,
-              'pinterest': /^(?:www.)?pinterest\.com\/[^\/]*(?:\/)?$/m,
-              'linkedin': /((https?:\/\/)?[^.]+(\.)?linkedin\.com(\/[^\r\n\s]+)?)/m
+              'fa-stop-adblock-twitter': /^(?:www.)?twitter\.com\//,
+              'fa-stop-adblock-tumblr': /^[a-zA-Z]*\.tumblr\.com/,
+              'fa-stop-adblock-facebook-square': /^(?:www.)?facebook\.com\/[^\/\n]*$/m,
+              'fa-stop-adblock-google-plus': /^plus\.google\.com\//,
+              'fa-stop-adblock-vimeo-square': /vimeo\.com\/[a-zA-Z]/,
+              'fa-stop-adblock-github-alt': /^github\.com\/[^\/\n]*$/m,
+              'fa-stop-adblock-dribbble': /^dribbble\.com\/[^\/\n]*$/m,
+              'fa-stop-adblock-pinterest': /^(?:www.)?pinterest\.com\/[^\/]*(?:\/)?$/m,
+              'fa-stop-adblock-linkedin': /((https?:\/\/)?[^.]+(\.)?linkedin\.com(\/[^\r\n\s]+)?)/m
             };
 
             // Attempt to match URL to a service

@@ -21,7 +21,7 @@
 <ul class="user-links service-links clearfix pull-right">
   <li ng-repeat="link in annotatedlinks" ng-if="link.service">
     <a href="{{ link.url }}" target="_blank">
-      <i class="fa fa-{{ link.service }}"></i>
+      <i class="fa {{ link.service }}"></i>
     </a>
     <button ng-click="removeLinkUI($index)" ng-show="isEditMode" class="btn btn-xs btn-danger">
       <i class="fa fa-times"></i>
