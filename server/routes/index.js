@@ -5,6 +5,7 @@ var UserClient = require('webmaker-user-client');
 var BadgeClient = require('badgekit-api-client');
 var path = require('path');
 var i18n = require('webmaker-i18n');
+var wts = require('webmaker-translation-stats');
 
 module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
   var router = express.Router();
@@ -18,6 +19,22 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
   var badgesContext = {
     system: 'webmaker'
   };
+
+  //Healthcheck
+  router.get('/user/_healthcheck', function(req, res) {
+    var info = {
+      http: 'okay',
+      version: require('../../package').version,
+    };
+    wts(i18n.getSupportLanguages(), path.join(__dirname, "../../locale"), function (err, data) {
+      if (err) {
+        info.locales = err.toString();
+      } else {
+        info.locales = data;
+      }
+      res.send(info);
+    });
+  });
 
   // Localized Strings
   router.get("/user/localized/strings/:lang?", i18n.stringsRoute("en-US"));
