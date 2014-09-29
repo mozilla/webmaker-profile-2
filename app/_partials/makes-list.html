@@ -1,5 +1,5 @@
-<ul class="makes-list">
-  <li ng-repeat="make in makes | filter: filterBy | orderBy: sortOrder || '-createdAt'">
+<ul class="makes-list" infinite-scroll="loadMore()">
+  <li ng-repeat="make in makes">
     <article class="make-view {{ make.contentType }}" id="id_{{ make._id }}">
       <time datetime="{{ make.createdAt | rfc3339 }}" pubdate></time>
       <figure class="make-thumbnail">

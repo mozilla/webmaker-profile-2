@@ -109,42 +109,74 @@ angular.module('wmProfile.directives', [])
       };
     }
   ])
-  .directive('wmpSortFilterBar', ['jQuery',
-    // Pull in sorting and filtering commands from a button group and put choices on scope
-    function ($) {
-      return {
-        restrict: 'AE',
-        link: function (scope, el, attrs) {
-          var elTriggers = $(el).children();
-
-          elTriggers.on('click', function (event) {
-            if ($(this).data('content-filter')) {
-              scope.filterBy = {
-                contentType: 'application/x-' + $(this).data('content-filter')
-              };
-            } else {
-              delete scope.filterBy;
-            }
-
-            if ($(this).data('sort-id')) {
-              scope.sortOrder = $(this).data('sort-id');
-            } else {
-              delete scope.sortOrder;
-            }
-
-            scope.$apply();
-          });
-        }
-      };
-    }
-  ])
-  .directive('wmpMakesList', function () {
+  .directive('wmpMakesList', ['makeapi', function (makeapi) {
     return {
       restrict: 'E',
-      scope: false,
-      templateUrl: '/user/_partials/makes-list.html'
+      scope: {
+        username: '=wmpMakesListFor',
+        kind: '@wmpMakesListKind',
+        makes: '=wmpMakesListData'
+      },
+      templateUrl: '/user/_partials/makes-list.html',
+      link: function ($scope, el, attrs) {
+        var requestInProgress = false;
+        var highestPageLoaded = 0;
+        var totalPages;
+
+        $scope.didServiceFail = false;
+        $scope.makes = [];
+
+        $scope.loadMore = function () {
+          if (!requestInProgress && highestPageLoaded < totalPages) {
+            getMakes(highestPageLoaded + 1);
+          }
+        };
+
+        function getMakes(page) {
+          requestInProgress = true;
+
+          // Setup custom query parameters
+          if ($scope.kind === 'makes') {
+            makeapi.getRemixCounts();
+            makeapi.user($scope.username);
+          } else if ($scope.kind === 'likes') {
+            makeapi.likedByUser($scope.username);
+          } else if ($scope.kind === 'teach') {
+            makeapi.getRemixCounts();
+            makeapi.user($scope.username);
+            makeapi.find({
+              tags: ['teach']
+            });
+          }
+
+          // Execute query
+          makeapi
+            .page(page)
+            .then(function success (err, makes, total) {
+              totalPages = Math.ceil(total / 10);
+
+              if (err) {
+                console.error(err);
+                $scope.didServiceFail = true;
+              }
+
+              makes = makeapi.massage(makes);
+
+              $scope.makes = $scope.makes.concat(makes);
+              $scope.$apply();
+
+              requestInProgress = false;
+              highestPageLoaded = page;
+            }, function fail (error) {
+              $scope.didServiceFail = true;
+              requestInProgress = false;
+            });
+        }
+
+        getMakes(1);
+      }
     };
-  })
+  }])
   .directive('wmpSpinner', function () {
     return {
       restrict: 'E',
