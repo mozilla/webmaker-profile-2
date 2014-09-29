@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
+  # Declare all non-minified scripts in load order here:
   scripts =
   [
-
     'app/_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js'
     'app/_bower_components/makeapi-client/src/make-api.js'
     'app/_bower_components/jquery/dist/jquery.js'
@@ -32,8 +32,7 @@ module.exports = (grunt) ->
     script = script.replace('app/', 'user/')
     devScript += "<script src='/" + script + "'></script>"
 
-  prodScript = '<script src="/user/_compiled/dependencies.min.js"></script>
-                <script src="/user/_compiled/app.min.js"></script>'
+  prodScript = '<script src="/user/_compiled/app.min.js"></script>'
 
   grunt.initConfig
     less:
@@ -178,36 +177,12 @@ module.exports = (grunt) ->
             }
           ]
     uglify:
-      dependencies:
-        options:
-          sourceMap: true
-          mangle: false
-        files:
-          'app/_compiled/dependencies.min.js': [
-
-            'app/_bower_components/webmaker-auth-client/dist/webmaker-auth-client.min.js'
-            'app/_bower_components/makeapi-client/src/make-api.js'
-            'app/_bower_components/jquery/dist/jquery.js'
-            'app/_bower_components/selectize/dist/js/standalone/selectize.js'
-
-            'app/_bower_components/angular/angular.js'
-            'app/_bower_components/angular-route/angular-route.js'
-            'app/_bower_components/angular-resource/angular-resource.js'
-            'app/_bower_components/angular-bootstrap/ui-bootstrap.js'
-            'app/_bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
-            'app/_bower_components/angular-sanitize/angular-sanitize.js'
-            'app/_bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js'
-
-            'app/_bower_components/locompleter/locompleter.js'
-
-            'app/_bower_components/webmaker-analytics/analytics.js'
-          ]
       app:
         options:
           sourceMap: true
           mangle: false
         files:
-          'app/_compiled/app.min.js': 'app/_js/**/*.js'
+          'app/_compiled/app.min.js': scripts
 
   grunt.loadNpmTasks "grunt-shell-spawn"
   grunt.loadNpmTasks "grunt-jsbeautifier"
