@@ -57,76 +57,14 @@ angular.module('wmProfile.controllers', [])
       });
     }
   ])
-  .controller('teachingResources', ['$scope', '$rootScope', 'makeapi',
-    function ($scope, $rootScope, makeapi) {
-      $scope.viewID = 'teachingResources';
-      $scope.didServiceFail = false;
-
-      makeapi
-        .getRemixCounts()
-        .user($rootScope.WMP.username)
-        .find({
-          tags: ['teach']
-        })
-        .then(function success (err, makes) {
-          if (err) {
-            console.error(err);
-            $scope.didServiceFail = true;
-          }
-
-          makes = makeapi.massage(makes);
-
-          $scope.makes = makes;
-          $scope.$apply();
-        }, function fail (error) {
-          $scope.didServiceFail = true;
-        });
-    }
+  .controller('teachingResources', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {}
   ])
-  .controller('makes', ['$scope', '$rootScope', 'makeapi',
-    function ($scope, $rootScope, makeapi) {
-      $scope.viewID = 'makes';
-      $scope.didServiceFail = false;
-
-      makeapi
-        .getRemixCounts()
-        .user($rootScope.WMP.username)
-        .then(function success (err, makes) {
-          if (err) {
-            console.error(err);
-            $scope.didServiceFail = true;
-          }
-
-          makes = makeapi.massage(makes);
-
-          $scope.makes = makes;
-          $scope.$apply();
-        }, function fail (error) {
-          $scope.didServiceFail = true;
-        });
-    }
+  .controller('makes', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {}
   ])
-  .controller('likes', ['$scope', '$rootScope', 'makeapi',
-    function ($scope, $rootScope, makeapi) {
-      $scope.viewID = 'likes';
-      $scope.didServiceFail = false;
-
-      makeapi
-        .likedByUser($rootScope.WMP.username)
-        .then(function success (err, makes) {
-          if (err) {
-            console.error(err);
-            $scope.didServiceFail = true;
-          }
-
-          makes = makeapi.massage(makes);
-
-          $scope.makes = makes;
-          $scope.$apply();
-        }, function fail (error) {
-          $scope.didServiceFail = true;
-        });
-    }
+  .controller('likes', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {}
   ])
   .controller('events', ['$scope', '$rootScope', 'eventService',
     function ($scope, $rootScope, eventService) {

@@ -20,7 +20,8 @@
     "selectize": "0.9.0",
     "makeapi-client": "https://github.com/mozilla/makeapi-client.git#v0.5.24",
     "makerstrap": "0.1.3",
-    "webmaker-auth-client": "0.1.11"
+    "webmaker-auth-client": "0.1.11",
+    "ngInfiniteScroll": "1.1.2"
   },
   "resolutions": {
     "angular": "1.2.17"
