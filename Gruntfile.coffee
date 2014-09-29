@@ -196,6 +196,7 @@ module.exports = (grunt) ->
             'app/_bower_components/angular-bootstrap/ui-bootstrap.js'
             'app/_bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
             'app/_bower_components/angular-sanitize/angular-sanitize.js'
+            'app/_bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js'
 
             'app/_bower_components/locompleter/locompleter.js'
 
