@@ -132,7 +132,6 @@ module.exports = (grunt) ->
       modify:
         src: [
           "app/_js/**/*.js"
-          "app/index.html"
           "app/_partials/**/*.html"
         ]
         options:
@@ -141,7 +140,6 @@ module.exports = (grunt) ->
       validate:
         src: [
           "app/_js/**/*.js"
-          "app/index.html"
           "app/_partials/**/*.html"
         ]
         options:

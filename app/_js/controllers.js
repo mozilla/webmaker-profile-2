@@ -50,9 +50,9 @@ angular.module('wmProfile.controllers', [])
       $scope.backpackURL = $sce.trustAsResourceUrl($rootScope.WMP.config.backpackURL);
       $scope.didServiceFail = false;
 
-      badgesService.getBadges($rootScope.WMP.username).then(function success (badges) {
+      badgesService.getBadges($rootScope.WMP.username).then(function success(badges) {
         $scope.badges = badges;
-      }, function fail (error) {
+      }, function fail(error) {
         $scope.didServiceFail = true;
       });
     }
@@ -73,22 +73,22 @@ angular.module('wmProfile.controllers', [])
 
       eventService.query({
         username: $rootScope.WMP.username
-      }, function success (data) {
+      }, function success(data) {
         $scope.events = data.sort(function (a, b) {
           return (new Date(b.beginDate).getTime() - new Date(a.beginDate).getTime());
         });
-      }, function fail (error) {
+      }, function fail(error) {
         $scope.didServiceFail = true;
       });
 
-      $scope.isDiffYear = function(idx) {
+      $scope.isDiffYear = function (idx) {
         var curYear = new Date($scope.events[idx].beginDate).getFullYear();
 
         if (idx === 0) {
           return true;
         }
 
-        var prevYear = new Date($scope.events[idx-1].beginDate).getFullYear();
+        var prevYear = new Date($scope.events[idx - 1].beginDate).getFullYear();
         return curYear !== prevYear;
       };
     }
