@@ -109,74 +109,76 @@ angular.module('wmProfile.directives', [])
       };
     }
   ])
-  .directive('wmpMakesList', ['makeapi', function (makeapi) {
-    return {
-      restrict: 'E',
-      scope: {
-        username: '=wmpMakesListFor',
-        kind: '@wmpMakesListKind',
-        makes: '=wmpMakesListData'
-      },
-      templateUrl: '/user/_partials/makes-list.html',
-      link: function ($scope, el, attrs) {
-        var requestInProgress = false;
-        var highestPageLoaded = 0;
-        var totalPages;
+  .directive('wmpMakesList', ['makeapi',
+    function (makeapi) {
+      return {
+        restrict: 'E',
+        scope: {
+          username: '=wmpMakesListFor',
+          kind: '@wmpMakesListKind',
+          makes: '=wmpMakesListData'
+        },
+        templateUrl: '/user/_partials/makes-list.html',
+        link: function ($scope, el, attrs) {
+          var requestInProgress = false;
+          var highestPageLoaded = 0;
+          var totalPages;
 
-        $scope.didServiceFail = false;
-        $scope.makes = [];
+          $scope.didServiceFail = false;
+          $scope.makes = [];
 
-        $scope.loadMore = function () {
-          if (!requestInProgress && highestPageLoaded < totalPages) {
-            getMakes(highestPageLoaded + 1);
-          }
-        };
+          $scope.loadMore = function () {
+            if (!requestInProgress && highestPageLoaded < totalPages) {
+              getMakes(highestPageLoaded + 1);
+            }
+          };
 
-        function getMakes(page) {
-          requestInProgress = true;
+          function getMakes(page) {
+            requestInProgress = true;
 
-          // Setup custom query parameters
-          if ($scope.kind === 'makes') {
-            makeapi.getRemixCounts();
-            makeapi.user($scope.username);
-          } else if ($scope.kind === 'likes') {
-            makeapi.likedByUser($scope.username);
-          } else if ($scope.kind === 'teach') {
-            makeapi.getRemixCounts();
-            makeapi.user($scope.username);
-            makeapi.find({
-              tags: ['teach']
-            });
-          }
+            // Setup custom query parameters
+            if ($scope.kind === 'makes') {
+              makeapi.getRemixCounts();
+              makeapi.user($scope.username);
+            } else if ($scope.kind === 'likes') {
+              makeapi.likedByUser($scope.username);
+            } else if ($scope.kind === 'teach') {
+              makeapi.getRemixCounts();
+              makeapi.user($scope.username);
+              makeapi.find({
+                tags: ['teach']
+              });
+            }
 
-          // Execute query
-          makeapi
-            .page(page)
-            .then(function success (err, makes, total) {
-              totalPages = Math.ceil(total / 10);
+            // Execute query
+            makeapi
+              .page(page)
+              .then(function success(err, makes, total) {
+                totalPages = Math.ceil(total / 10);
 
-              if (err) {
-                console.error(err);
+                if (err) {
+                  console.error(err);
+                  $scope.didServiceFail = true;
+                }
+
+                makes = makeapi.massage(makes);
+
+                $scope.makes = $scope.makes.concat(makes);
+                $scope.$apply();
+
+                requestInProgress = false;
+                highestPageLoaded = page;
+              }, function fail(error) {
                 $scope.didServiceFail = true;
-              }
+                requestInProgress = false;
+              });
+          }
 
-              makes = makeapi.massage(makes);
-
-              $scope.makes = $scope.makes.concat(makes);
-              $scope.$apply();
-
-              requestInProgress = false;
-              highestPageLoaded = page;
-            }, function fail (error) {
-              $scope.didServiceFail = true;
-              requestInProgress = false;
-            });
+          getMakes(1);
         }
-
-        getMakes(1);
-      }
-    };
-  }])
+      };
+    }
+  ])
   .directive('wmpSpinner', function () {
     return {
       restrict: 'E',
@@ -190,16 +192,16 @@ angular.module('wmProfile.directives', [])
       link: function ($scope, el) {
         $scope.isTimedOut = false;
 
-        el.hide().fadeTo(0,0);
+        el.hide().fadeTo(0, 0);
 
-        var revealDelay = setTimeout(function() {
+        var revealDelay = setTimeout(function () {
           el.fadeTo(200, 1);
         }, $scope.delay);
 
         var errorDelay = setTimeout(function () {
           $scope.isTimedOut = true;
           $scope.$apply();
-        }, $scope.timeout)
+        }, $scope.timeout);
 
         $scope.$watch('data', function () {
           if (typeof $scope.data !== 'undefined') {

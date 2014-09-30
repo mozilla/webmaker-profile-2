@@ -16,30 +16,30 @@ config(['$routeProvider', '$locationProvider',
       templateUrl: '/user/_partials/badges.html',
       controller: 'badges'
     })
-    .when('/:locale?/user/:username/badges', {
-      templateUrl: '/user/_partials/badges.html',
-      controller: 'badges'
-    })
-    .when('/:locale?/user/:username/teaching-resources', {
-      templateUrl: '/user/_partials/teaching-resources.html',
-      controller: 'teachingResources'
-    })
-    .when('/:locale?/user/:username/makes', {
-      templateUrl: '/user/_partials/makes.html',
-      controller: 'makes'
-    })
-    .when('/:locale?/user/:username/likes', {
-      templateUrl: '/user/_partials/likes.html',
-      controller: 'likes'
-    })
-    .when('/:locale?/user/:username/events', {
-      templateUrl: '/user/_partials/events.html',
-      controller: 'events'
-    })
-    .when('/:locale?/user/:username', {
-      templateUrl: '/user/_partials/badges.html',
-      controller: 'badges'
-    });
+      .when('/:locale?/user/:username/badges', {
+        templateUrl: '/user/_partials/badges.html',
+        controller: 'badges'
+      })
+      .when('/:locale?/user/:username/teaching-resources', {
+        templateUrl: '/user/_partials/teaching-resources.html',
+        controller: 'teachingResources'
+      })
+      .when('/:locale?/user/:username/makes', {
+        templateUrl: '/user/_partials/makes.html',
+        controller: 'makes'
+      })
+      .when('/:locale?/user/:username/likes', {
+        templateUrl: '/user/_partials/likes.html',
+        controller: 'likes'
+      })
+      .when('/:locale?/user/:username/events', {
+        templateUrl: '/user/_partials/events.html',
+        controller: 'events'
+      })
+      .when('/:locale?/user/:username', {
+        templateUrl: '/user/_partials/badges.html',
+        controller: 'badges'
+      });
 
     // TODO - "404" for malformed routes / missing users
     $locationProvider.html5Mode(true);
@@ -70,7 +70,7 @@ run(['$rootScope', '$http', 'jQuery',
           $rootScope.lang = config.l10n.defaultLang;
         }
         $rootScope.direction = config.l10n.direction;
-        $rootScope.arrowDir = config.l10n.direction === 'rtl' ? "left" : "right";
+        $rootScope.arrowDir = config.l10n.direction === 'rtl' ? 'left' : 'right';
 
         // Configure CSRF token
         $http.defaults.headers.common['X-CSRF-Token'] = config.csrf;
