@@ -6,7 +6,6 @@ module.exports = (grunt) ->
     'app/_bower_components/makeapi-client/src/make-api.js'
     'app/_bower_components/jquery/dist/jquery.js'
     'app/_bower_components/selectize/dist/js/standalone/selectize.js'
-
     'app/_bower_components/angular/angular.js'
     'app/_bower_components/angular-route/angular-route.js'
     'app/_bower_components/angular-resource/angular-resource.js'
@@ -14,10 +13,8 @@ module.exports = (grunt) ->
     'app/_bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
     'app/_bower_components/angular-sanitize/angular-sanitize.js'
     'app/_bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js'
-
     'app/_bower_components/locompleter/locompleter.js'
     'app/_bower_components/webmaker-analytics/analytics.js'
-
     'app/_js/app.js'
     'app/_js/services.js'
     'app/_js/controllers.js'
@@ -40,13 +37,7 @@ module.exports = (grunt) ->
         sourceMap: true
         sourceMapBasepath: "app"
         sourceMapRootpath: "/"
-      development:
-        files:
-          "app/_compiled/app.ltr.css": "app/_less/app.less"
-      production:
-        files:
-          ".static/_css/app.ltr.css": "app/_less/app.less"
-      reload:
+      app:
         files:
           "app/_compiled/app.ltr.css": "app/_less/app.less"
 
@@ -55,15 +46,6 @@ module.exports = (grunt) ->
         options:
           async: true
         command: 'node server'
-      reload:
-        options:
-          async: true
-        command: 'node server --path=../.tmp'
-
-    clean: [
-      ".tmp"
-      ".static"
-    ]
 
     watch:
       options:
@@ -80,44 +62,15 @@ module.exports = (grunt) ->
         'index.html'
       ]
       tasks: [
-        "less:reload"
+        "less"
       ]
 
-    copy:
-      reloadInit:
-        files: [
-          expand: true
-          cwd: "app"
-          src: "_bower_components/**/*.*"
-          dest: ".tmp/"
-        ]
-      stageJS:
-        files: [
-          expand: true
-          cwd: "app"
-          src: "_js/**/*.js"
-          dest: ".tmp/"
-        ]
-      stagePartials:
-        files: [
-          expand: true
-          cwd: "app"
-          src: "_partials/**/*.html"
-          dest: ".tmp/"
-        ]
-      stageImages:
-        files: [
-          expand: true
-          cwd: "app"
-          src: "_img/**/*.*"
-          dest: ".tmp/"
-        ]
-
+    # todo
     autoprefixer:
       options:
         browsers: ["last 2 versions"]
       build:
-        src: ".static/_css/app.ltr.css"
+        src: "app/_compiled/app.ltr.css"
         dest: "app/_compiled/app.ltr.css"
 
     jshint:
@@ -188,26 +141,24 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-less"
   grunt.loadNpmTasks "grunt-autoprefixer"
-  grunt.loadNpmTasks "grunt-contrib-copy"
-  grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-string-replace"
 
-  # Development server
+  # Development mode
   grunt.registerTask "default", [
     "string-replace:development"
-    "less:development"
+    "less"
     "shell:server"
     "watch"
   ]
 
   # Clean code before a commit
-  grunt.registerTask "lint", [
+  grunt.registerTask "clean", [
     "jsbeautifier:modify"
     "jshint"
   ]
 
-  # Validate code (read only)
+  # Validate code before commit (read only)
   grunt.registerTask "validate", [
     "jsbeautifier:validate"
     "jshint"
@@ -216,7 +167,7 @@ module.exports = (grunt) ->
   # Build for Production
   grunt.registerTask "build", [
     "string-replace:production"
-    "less:production"
+    "less"
     "uglify"
     "autoprefixer:build"
   ]
