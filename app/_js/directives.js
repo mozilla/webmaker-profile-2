@@ -116,25 +116,26 @@ angular.module('wmProfile.directives', [])
         scope: {
           username: '=wmpMakesListFor',
           kind: '@wmpMakesListKind',
-          makes: '=wmpMakesListData'
+          isLoading: '=wmpMakesListIsLoading',
+          didServiceFail: '=wmpMakesListDidFail'
         },
         templateUrl: '/user/_partials/makes-list.html',
         link: function ($scope, el, attrs) {
-          var requestInProgress = false;
           var highestPageLoaded = 0;
           var totalPages;
 
           $scope.didServiceFail = false;
           $scope.makes = [];
+          $scope.isLoading = false;
 
           $scope.loadMore = function () {
-            if (!requestInProgress && highestPageLoaded < totalPages) {
+            if (!$scope.isLoading && highestPageLoaded < totalPages) {
               getMakes(highestPageLoaded + 1);
             }
           };
 
           function getMakes(page) {
-            requestInProgress = true;
+            $scope.isLoading = true;
 
             // Setup custom query parameters
             if ($scope.kind === 'makes') {
@@ -164,13 +165,13 @@ angular.module('wmProfile.directives', [])
                 makes = makeapi.massage(makes);
 
                 $scope.makes = $scope.makes.concat(makes);
+                $scope.isLoading = false;
                 $scope.$apply();
 
-                requestInProgress = false;
                 highestPageLoaded = page;
               }, function fail(error) {
                 $scope.didServiceFail = true;
-                requestInProgress = false;
+                $scope.isLoading = false;
               });
           }
 
