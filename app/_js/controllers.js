@@ -54,7 +54,7 @@ angular.module('wmProfile.controllers', [])
       badgesService.getBadges($rootScope.WMP.username).then(function success(badges) {
         $scope.badges = badges;
         $scope.dataLoading = false;
-      }, function fail (error) {
+      }, function fail(error) {
         $scope.didServiceFail = true;
         $scope.dataLoading = false;
       });
@@ -83,7 +83,7 @@ angular.module('wmProfile.controllers', [])
         });
 
         $scope.dataLoading = false;
-      }, function fail (error) {
+      }, function fail(error) {
         $scope.didServiceFail = true;
         $scope.dataLoading = false;
       });
