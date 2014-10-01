@@ -1,4 +1,6 @@
-<i ng-hide="dataFailed" class="fa fa-cog fa-spin fa-3x"></i>
+<div class="text-center" ng-hide="dataFailed" ng-show="dataLoading">
+  <i class="fa fa-cog fa-spin fa-3x"></i>
+</div>
 
 <div ng-show="isTimedOut && !dataFailed" class="alert alert-warning margin-top" role="alert">
   <i class="fa fa-exclamation-triangle"></i>&nbsp;Our server is under heavy load. Please continue waiting or try again later!

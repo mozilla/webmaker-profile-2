@@ -15,6 +15,7 @@ module.exports = (grunt) ->
     'app/_bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js'
     'app/_bower_components/locompleter/locompleter.js'
     'app/_bower_components/webmaker-analytics/analytics.js'
+    'app/_bower_components/spiiin/src/spiiin.js'
     'app/_js/app.js'
     'app/_js/services.js'
     'app/_js/controllers.js'
