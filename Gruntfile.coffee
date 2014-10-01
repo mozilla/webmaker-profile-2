@@ -36,7 +36,7 @@ module.exports = (grunt) ->
       options:
         sourceMap: true
         sourceMapBasepath: "app"
-        sourceMapRootpath: "/"
+        sourceMapRootpath: "/user/"
       app:
         files:
           "app/_compiled/app.ltr.css": "app/_less/app.less"
