@@ -38,7 +38,14 @@ module.exports = (grunt) ->
         sourceMap: true
         sourceMapBasepath: "app"
         sourceMapRootpath: "/user/"
-      app:
+        sourceMapFilename: "app/_compiled/app.ltr.css.map"
+        sourceMapURL: "/user/_compiled/app.ltr.css.map"
+      development:
+        files:
+          "app/_compiled/app.ltr.css": "app/_less/app.less"
+      production:
+        options:
+          cleancss: true
         files:
           "app/_compiled/app.ltr.css": "app/_less/app.less"
 
@@ -63,7 +70,7 @@ module.exports = (grunt) ->
         'index.html'
       ]
       tasks: [
-        "less"
+        "less:development"
       ]
 
     # todo
@@ -135,6 +142,14 @@ module.exports = (grunt) ->
           mangle: false
         files:
           'app/_compiled/app.min.js': scripts
+    htmlmin:
+      all:
+        options:
+          collapseWhitespace: true
+          minifyCSS: true
+        files:
+          'app/index.html': 'app/index.html'
+
 
   grunt.loadNpmTasks "grunt-shell-spawn"
   grunt.loadNpmTasks "grunt-jsbeautifier"
@@ -144,11 +159,13 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-autoprefixer"
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-string-replace"
+  grunt.loadNpmTasks "grunt-contrib-htmlmin"
 
   # Development mode
   grunt.registerTask "default", [
     "string-replace:development"
-    "less"
+    "htmlmin"
+    "less:development"
     "shell:server"
     "watch"
   ]
@@ -168,7 +185,8 @@ module.exports = (grunt) ->
   # Build for Production
   grunt.registerTask "build", [
     "string-replace:production"
-    "less"
+    "htmlmin"
+    "less:production"
     "uglify"
     "autoprefixer:build"
   ]
