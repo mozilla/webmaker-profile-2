@@ -3,8 +3,8 @@
 <rad-spinner rad-spinner-template="/user/_partials/spinner.html" rad-spinner-timeout="5000" rad-spinner-data="badges" rad-spinner-data-loading="dataLoading" rad-spinner-data-failed="didServiceFail">
 </rad-spinner>
 
-<div class="row">
-  <div ng-repeat="badge in badges" class="col-sm-3" ng-show="badges.length">
+<div class="badges">
+  <div ng-repeat="badge in badges" ng-show="badges.length">
     <div class="thumbnail thumbnail-badges">
       <a href="{{WMP.config.webmakerBadgesUrl + '/' + badge.badge.slug}}" target="_self">
         <img ng-src="{{badge.badge.imageUrl}}">

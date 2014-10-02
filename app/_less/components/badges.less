@@ -1,0 +1,18 @@
+.badges {
+  @media screen and (min-width: @screen-xs) {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+
+    > div {
+      width: 50%;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media screen and (min-width: @screen-sm) {
+    > div {
+      width: 25%;
+    }
+  }
+}
