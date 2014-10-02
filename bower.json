@@ -1,6 +1,6 @@
 {
   "name": "webmaker-profile-2",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -23,8 +23,5 @@
     "webmaker-auth-client": "0.1.11",
     "ngInfiniteScroll": "1.1.2",
     "spiiin": "0.2.0"
-  },
-  "resolutions": {
-    "angular": "1.2.17"
   }
 }
