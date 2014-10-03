@@ -56,7 +56,7 @@
     "description": "A button to log in to their account"
   },
   "Gravatar": {
-    "message": "<a href='http://gravatar.com/'>Change profile picture</a>",
+    "message": "<a href='http://gravatar.com/' target='_blank'>Change profile picture</a>",
     "description": "Link to gravatar to change profile photo"
   }
 }
