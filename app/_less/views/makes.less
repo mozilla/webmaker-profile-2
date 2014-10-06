@@ -74,34 +74,35 @@
 }
 
 .make-thumbnail {
-  margin: 1rem auto;
+  display: none;
+}
 
-  @media screen and (min-width: @screen-sm) {
-    float: left;
-    margin: 0 0.5rem 0 0;
-    width: 15rem;
-  }
-  @media screen and (min-width: @screen-md) {
-    width: 20rem;
-  }
-  @media screen and (min-width: @screen-lg) {
-    width: 25rem;
-  }
-
-  img {
+@media screen and (min-width: @screen-sm) {
+  .make-thumbnail {
     display: block;
-    margin: 0 auto;
-    max-width: 100%;
+    float: left;
+    width: 30%;
+    padding-right: 30px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .make-text {
+    float: left;
+    width: 70%;
   }
 }
 
 .make-title {
   font-size: 2rem;
-  margin-top: 2rem;
-  min-height: 5.65rem;
-  padding: 0.8rem 0 1.2rem 6.2rem;
+  margin: 2rem 0;
   position: relative;
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+
   &::before {
     content: '';
     background: @white url('../_img/tools_sprite.png') center center no-repeat;
@@ -109,34 +110,18 @@
     border: lighten(@grey, 56%) solid 0.1rem;
     border-radius: 50%;
     display: block;
-    float: left;
-    height: 4.1rem;
-    left: -0.7rem;
-    margin: 0 1rem 0 0.7rem;
     padding: 3rem 2.9rem 2.4rem 2.4rem;
-    position: absolute;
-    top: 0;
-    width: 3.9rem;
+    margin-right: 1.5rem;
+
     @media screen and (min-width: @screen-sm) {
       background-size: 53.75px 240px;
       padding: 3.75rem 4rem 3.75rem 3.5rem;
       top: -1.2rem;
     }
   }
-  @media screen and (min-width: @screen-sm) {
-    margin: 3rem 0 0 @sm-margin;
-    min-height: 0;
-    padding: 0.5rem 0 0 7.7rem;
-    text-indent: 1.25rem;
-  }
-  @media screen and (min-width: @screen-md) {
-    margin-left: @md-margin;
-  }
-  @media screen and (min-width: @screen-lg) {
-    margin-left: @lg-margin;
-  }
+
   a {
-    &:link, &:visited, &:hover, &:active, &:focus {
+    &:link, &:visited {
       color: @grey;
     }
     &:hover, &:active, &:focus {
@@ -147,25 +132,7 @@
 
 .make-description, .make-meta {
   color: lighten(@grey, 30%);
-  padding: 0.5rem 2rem;
   font-weight: 300;
-
-  @media screen and (min-width: @screen-sm) {
-    margin-left: @sm-margin;
-  }
-  @media screen and (min-width: @screen-md) {
-   margin-left: @md-margin;
-  }
-  @media screen and (min-width: @screen-lg) {
-   margin-left: @lg-margin;
-  }
-}
-
-.make-description {
-  @media screen and (min-width: @screen-sm) {
-    min-height: 3rem;
-    padding-left: 9rem;
-  }
 }
 
 .make-likes {
