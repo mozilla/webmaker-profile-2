@@ -6,24 +6,22 @@
         <img ng-src="{{ make.thumbnail }}">
       </figure>
 
-      <h1 class="make-title">
-        <a href="{{ make.url }}" target="_blank">
-          {{ make.title }}
-        </a>
-      </h1>
+      <div class="make-text">
+        <h1 class="make-title">
+          <a href="{{ make.url }}" target="_blank">{{ make.title }}</a>
+        </h1>
 
-      <p class="make-description">
-        {{ make.description }}
-      </p>
+        <p>{{ make.description }}</p>
 
-      <div class="make-meta">
-        <span class="make-likes" ng-if="make.likes.length">{{ make.likes.length }}</span>
-        <span class="make-likes-empty" ng-if="!make.likes.length"></span>
-        <ul class="make-tags" ng-if="make.tags.length">
-          <li ng-repeat="tag in make.tags">
-            <a href="/{{ lang }}/search?type=tags&q={{ tag }}" target="_self">{{ tag | decode }}</a><span ng-class="{hidden:$last}">,</span>
-          </li>
-        </ul>
+        <div class="make-meta">
+          <span class="make-likes" ng-if="make.likes.length">{{ make.likes.length }}</span>
+          <span class="make-likes-empty" ng-if="!make.likes.length"></span>
+          <ul class="make-tags" ng-if="make.tags.length">
+            <li ng-repeat="tag in make.tags">
+              <a href="/{{ lang }}/search?type=tags&q={{ tag }}" target="_self">{{ tag | decode }}</a><span ng-class="{hidden:$last}">,</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </article>
   </li>
