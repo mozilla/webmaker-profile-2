@@ -12,3 +12,4 @@ env.cson
 .tmp/
 .static/
 app/index.html
+app.ltr.css.map
