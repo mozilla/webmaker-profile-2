@@ -2,11 +2,11 @@
   <li ng-repeat="make in makes">
     <article class="make-view {{ make.contentType }}" id="id_{{ make._id }}">
       <time datetime="{{ make.createdAt | rfc3339 }}" pubdate></time>
-      <figure class="make-thumbnail">
-        <img ng-src="{{ make.thumbnail }}">
+      <figure class="make-thumbnail" ng-hide="thumbFailed">
+        <img wmp-src="{{ make.thumbnail }}" wmp-src-failed="thumbFailed">
       </figure>
 
-      <div class="make-text">
+      <div ng-class="{'make-text': !thumbFailed}">
         <h1 class="make-title">
           <a href="{{ make.url }}" target="_blank">{{ make.title }}</a>
         </h1>
