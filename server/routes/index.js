@@ -135,11 +135,19 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
     });
   });
 
-  router.post('/user/_service/login/verify', webmakerAuth.handlers.verify);
-  router.post('/user/_service/login/authenticate', webmakerAuth.handlers.authenticate);
-  router.post('/user/_service/login/create', webmakerAuth.handlers.create);
-  router.post('/user/_service/login/logout', webmakerAuth.handlers.logout);
-  router.post('/user/_service/login/check-username', webmakerAuth.handlers.exists);
+  router.post('/verify', webmakerAuth.handlers.verify);
+  router.post('/authenticate', webmakerAuth.handlers.authenticate);
+  router.post('/create', webmakerAuth.handlers.create);
+  router.post('/logout', webmakerAuth.handlers.logout);
+  router.post('/check-username', webmakerAuth.handlers.exists);
+
+  router.post('/auth/v2/create', webmakerAuth.handlers.createUser);
+  router.post('/auth/v2/uid-exists', webmakerAuth.handlers.uidExists);
+  router.post('/auth/v2/request', webmakerAuth.handlers.request);
+  router.post('/auth/v2/authenticateToken', webmakerAuth.handlers.authenticateToken);
+  router.post('/auth/v2/verify-password', webmakerAuth.handlers.verifyPassword);
+  router.post('/auth/v2/request-reset-code', webmakerAuth.handlers.requestResetCode);
+  router.post('/auth/v2/reset-password', webmakerAuth.handlers.resetPassword);
 
   return router;
 };

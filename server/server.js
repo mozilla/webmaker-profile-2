@@ -15,6 +15,7 @@ module.exports = function (config) {
     // required
     loginURL: config.loginUrl,
     secretKey: config.sessionSecret,
+    loginHost: config.loginEmailUrl,
 
     // optional
     authLoginURL: config.loginUrlWithAuth,
@@ -53,6 +54,16 @@ module.exports = function (config) {
     mappings: require('webmaker-locale-mapping'),
     translation_directory: path.resolve(__dirname, '../locale')
   }));
+
+  var webmakerLoginJSON = require('../app/_bower_components/webmaker-login-ux/locale/en_US/webmaker-login.json');
+
+  i18n.addLocaleObject({
+    'en-US': webmakerLoginJSON
+  }, function (err, res) {
+    if (err) {
+      console.error(err);
+    }
+  });
 
   app.use(routes);
   app.use(middleware.errorHandler);

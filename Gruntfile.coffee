@@ -16,6 +16,8 @@ module.exports = (grunt) ->
     'app/_bower_components/locompleter/locompleter.js'
     'app/_bower_components/webmaker-analytics/analytics.js'
     'app/_bower_components/spiiin/src/spiiin.js'
+    'app/_bower_components/webmaker-login-ux/dist/ngWebmakerLogin.js'
+    'app/_bower_components/webmaker-login-ux/dist/templates/ngWebmakerLogin.templates.js'
     'app/_js/app.js'
     'app/_js/services.js'
     'app/_js/controllers.js'

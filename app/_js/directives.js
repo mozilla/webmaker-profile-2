@@ -12,59 +12,57 @@ angular.module('wmProfile.directives', [])
       }
     };
   })
-  .directive('wmpSrc', ['jQuery', function (jQuery) {
-    // Add wmp-src to an img to only give it a src if the target is loadable
-    // This prevents broken images from displaying and creates hooks for other display logic
-    return {
-      restrict: 'A',
-      scope: {
-        url: '@wmpSrc',
-        didFail: '=wmpSrcFailed'
-      },
-      link: function ($scope, el, attrs) {
-        var elLoader = jQuery('<img>');
-        el.fadeTo(0, 0);
+  .directive('wmpSrc', ['jQuery',
+    function (jQuery) {
+      // Add wmp-src to an img to only give it a src if the target is loadable
+      // This prevents broken images from displaying and creates hooks for other display logic
+      return {
+        restrict: 'A',
+        scope: {
+          url: '@wmpSrc',
+          didFail: '=wmpSrcFailed'
+        },
+        link: function ($scope, el, attrs) {
+          var elLoader = jQuery('<img>');
+          el.fadeTo(0, 0);
 
-        elLoader.on('load', function () {
-          el.attr('src', $scope.url).fadeTo(200, 1);
-          $scope.didFail = false;
-          $scope.$apply();
-        });
+          elLoader.on('load', function () {
+            el.attr('src', $scope.url).fadeTo(200, 1);
+            $scope.didFail = false;
+            $scope.$apply();
+          });
 
-        elLoader.on('error', function () {
-          $scope.didFail = true;
-          $scope.$apply();
-        });
+          elLoader.on('error', function () {
+            $scope.didFail = true;
+            $scope.$apply();
+          });
 
-        // Attempt to load target image in a non attached IMG element
-        elLoader.attr('src', $scope.url);
-      }
-    };
-  }])
-  .directive('wmpLogin', ['WebmakerAuthClient', 'loginService',
-    function (WebmakerAuthClient, loginService) {
+          // Attempt to load target image in a non attached IMG element
+          elLoader.attr('src', $scope.url);
+        }
+      };
+    }
+  ])
+  .directive('wmpLogin', ['$rootScope',
+    function ($rootScope) {
       return {
         restrict: 'E',
         scope: false,
         templateUrl: '/user/_partials/login.html',
         link: function ($scope, el, attrs) {
-          $scope.userInfo = loginService.getData();
-          $scope.userLoggedIn = !!$scope.userInfo; // No user info means not logged in
+          $scope.userInfo = undefined;
+          $scope.userLoggedIn = false; // No user info means not logged in
 
-          $scope.$on('userLoggedIn', function (event, data) {
+          $rootScope.$on('signedIn', function (user) {
             $scope.userLoggedIn = true;
-            $scope.userInfo = data;
+            $scope.userInfo = user;
             $scope.$digest();
           });
 
-          $scope.$on('userLoggedOut', function (event, data) {
+          $rootScope.$on('loggedOut', function (user) {
             $scope.userLoggedIn = false;
             $scope.userInfo = undefined;
-            $scope.$digest();
           });
-
-          $scope.login = loginService.auth.login;
-          $scope.logout = loginService.auth.logout;
         }
       };
     }
