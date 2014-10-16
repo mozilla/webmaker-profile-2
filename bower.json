@@ -21,6 +21,7 @@
     "makeapi-client": "https://github.com/mozilla/makeapi-client.git#v0.5.24",
     "makerstrap": "0.1.3",
     "webmaker-auth-client": "0.1.11",
+    "webmaker-login-angular": "https://github.com/cadecairos/webmaker-login-angular/archive/8ba3f24d7f68b784a75b75387165b44c175f7430.tar.gz",
     "ngInfiniteScroll": "1.1.2",
     "spiiin": "0.2.0"
   }

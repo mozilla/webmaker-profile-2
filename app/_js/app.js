@@ -4,6 +4,7 @@ angular.module('wmProfile', [
   'ui.bootstrap',
   'wmProfile.filters',
   'wmProfile.services',
+  'ngWebmakerLogin',
   'localization',
   'wmProfile.directives',
   'wmProfile.controllers',

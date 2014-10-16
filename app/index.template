@@ -27,14 +27,13 @@
 </head>
 
 <body ng-cloak>
-  <div ng-controller="createUserController"></div>
 
   <div class="alert alert-info top-banner" ng-hide="userLoggedIn">
     <div class="container">
       <strong>
         Want your own Webmaker profile? <span ng-if="userExists === false && WMP.username">{{ WMP.username }} is available!</span>
       </strong>
-      <button class="btn btn-sm btn-info" ng-click="login()">Sign up today!</button>
+      <button wm-join-webmaker wm-password-reset showcta="false" class="btn btn-sm btn-info">Sign up today!</button>
     </div>
   </div>
 
