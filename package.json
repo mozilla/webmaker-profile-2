@@ -13,6 +13,7 @@
     "async": "0.8.0",
     "badgekit-api-client": "git://github.com/mozilla/badgekit-api-client#rename-instance",
     "body-parser": "1.2.0",
+    "compression": "1.2.0",
     "cson": "1.4.5",
     "csurf": "1.2.2",
     "express": "4.2.0",
