@@ -1,5 +1,6 @@
 module.exports = function (config) {
   var express = require('express');
+  var compress = require('compression');
   var bodyParser = require('body-parser');
   var morgan = require('morgan');
   var csrf = require('csurf');
@@ -28,6 +29,10 @@ module.exports = function (config) {
   var app = express();
   var routes = require('./routes')(config, webmakerAuth, lrRelativePath);
   var middleware = require('./middleware')(config);
+
+  app.use(compress({
+    threshold: 0
+  }));
 
   if (config.enableGELFLogs) {
     app.use(messina.middleware());
