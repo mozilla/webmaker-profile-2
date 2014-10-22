@@ -55,7 +55,7 @@ module.exports = function (config) {
     translation_directory: path.resolve(__dirname, '../locale')
   }));
 
-  var webmakerLoginJSON = require('../app/_bower_components/webmaker-login-angular/locale/en_US/webmaker-login.json');
+  var webmakerLoginJSON = require('../app/_bower_components/webmaker-login-ux/locale/en_US/webmaker-login.json');
 
   i18n.addLocaleObject({
     'en-US': webmakerLoginJSON
