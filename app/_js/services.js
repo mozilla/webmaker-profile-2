@@ -49,7 +49,8 @@ angular.module('wmProfile.services', [])
           }, {
             bio: data.bio,
             location: data.location,
-            links: data.links
+            links: data.links,
+            bgColor: data.bgColor
           }, function (returnedData) {
             userData = data;
             deferred.resolve(userData);

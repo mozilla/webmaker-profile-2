@@ -72,11 +72,22 @@
               <div class="clearfix">
                 <h1 class="pull-left">{{ WMP.username }}</h1>
 
-                <button ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
-                  <span ng-hide="isEditMode" class="fa fa-pencil">&nbsp;{{ 'Edit' | i18n }}</span>
-                  <span ng-show="isEditMode" class="fa fa-save">&nbsp;{{ 'Save' | i18n }}</span>
-                </button>
+                <div class="color-wrapper">
+                  <button ng-show="canEdit" ng-click="isColorEditMode = !isColorEditMode" class="btn btn-secondary pull-right margin-top">
+        		        <span class="fa fa-tint"></span>
+    			        </button>
+
+                  <button ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
+                    <span ng-hide="isEditMode" class="fa fa-pencil">&nbsp;{{ 'Edit' | i18n }}</span>
+                    <span ng-show="isEditMode" class="fa fa-save">&nbsp;{{ 'Save' | i18n }}</span>
+                  </button>
+                </div>
               </div>
+
+              <div ng-show="isColorEditMode" class="pull-right margin-top range-wrapper">
+                <input min="0" step="1" max="359" type="range" />
+        	      <a href="#">Maker Blue (default)</a>
+        	    </div>
 
               <div class="margin-bottom">
                 <textarea class="form-control" ng-show="isEditMode" placeholder="Write a little about yourself!" ng-model="user.bio"></textarea>
