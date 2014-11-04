@@ -1,6 +1,6 @@
 angular.module('wmProfile.controllers', [])
-  .controller('userMeta', ['$scope', '$rootScope', 'badgesService', 'userService', 'loginService',
-    function ($scope, $rootScope, badgesService, userService, loginService) {
+  .controller('userMeta', ['$scope', '$rootScope', 'badgesService', 'userService',
+    function ($scope, $rootScope, badgesService, userService) {
       // Scope defaults
       $scope.hasFeaturedBadge = false;
       $scope.isEditMode = false;
@@ -31,14 +31,21 @@ angular.module('wmProfile.controllers', [])
 
       // Show and hide edit button based on logged in user matching profile owner
 
-      $scope.$on('userLoggedIn', function (event, data) {
+      $scope.$on('login', function (event, data) {
         if ($rootScope.WMP.username === data.username) {
           $scope.canEdit = true;
           $scope.$digest();
         }
       });
 
-      $scope.$on('userLoggedOut', function (event, data) {
+      $scope.$on('verified', function (event, data) {
+        if (data && $rootScope.WMP.username === data.username) {
+          $scope.canEdit = true;
+          $scope.$digest();
+        }
+      });
+
+      $scope.$on('logout', function (event, data) {
         $scope.canEdit = false;
         $scope.$digest();
       });

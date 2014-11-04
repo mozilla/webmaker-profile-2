@@ -6,7 +6,6 @@
 angular.module('wmProfile.services', [])
   .constant('MakeAPI', window.Make)
   .constant('jQuery', window.$)
-  .constant('WebmakerAuthClient', window.WebmakerAuthClient)
   .factory('userService', ['$resource', '$q', '$rootScope',
     function ($resource, $q, $rootScope) {
       var userAPI = $resource('/user/_service/user-data/:username', {
@@ -57,45 +56,6 @@ angular.module('wmProfile.services', [])
             console.error('Failed to update user ' + username, err);
             deferred.reject(err);
           });
-        }
-      };
-    }
-  ])
-  .factory('loginService', ['$rootScope', 'WebmakerAuthClient',
-    function ($rootScope, WebmakerAuthClient) {
-      var visitorData;
-      var auth = new WebmakerAuthClient({
-        csrfToken: $rootScope.WMP.config.csrf,
-        handleNewUserUI: false,
-        paths: {
-          authenticate: '/user/_service/login/authenticate',
-          checkUsername: '/user/_service/login/check-username',
-          create: '/user/_service/login/create',
-          logout: '/user/_service/login/logout',
-          verify: '/user/_service/login/verify',
-        }
-      });
-
-      auth.on('login', function (user, debuggingInfo) {
-        visitorData = user;
-        $rootScope.$broadcast('userLoggedIn', visitorData);
-        $rootScope.userLoggedIn = true;
-      });
-
-      auth.on('logout', function () {
-        visitorData = undefined;
-        $rootScope.$broadcast('userLoggedOut');
-        $rootScope.userLoggedIn = false;
-      });
-
-      auth.on('error', function (errorMessage) {
-        console.error(errorMessage);
-      });
-
-      return {
-        auth: auth,
-        getData: function () {
-          return visitorData;
         }
       };
     }

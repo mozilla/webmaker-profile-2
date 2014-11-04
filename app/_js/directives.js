@@ -53,13 +53,19 @@ angular.module('wmProfile.directives', [])
           $scope.userInfo = undefined;
           $scope.userLoggedIn = false; // No user info means not logged in
 
-          $rootScope.$on('signedIn', function (user) {
+          $rootScope.$on('login', function (user) {
             $scope.userLoggedIn = true;
             $scope.userInfo = user;
             $scope.$digest();
           });
 
-          $rootScope.$on('loggedOut', function (user) {
+          $rootScope.$on('verified', function (user) {
+            $scope.userLoggedIn = !!user;
+            $scope.userInfo = user;
+            $scope.$digest();
+          });
+
+          $rootScope.$on('logout', function (user) {
             $scope.userLoggedIn = false;
             $scope.userInfo = undefined;
           });
