@@ -49,6 +49,19 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
     }
   })
 
+  var loginPaths = {
+    authenticate: '/user/_service/login/authenticate',
+    verify: '/user/_service/login/verify',
+    logout: '/user/_service/login/logout',
+    request: '/user/_service/login/auth/v2/request',
+    uidExists: '/user/_service/login/auth/v2/uid-exists',
+    createUser: '/user/_service/login/auth/v2/create',
+    authenticateToken: '/user/_service/login/auth/v2/authenticate-token',
+    verifyPassword: '/user/_service/login/auth/v2/verify-password',
+    requestResetCode: '/user/_service/login/auth/v2/request-reset-code',
+    resetPassword: '/user/_service/login/auth/v2/reset-password'
+  };
+
   router.get('/user/_service/env.json', function (req, res) {
     var env = config.public;
     env.csrf = req.csrfToken();
@@ -58,6 +71,7 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
       defaultLang: 'en-US',
       direction: req.localeInfo.direction
     };
+    env.loginPaths = loginPaths;
     res.json(config.public);
   });
 
@@ -135,19 +149,19 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
     });
   });
 
-  router.post('/verify', webmakerAuth.handlers.verify);
-  router.post('/authenticate', webmakerAuth.handlers.authenticate);
-  router.post('/create', webmakerAuth.handlers.create);
-  router.post('/logout', webmakerAuth.handlers.logout);
-  router.post('/check-username', webmakerAuth.handlers.exists);
+  router.post('/user/_service/login/verify', webmakerAuth.handlers.verify);
+  router.post('/user/_service/login/authenticate', webmakerAuth.handlers.authenticate);
+  router.post('/user/_service/login/create', webmakerAuth.handlers.create);
+  router.post('/user/_service/login/logout', webmakerAuth.handlers.logout);
+  router.post('/user/_service/login/check-username', webmakerAuth.handlers.exists);
 
-  router.post('/auth/v2/create', webmakerAuth.handlers.createUser);
-  router.post('/auth/v2/uid-exists', webmakerAuth.handlers.uidExists);
-  router.post('/auth/v2/request', webmakerAuth.handlers.request);
-  router.post('/auth/v2/authenticateToken', webmakerAuth.handlers.authenticateToken);
-  router.post('/auth/v2/verify-password', webmakerAuth.handlers.verifyPassword);
-  router.post('/auth/v2/request-reset-code', webmakerAuth.handlers.requestResetCode);
-  router.post('/auth/v2/reset-password', webmakerAuth.handlers.resetPassword);
+  router.post('/user/_service/login/auth/v2/uid-exists', webmakerAuth.handlers.uidExists);
+  router.post('/user/_service/login/auth/v2/request', webmakerAuth.handlers.request);
+  router.post('/user/_service/login/auth/v2/authenticate-token', webmakerAuth.handlers.authenticateToken);
+  router.post('/user/_service/login/auth/v2/create', webmakerAuth.handlers.createUser);
+  router.post('/user/_service/login/auth/v2/verify-password', webmakerAuth.handlers.verifyPassword);
+  router.post('/user/_service/login/auth/v2/request-reset-code', webmakerAuth.handlers.requestResetCode);
+  router.post('/user/_service/login/auth/v2/reset-password', webmakerAuth.handlers.resetPassword);
 
   return router;
 };
