@@ -9,6 +9,7 @@ angular.module('wmProfile.controllers', [])
       // Extrapolate user information from username
       userService.getUserData($rootScope.WMP.username).then(function (userData) {
         $scope.user = userData.user;
+        $scope.changeBg(userData.user.bgColor);
       });
 
       $scope.$watch('isEditMode', function (newValue, oldValue) {
@@ -48,6 +49,37 @@ angular.module('wmProfile.controllers', [])
       $scope.$on('logout', function (event, data) {
         $scope.canEdit = false;
         $scope.$digest();
+      });
+
+      $(document).ready(function(){
+
+        range = document.querySelector("input");
+        body = document.querySelector("body");
+        reset = document.querySelector("a");
+
+        range.addEventListener("input",function(e){
+          $scope.changeBg(e.target.value);
+        });
+
+        reset.addEventListener("click",function(e){
+          range.value = "175";
+          $scope.changeBg(range.value);
+        });
+
+        var body, range;
+
+         $scope.changeBg = function changeBg(midHue) {
+          midHue = $scope.user.bgColor = parseInt(midHue);
+          var startHue = midHue + 20;
+          var endHue = midHue - 15;
+
+          var startColor = "hsl("+ startHue +",100%,60%)";
+          var midColor = "hsl("+ midHue +",100%,60%)";
+          var endColor = "hsl("+ midHue +",84%,38%)";
+          var styleString = "url('bg_noise.png'), linear-gradient(" + startColor + " 0%, " + midColor + " 35%, " + endColor + " 100%)";
+
+          body.style.backgroundImage = styleString;
+        }
       });
     }
   ])
