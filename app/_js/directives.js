@@ -142,11 +142,12 @@ angular.module('wmProfile.directives', [])
       };
     }
   ])
-  .directive('wmpMakesList', ['makeapi',
+  .directive('wmpMakesList', ['makeapi', '$rootScope',
     function (makeapi) {
       return {
         restrict: 'E',
         scope: {
+          lang: $rootScope.lang,
           username: '=wmpMakesListFor',
           kind: '@wmpMakesListKind',
           isLoading: '=wmpMakesListIsLoading',
