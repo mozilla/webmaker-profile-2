@@ -151,9 +151,7 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
 
   router.post('/user/_service/login/verify', webmakerAuth.handlers.verify);
   router.post('/user/_service/login/authenticate', webmakerAuth.handlers.authenticate);
-  router.post('/user/_service/login/create', webmakerAuth.handlers.create);
   router.post('/user/_service/login/logout', webmakerAuth.handlers.logout);
-  router.post('/user/_service/login/check-username', webmakerAuth.handlers.exists);
 
   router.post('/user/_service/login/auth/v2/uid-exists', webmakerAuth.handlers.uidExists);
   router.post('/user/_service/login/auth/v2/request', webmakerAuth.handlers.request);
