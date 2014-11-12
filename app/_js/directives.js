@@ -143,7 +143,7 @@ angular.module('wmProfile.directives', [])
     }
   ])
   .directive('wmpMakesList', ['makeapi', '$rootScope',
-    function (makeapi) {
+    function (makeapi, $rootscope) {
       return {
         restrict: 'E',
         scope: {
