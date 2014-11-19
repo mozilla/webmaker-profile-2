@@ -39,6 +39,14 @@
     "message": "admin",
     "description": "A text string indicating that the signed-in user is an administrator account"
   },
+  "supermentor": {
+    "message": "supermentor",
+    "description": "A text string indicating that the signed-in user is a supermentor account"
+  },
+  "mentor": {
+    "message": "mentor",
+    "description": "A text string indicating that the signed-in user is a mentor account"
+  },
   "myprofile": {
     "message": "My Profile",
     "description": "A link in the user dropdown menu to visit their own user profile on webmaker.org"
