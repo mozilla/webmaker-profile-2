@@ -66,5 +66,17 @@
   "Gravatar": {
     "message": "<a href='http://gravatar.com/' target='_blank'>Change profile picture</a>",
     "description": "Link to gravatar to change profile photo"
+  },
+  "You already added that link": {
+    "message": "You already added that link",
+    "description": "Text telling the user that he has already added the link"
+  },
+  "Invalid URL formatting": {
+    "message": "Invalid URL formatting",
+    "description": "Text telling the user that formatting of the URL is invalid"
+  },
+  "Add Another Link": {
+    "message": "Add Another Link",
+    "description": "A button to add another link"
   }
 }
