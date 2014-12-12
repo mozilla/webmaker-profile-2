@@ -1,5 +1,8 @@
+before_install:
+- npm install -g grunt-cli
+
 install:
-- cp .env-dist .env
+- cp env.cson.example env.cson
 - npm install
 
 language: node_js

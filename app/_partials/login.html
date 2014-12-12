@@ -4,7 +4,7 @@
       <span class="sr-only">{{ 'userlinks' | i18n }}</span>
       <img class="user-info-avatar" ng-src="{{ _user.avatar }}">
       <span>{{ 'Hi' | i18n }}, </span>
-      <strong>{{ _user.username }}</strong> 
+      <strong>{{ _user.username }}</strong>
       <span class="label label-primary" ng-show="_user.isAdmin">{{ 'admin' | i18n }}</span>
       <span class="label label-info" ng-show="!_user.isAdmin && _user.isSuperMentor">{{ 'supermentor' | i18n }}</span>
       <span class="label label-warning" ng-show="!_user.isAdmin && !_user.isSuperMentor && _user.isMentor">{{ 'mentor' | i18n }}</span>

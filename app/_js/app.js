@@ -15,9 +15,9 @@ angular.module('wmProfile', [
 config(['$routeProvider', '$locationProvider',
   function ($routeProvider, $locationProvider) {
     $routeProvider.when('/:locale?/user/:username/badges', {
-      templateUrl: '/user/_partials/badges.html',
-      controller: 'badges'
-    })
+        templateUrl: '/user/_partials/badges.html',
+        controller: 'badges'
+      })
       .when('/:locale?/user/:username/badges', {
         templateUrl: '/user/_partials/badges.html',
         controller: 'badges'
@@ -59,10 +59,10 @@ run(['$rootScope', '$http', 'jQuery',
     };
 
     $.ajax({
-      async: false,
-      url: '/user/_service/env.json',
-      dataType: 'json'
-    })
+        async: false,
+        url: '/user/_service/env.json',
+        dataType: 'json'
+      })
       .done(function (config) {
         $rootScope.WMP.config = config;
         // Set locale information
