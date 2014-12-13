@@ -4,9 +4,7 @@ describe('tests', function() {
 
   var links = element.all(by.repeater('link in annotatedlinks'));
 
-  beforeEach(function() {
-    browser.get('https://webmaker.org/user/' + username);
-  });
+  browser.get('https://webmaker.org/user/' + username);
 
   it('Should have a title', function() {
     expect(browser.getTitle()).toEqual(username + ' | Webmaker');
@@ -18,6 +16,14 @@ describe('tests', function() {
 
   it('Should show correct number of links', function() {
     expect(links.count()).toEqual(linksnum);
+  });
+
+  it('Should not display edit button when not logged in', function() {
+    expect(element(by.buttonText('Edit')).isPresent()).toBe(false);
+  });
+
+  it('Should show login buttton', function() {
+    expect(element(by.buttonText('Log In')).isPresent()).toBe(true);
   });
   
 });
