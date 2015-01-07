@@ -147,7 +147,7 @@ angular.module('wmProfile.directives', [])
       return {
         restrict: 'E',
         scope: {
-          lang: $rootScope.lang,
+          lang: '=',
           username: '=wmpMakesListFor',
           kind: '@wmpMakesListKind',
           isLoading: '=wmpMakesListIsLoading',

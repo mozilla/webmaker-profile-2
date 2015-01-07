@@ -14,7 +14,7 @@
     "badgekit-api-client": "git://github.com/mozilla/badgekit-api-client#rename-instance",
     "body-parser": "1.2.0",
     "compression": "1.2.0",
-    "cson": "1.4.5",
+    "cson": "1.6.2",
     "csurf": "1.2.2",
     "express": "4.2.0",
     "grunt-shell-spawn": "0.3.0",
