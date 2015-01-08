@@ -1,4 +1,4 @@
-# Webmaker Profile 2
+# Webmaker Profile 2  [![Build Status](https://travis-ci.org/mozilla/webmaker-profile-2.svg)](https://travis-ci.org/mozilla/webmaker-profile-2)
 
 *Electric Boogaloo*
 
