@@ -25,5 +25,9 @@ describe('tests', function() {
   it('Should show login buttton', function() {
     expect(element(by.buttonText('Log In')).isPresent()).toBe(true);
   });
-  
+
+  it('Should not display change avatar when not logged in', function() {
+    expect(element(by.binding(' Gravatar | i18n ')).isPresent()).toBe(false);
+  });
+
 });
