@@ -80,8 +80,11 @@ angular.module('wmProfile.directives', [])
         var options = [];
 
         for (var i = 0; i <= 0; i++) {
-          // TODO: This can be done only after localization for profile is completed [1] Uncomment line below [2] Don't hard code id and title
-          // var title = config.langmap[config.supported_languages[i]] ? config.langmap[config.supported_languages[i]].nativeName : 'unknown';
+          // TODO: This can be done only after localization for profile is completed
+          // [1] Uncomment line below
+          // [2] Don't hard code id and title
+          // var title = config.langmap[config.supported_languages[i]] ?
+          //   config.langmap[config.supported_languages[i]].nativeName : 'unknown';
           options.push({
             id: 'en-US',
             title: 'English (United States)'
@@ -124,8 +127,10 @@ angular.module('wmProfile.directives', [])
           var elChildren = $(el).children();
           var urlView = window.location.pathname.match(/\/([^\/]+)\/?$/)[1];
           var viewMatched = false;
+          var i;
+          var ii;
 
-          for (var i = 0, ii = elChildren.length; i < ii; i += 1) {
+          for (i = 0, ii = elChildren.length; i < ii; i += 1) {
             var linkedView = elChildren.eq(i).attr('href').match(/\/([^\/]+)\/?$/)[1];
 
             if (linkedView === urlView) {
@@ -313,8 +318,10 @@ angular.module('wmProfile.directives', [])
 
           function updateUI(links) {
             $scope.annotatedlinks = [];
+            var index;
+            var length;
 
-            for (var index = 0, length = links.length; index < length; index++) {
+            for (index = 0, length = links.length; index < length; index++) {
               $scope.annotatedlinks.push({
                 url: links[index],
                 service: getServiceFromURL(links[index])

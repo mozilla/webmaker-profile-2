@@ -1,11 +1,9 @@
-fs = require('fs')
-
-jshintrc = JSON.parse(fs.readFileSync('./node_modules/mofo-style/linters/.jshintrc', encoding: 'utf8'))
-
-jshintrc.globals =
-  angular: false
-
 module.exports = (grunt) ->
+  jshintrc = grunt.file.readJSON('./node_modules/mofo-style/linters/.jshintrc');
+
+  jshintrc.globals =
+    angular: false
+
   # Declare all non-minified scripts in load order here:
   scripts =
   [
