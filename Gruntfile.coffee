@@ -1,3 +1,10 @@
+fs = require('fs')
+
+jshintrc = JSON.parse(fs.readFileSync('./node_modules/mofo-style/linters/.jshintrc', encoding: 'utf8'))
+
+jshintrc.globals =
+  angular: false
+
 module.exports = (grunt) ->
   # Declare all non-minified scripts in load order here:
   scripts =
@@ -84,30 +91,26 @@ module.exports = (grunt) ->
         dest: "app/_compiled/app.ltr.css"
 
     jshint:
-      all: [
-        "Gruntfile.js"
-        "app/_js/**/*.js"
-      ]
-      options:
-        jshintrc: ".jshintrc"
+      all: "app/_js/**/*.js"
+      options: jshintrc
 
     jsbeautifier:
       modify:
-        src: [
-          "app/_js/**/*.js"
-          "app/_partials/**/*.html"
-        ]
+        src: "app/_js/**/*.js"
         options:
-          config: ".jsbeautifyrc"
+          config: "node_modules/mofo-style/linters/.jsbeautifyrc"
 
       validate:
-        src: [
-          "app/_js/**/*.js"
-          "app/_partials/**/*.html"
-        ]
+        src: "app/_js/**/*.js"
         options:
           mode: "VERIFY_ONLY"
-          config: ".jsbeautifyrc"
+          config: "node_modules/mofo-style/linters/.jsbeautifyrc"
+
+    jscs:
+      src: "app/_js/**/*.js"
+      options:
+        config: 'node_modules/mofo-style/linters/.jscsrc'
+
     'string-replace':
       production:
         files:
@@ -162,6 +165,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-string-replace"
   grunt.loadNpmTasks "grunt-contrib-htmlmin"
+  grunt.loadNpmTasks "grunt-jscs"
 
   # Development mode
   grunt.registerTask "default", [
