@@ -89,7 +89,6 @@ angular.module('wmProfile.services', [])
           return deferred.promise;
         }
       };
-
     }
   ])
   .factory('eventService', ['$rootScope', '$resource',

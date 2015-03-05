@@ -45,7 +45,6 @@ config(['$routeProvider', '$locationProvider',
 
     // TODO - "404" for malformed routes / missing users
     $locationProvider.html5Mode(true);
-
   }
 ]).
 run(['$rootScope', '$http', 'jQuery',

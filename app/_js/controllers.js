@@ -21,8 +21,10 @@ angular.module('wmProfile.controllers', [])
       // Show the featured badge if user has it
       badgesService.getBadges($rootScope.WMP.username).then(function (badges) {
         var featuredBadge = 23; // Super mentor
+        var i;
+        var ii;
 
-        for (var i = 0, ii = badges.length; i < ii && !$scope.hasFeaturedBadge; i++) {
+        for (i = 0, ii = badges.length; i < ii && !$scope.hasFeaturedBadge; i++) {
           if (badges[i].badge.id === featuredBadge) {
             $scope.hasFeaturedBadge = true;
           }
