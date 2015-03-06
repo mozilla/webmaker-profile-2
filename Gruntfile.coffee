@@ -178,12 +178,14 @@ module.exports = (grunt) ->
   grunt.registerTask "clean", [
     "jsbeautifier:modify"
     "jshint"
+    "jscs"
   ]
 
   # Validate code before commit (read only)
   grunt.registerTask "validate", [
     "jsbeautifier:validate"
     "jshint"
+    "jscs"
   ]
 
   # Build for Production
