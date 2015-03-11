@@ -4,7 +4,7 @@
   "description": "Webmaker Profile 2",
   "main": "app/js/app.js",
   "scripts": {
-    "test": "grunt validate",
+    "test": "grunt test",
     "postinstall": "bower install"
   },
   "keywords": [],
@@ -42,6 +42,7 @@
     "grunt-contrib-watch": "0.6.1",
     "grunt-jsbeautifier": "0.2.6",
     "grunt-jscs": "1.5.0",
+    "grunt-shell-spawn": "0.3.0",
     "grunt-string-replace": "0.2.7",
     "mofo-style": "1.0.1"
   },
