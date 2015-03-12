@@ -69,39 +69,49 @@ tests = [
   new Test('Document title is correct.', function () {
     var self = this;
 
-    page.open('http://localhost:1969/user/newgvn', function (status) {
+    page.open('http://localhost:1969/user/mike_danton', function (status) {
       var title = page.evaluate(function () {
         return document.title;
       });
 
-      self.onComplete(title === 'newgvn | Webmaker');
+      self.onComplete(title === 'mike_danton | Webmaker');
     });
   }),
   new Test('Avatar image is visible.', function () {
     var self = this;
 
-    page.open('http://localhost:1969/user/newgvn', function (status) {
-      self.onComplete(page.evaluate(function () {
-        return $('[data-test-id="avatar-img"]').css('display') === 'block';
-      }));
+    page.open('http://localhost:1969/user/mike_danton', function (status) {
+      page.injectJs('login.js');
+
+      // Allow sufficient time for Login mock to take effect
+      setTimeout(function () {
+        self.onComplete(page.evaluate(function () {
+          return $('[data-test-id="avatar-img"]')[0].clientHeight > 0;
+        }));
+      }, 100);
     });
   }),
   new Test('Clicking badge button opened badge pane.', function () {
     var self = this;
 
-    page.open('http://localhost:1969/user/newgvn', function (status) {
-      // Click "badge" tab
-      page.evaluate(function () {
-        $('[data-test-id="btn-badges"]').click();
-      });
+    page.open('http://localhost:1969/user/mike_danton', function (status) {
+      page.injectJs('login.js');
 
-      // Allow DOM to finish updating after click
+      // Allow sufficient time for Login mock to take effect
       setTimeout(function () {
-        var result = page.evaluate(function () {
-          return $('[data-test-id="view-badges"]').css('display');
+        // Click "badge" tab
+        page.evaluate(function () {
+          $('[data-test-id="btn-badges"]').click();
         });
 
-        self.onComplete(result);
+        // Allow DOM to finish updating after click
+        setTimeout(function () {
+          var result = page.evaluate(function () {
+            return $('[data-test-id="view-badges"]')[0].clientHeight > 0;
+          });
+
+          self.onComplete(result);
+        }, 100);
       }, 100);
     });
   })

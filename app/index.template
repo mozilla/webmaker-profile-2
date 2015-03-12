@@ -119,6 +119,8 @@
     </div>
   </div>
 
+  <script>window.TEST = {};</script>
+
   <script src="https://login.persona.org/include.js"></script>
 
   %_APP_JS_%
