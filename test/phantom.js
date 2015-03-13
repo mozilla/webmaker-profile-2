@@ -125,7 +125,7 @@ tests = [
     'login.js',
     function () {
       var self = this;
-      
+
       // Click "badge" tab
       page.evaluate(function () {
         $('[data-test-id="btn-badges"]').click();
@@ -138,6 +138,52 @@ tests = [
         });
 
         self.onComplete(result);
+      }, 100);
+    }
+  ),
+  new Test(
+    'Edit avatar link is visible in edit mode. BZ: 1063965.',
+    'http://localhost:1969/user/mike_danton',
+    'login.js',
+    function () {
+      var self = this;
+
+      page.evaluate(function () {
+        $('[data-test-id="edit-button"]').click();
+      });
+
+      setTimeout(function () {
+        var linkHeight = page.evaluate(function () {
+          return $('[data-test-id="gravatar-metadata"]')[0].clientHeight;
+        });
+
+        self.onComplete(linkHeight > 0);
+      }, 100);
+    }
+  ),
+  new Test(
+    'LinkedIn url should get custom icon. BZ: 1064096.',
+    'http://localhost:1969/user/mike_danton',
+    'login.js',
+    function () {
+      var self = this;
+
+      page.evaluate(function () {
+        $('[data-test-id="edit-button"]').click();
+      });
+
+      setTimeout(function () {
+        var linkExists = page.evaluate(function () {
+          $('[data-test-id="link-input"]')
+            .val('www.linkedin.com/in/mikedanton')
+            .trigger('input');
+
+          $('[data-test-id="button-add-link"]').click();
+
+          return $('[data-test-id="user-service-links"] .fa-stop-adblock-linkedin').length;
+        });
+
+        self.onComplete(linkExists);
       }, 100);
     }
   )
