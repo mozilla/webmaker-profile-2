@@ -48,15 +48,44 @@ var runner = {
 
 // TEST CLASS -----------------------------------------------------------------
 
-var Test = function (description, testBody) {
+/**
+ * Test Class
+ * @param {string} description Description of test success
+ * @param {string} url         Page to run test
+ * @param {string} injectedJS  JS to inject before tests run
+ * @param {function} testBody  Test body (Call this.onComplete() when done)
+ */
+var Test = function (description, url, injectedJS, testBody) {
   this.description = description;
+  this.url = url;
   this.testBody = testBody;
+  this.injectedJS = injectedJS;
 };
 
 Test.prototype = {
+  /**
+   * Run the test
+   */
   run: function () {
-    this.testBody.call(this);
+    var self = this;
+
+    page.open(self.url, function (status) {
+      if (self.injectedJS) {
+        page.injectJs(self.injectedJS);
+
+        setTimeout(function () {
+          self.testBody.call(self);
+        }, 100);
+      } else {
+        console.log('esel');
+        self.testBody.call(self);
+      }
+    });
   },
+  /**
+   * Callback for testBody
+   * @param  {boolean} didPass Test result
+   */
   onComplete: function (didPass) {
     reporter.report(this.description, didPass);
     runner.onTestComplete();
@@ -66,55 +95,52 @@ Test.prototype = {
 // TESTS ----------------------------------------------------------------------
 
 tests = [
-  new Test('Document title is correct.', function () {
-    var self = this;
+  new Test(
+    'Avatar image is visible.',
+    'http://localhost:1969/user/mike_danton',
+    'login.js',
+    function () {
+      var isVisible = page.evaluate(function () {
+        return $('[data-test-id="avatar-img"]')[0].clientHeight > 0;
+      });
 
-    page.open('http://localhost:1969/user/mike_danton', function (status) {
+      this.onComplete(isVisible);
+    }
+  ),
+  new Test(
+    'Document title is correct.',
+    'http://localhost:1969/user/mike_danton',
+    null,
+    function () {
       var title = page.evaluate(function () {
         return document.title;
       });
 
-      self.onComplete(title === 'mike_danton | Webmaker');
-    });
-  }),
-  new Test('Avatar image is visible.', function () {
-    var self = this;
+      this.onComplete(title === 'mike_danton | Webmaker');
+    }
+  ),
+  new Test(
+    'Clicking badge button opened badge pane.',
+    'http://localhost:1969/user/mike_danton',
+    'login.js',
+    function () {
+      var self = this;
+      
+      // Click "badge" tab
+      page.evaluate(function () {
+        $('[data-test-id="btn-badges"]').click();
+      });
 
-    page.open('http://localhost:1969/user/mike_danton', function (status) {
-      page.injectJs('login.js');
-
-      // Allow sufficient time for Login mock to take effect
+      // Allow DOM to finish updating after click
       setTimeout(function () {
-        self.onComplete(page.evaluate(function () {
-          return $('[data-test-id="avatar-img"]')[0].clientHeight > 0;
-        }));
-      }, 100);
-    });
-  }),
-  new Test('Clicking badge button opened badge pane.', function () {
-    var self = this;
-
-    page.open('http://localhost:1969/user/mike_danton', function (status) {
-      page.injectJs('login.js');
-
-      // Allow sufficient time for Login mock to take effect
-      setTimeout(function () {
-        // Click "badge" tab
-        page.evaluate(function () {
-          $('[data-test-id="btn-badges"]').click();
+        var result = page.evaluate(function () {
+          return $('[data-test-id="view-badges"]')[0].clientHeight > 0;
         });
 
-        // Allow DOM to finish updating after click
-        setTimeout(function () {
-          var result = page.evaluate(function () {
-            return $('[data-test-id="view-badges"]')[0].clientHeight > 0;
-          });
-
-          self.onComplete(result);
-        }, 100);
+        self.onComplete(result);
       }, 100);
-    });
-  })
+    }
+  )
 ];
 
 runner.start();
