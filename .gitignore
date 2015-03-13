@@ -13,3 +13,4 @@ env.cson
 .static/
 app/index.html
 app.ltr.css.map
+npm-debug.log
