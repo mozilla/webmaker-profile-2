@@ -219,6 +219,7 @@ module.exports = (grunt) ->
 
   # Test
   grunt.registerTask "test", [
+    "build"
     "validate"
     "shell:server"
     "shell:sleep" # Allow server to get completely ready
