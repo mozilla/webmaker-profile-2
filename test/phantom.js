@@ -1,100 +1,17 @@
 var page = require('webpage').create();
 
-var testsRun = 0;
-var passed = 0;
-var failed = 0;
+var reporter = require('./reporter');
+var runner = require('./runner');
+var Test = require('./test-object');
 
-var tests;
-
-// REPORTER -------------------------------------------------------------------
-
-var reporter = {
-  report: function (test, result) {
-    if (result) {
-      console.log('PASS: ' + test);
-      passed++;
-    } else {
-      console.log('FAIL: ' + test);
-      failed++;
-    }
-
-    testsRun++;
-
-    if (testsRun === tests.length) {
-      this.onComplete();
-    }
-  },
-  onComplete: function () {
-    console.log('\nAll tests finished.\n');
-    console.log(passed + ' tests passed.');
-    console.log(failed + ' tests failed.');
-
-    phantom.exit(failed > 0 ? 1 : 0);
-  }
-};
-
-// RUNNER ---------------------------------------------------------------------
-
-var runner = {
-  start: function () {
-    tests[0].run();
-  },
-  onTestComplete: function () {
-    if (testsRun < tests.length) {
-      tests[testsRun].run();
-    }
-  }
-};
-
-// TEST CLASS -----------------------------------------------------------------
-
-/**
- * Test Class
- * @param {string} description Description of test success
- * @param {string} url         Page to run test
- * @param {string} injectedJS  JS to inject before tests run
- * @param {function} testBody  Test body (Call this.onComplete() when done)
- */
-var Test = function (description, url, injectedJS, testBody) {
-  this.description = description;
-  this.url = url;
-  this.testBody = testBody;
-  this.injectedJS = injectedJS;
-};
-
-Test.prototype = {
-  /**
-   * Run the test
-   */
-  run: function () {
-    var self = this;
-
-    page.open(self.url, function (status) {
-      if (self.injectedJS) {
-        page.injectJs(self.injectedJS);
-
-        setTimeout(function () {
-          self.testBody.call(self);
-        }, 100);
-      } else {
-        console.log('esel');
-        self.testBody.call(self);
-      }
-    });
-  },
-  /**
-   * Callback for testBody
-   * @param  {boolean} didPass Test result
-   */
-  onComplete: function (didPass) {
-    reporter.report(this.description, didPass);
-    runner.onTestComplete();
-  }
-};
+// Keep the console quiet
+page.onConsoleMessage = function () {};
+page.onResourceReceived = function () {};
+page.onError = function () {};
 
 // TESTS ----------------------------------------------------------------------
 
-tests = [
+var tests = [
   new Test(
     'Avatar image is visible.',
     'http://localhost:1969/user/mike_danton',
@@ -189,4 +106,14 @@ tests = [
   )
 ];
 
-runner.start();
+// Decorate Test instances with an `onComplete` method to trigger the reporter and runner
+tests.forEach(function (test) {
+  test.onComplete = function (didPass) {
+    reporter.report(this.description, didPass);
+    runner.onTestComplete();
+  };
+});
+
+runner.start(tests, function allTestsDone() {
+  reporter.summarize();
+});

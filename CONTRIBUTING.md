@@ -58,6 +58,11 @@ The preferred way to target an element is to give it a `data-test-id` attribute 
 
 There is one global object, `TEST`, that may be decorated with references to private members of the application's JS code. This is useful for reading data about the application state, but also for mocking purposes such as injecting dummy data (see also: `injectedJS`).
 
+#### DOM and setTimeout
+
+There are some cases where the DOM won't finish updating fast enough to depend on programmatic interactions and subsequent mutations being syncronous.
+
+An example of this is firing a click event on a button and then checking for a modal window to be visible. The modal may not be visible immediately, so you will need a `setTimeout` call to delay your test. Generally 1 MS should be sufficient for non-animated UI, but be generous with your delay to reduce the likelihood of a race condition (at least 100 MS is encouraged).
 
 ## Pull requests
 
