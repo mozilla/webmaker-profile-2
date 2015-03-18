@@ -135,7 +135,8 @@ module.exports = function (config, webmakerAuth, liveReloadRelativePath) {
     var filteredData = {
       bio: req.body.bio,
       location: req.body.location,
-      links: req.body.links
+      links: req.body.links,
+      bgColor: req.body.bgColor
     }
 
     userClient.update.byUsername(req.params.username, filteredData, function (err, data) {
