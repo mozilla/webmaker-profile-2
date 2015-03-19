@@ -35,6 +35,8 @@ Any patch should be tested in as many of our [supported browsers](LINK HERE) as 
 
 To run tests you need a [global install of Phantom JS](http://phantomjs.org/download.html).
 
+*Warning:* If you're running OSX Yosemite you'll need to get a binary [here](https://github.com/eugene1g/phantomjs/releases). Hopefully this will be fixed soon!
+
 Once PhantomJS is installed, simply execute `npm test`.
 
 ### Adding Tests
