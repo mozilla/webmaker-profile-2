@@ -61,24 +61,24 @@
     <div ng-show="userExists">
       <div ng-controller="userMeta as user" class="row double-margin-bottom">
         <div class="user-avatar col-xs-12 col-sm-2">
-          <img ng-src="{{ user.avatar }}" class="img-circle img-responsive">
-          <span class="text-center gravatar" ng-show="isEditMode" ng-bind-html="'Gravatar' | i18n"></span>
+          <img data-test-id="avatar-img" ng-src="{{ user.avatar }}" class="img-circle img-responsive">
+          <span data-test-id="gravatar-metadata" class="text-center gravatar" ng-show="isEditMode" ng-bind-html="'Gravatar' | i18n"></span>
         </div>
 
         <div class="user-metadata solid-bg col-xs-12 col-sm-10">
           <div ng-class="{'row': hasFeaturedBadge, 'match-child-heights-min-sm': hasFeaturedBadge}">
             <div ng-class="{'col-sm-10': hasFeaturedBadge}">
               <div class="clearfix">
-                <h1 class="pull-left">{{ WMP.username }}</h1>
+                <h1 data-test-id="username-header" class="pull-left">{{ WMP.username }}</h1>
 
-                <button ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
+                <button data-test-id="edit-button" ng-show="canEdit" ng-click="isEditMode = !isEditMode" class="btn btn-secondary pull-right margin-top">
                   <span ng-hide="isEditMode" class="fa fa-pencil">&nbsp;{{ 'Edit' | i18n }}</span>
                   <span ng-show="isEditMode" class="fa fa-save">&nbsp;{{ 'Save' | i18n }}</span>
                 </button>
               </div>
 
               <div class="margin-bottom">
-                <textarea class="form-control" ng-show="isEditMode" placeholder="Write a little about yourself!" ng-model="user.bio"></textarea>
+                <textarea data-test-id="bio-field" class="form-control" ng-show="isEditMode" placeholder="Write a little about yourself!" ng-model="user.bio"></textarea>
                 <p ng-hide="isEditMode">{{ user.bio }}</p>
               </div>
 
@@ -102,11 +102,11 @@
       <div class="row">
         <div class="tab-nav col-xs-12">
           <div wmp-toggle-group wmp-activate-child class="btn-group">
-            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/makes">{{ 'Makes' | i18n }}</a>
-            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/badges">{{ 'Badges' | i18n }}</a>
-            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/likes">{{ 'Likes' | i18n }}</a>
-            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/events">{{ 'Events' | i18n }}</a>
-            <a class="btn" href="/{{ lang }}/user/{{ WMP.username }}/teaching-resources">{{ 'Teaching_Resources' | i18n }}</a>
+            <a data-test-id="btn-makes" class="btn" href="/{{ lang }}/user/{{ WMP.username }}/makes">{{ 'Makes' | i18n }}</a>
+            <a data-test-id="btn-badges" class="btn" href="/{{ lang }}/user/{{ WMP.username }}/badges">{{ 'Badges' | i18n }}</a>
+            <a data-test-id="btn-likes" class="btn" href="/{{ lang }}/user/{{ WMP.username }}/likes">{{ 'Likes' | i18n }}</a>
+            <a data-test-id="btn-events" class="btn" href="/{{ lang }}/user/{{ WMP.username }}/events">{{ 'Events' | i18n }}</a>
+            <a data-test-id="btn-teaching-resources" class="btn" href="/{{ lang }}/user/{{ WMP.username }}/teaching-resources">{{ 'Teaching_Resources' | i18n }}</a>
           </div>
         </div>
       </div>
@@ -118,6 +118,8 @@
       </div>
     </div>
   </div>
+
+  <script>window.TEST = {};</script>
 
   <script src="https://login.persona.org/include.js"></script>
 

@@ -53,6 +53,8 @@ run(['$rootScope', '$http', 'jQuery',
 
     extractedUsername = extractedUsername ? extractedUsername[1] : undefined;
 
+    window.TEST.$rootScope = $rootScope;
+
     $rootScope.WMP = {
       username: extractedUsername
     };

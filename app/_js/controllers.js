@@ -1,6 +1,8 @@
 angular.module('wmProfile.controllers', [])
   .controller('userMeta', ['$scope', '$rootScope', 'badgesService', 'userService',
     function ($scope, $rootScope, badgesService, userService) {
+      window.TEST.userMetaScope = $scope;
+
       // Scope defaults
       $scope.hasFeaturedBadge = false;
       $scope.isEditMode = false;

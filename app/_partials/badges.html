@@ -1,22 +1,24 @@
-<h2 class="margin-bottom">Badges</h2>
+<div data-test-id="view-badges">
+  <h2 class="margin-bottom">Badges</h2>
 
-<rad-spinner rad-spinner-template="/user/_partials/spinner.html" rad-spinner-timeout="5000" rad-spinner-data="badges" rad-spinner-data-loading="dataLoading" rad-spinner-data-failed="didServiceFail">
-</rad-spinner>
+  <rad-spinner rad-spinner-template="/user/_partials/spinner.html" rad-spinner-timeout="5000" rad-spinner-data="badges" rad-spinner-data-loading="dataLoading" rad-spinner-data-failed="didServiceFail">
+  </rad-spinner>
 
-<div class="badges">
-  <div ng-repeat="badge in badges" ng-show="badges.length">
-    <div class="thumbnail thumbnail-badges">
-      <a href="{{WMP.config.webmakerBadgesUrl + '/' + badge.badge.slug}}" target="_self">
-        <img ng-src="{{badge.badge.imageUrl}}">
-      </a>
-      <h4>{{badge.badge.name}}</h4>
-      <p>Issued by <a href="{{badge.badge.issuerUrl}}" target="_self">{{badge.badge.issuer.name}}</a>
-        <br>{{badge.issuedOn | date : 'mediumDate'}}</p>
-      <div class="badge-actions">
-        <form method="post" action="{{backpackURL}}" target="_blank">
-          <input type="hidden" name="assertions" value="{{badge.assertionUrl}}">
-          <input ng-show="userInfo.username === WMP.username" type="submit" class="badge-action btn btn-xs btn-primary" src="/user/_img/backpack.png" value="Send to Backpack">
-        </form>
+  <div class="badges">
+    <div ng-repeat="badge in badges" ng-show="badges.length">
+      <div class="thumbnail thumbnail-badges">
+        <a href="{{WMP.config.webmakerBadgesUrl + '/' + badge.badge.slug}}" target="_self">
+          <img ng-src="{{badge.badge.imageUrl}}">
+        </a>
+        <h4>{{badge.badge.name}}</h4>
+        <p>Issued by <a href="{{badge.badge.issuerUrl}}" target="_self">{{badge.badge.issuer.name}}</a>
+          <br>{{badge.issuedOn | date : 'mediumDate'}}</p>
+        <div class="badge-actions">
+          <form method="post" action="{{backpackURL}}" target="_blank">
+            <input type="hidden" name="assertions" value="{{badge.assertionUrl}}">
+            <input ng-show="userInfo.username === WMP.username" type="submit" class="badge-action btn btn-xs btn-primary" src="/user/_img/backpack.png" value="Send to Backpack">
+          </form>
+        </div>
       </div>
     </div>
   </div>

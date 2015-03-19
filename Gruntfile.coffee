@@ -3,6 +3,11 @@ module.exports = (grunt) ->
 
   jshintrc.globals =
     angular: false
+    phantom: false
+    $: false
+
+  testsPassed = false
+  scriptsToLint = ["app/_js/**/*.js", "test/phantom.js", "test/reporter.js", "test/runner.js", "test/login.js"]
 
   # Declare all non-minified scripts in load order here:
   scripts =
@@ -61,6 +66,14 @@ module.exports = (grunt) ->
         options:
           async: true
         command: 'node server'
+      sleep:
+        command: 'sleep 5'
+      test:
+        options:
+          callback: (exitCode, stdOutStr, stdErrStr, done) ->
+            testsPassed = if exitCode > 0 then false else true
+            done()
+        command: 'phantomjs test/phantom.js'
 
     watch:
       options:
@@ -89,23 +102,23 @@ module.exports = (grunt) ->
         dest: "app/_compiled/app.ltr.css"
 
     jshint:
-      all: "app/_js/**/*.js"
+      all: scriptsToLint
       options: jshintrc
 
     jsbeautifier:
       modify:
-        src: "app/_js/**/*.js"
+        src: scriptsToLint
         options:
           config: "node_modules/mofo-style/linters/.jsbeautifyrc"
 
       validate:
-        src: "app/_js/**/*.js"
+        src: scriptsToLint
         options:
           mode: "VERIFY_ONLY"
           config: "node_modules/mofo-style/linters/.jsbeautifyrc"
 
     jscs:
-      src: "app/_js/**/*.js"
+      src: scriptsToLint
       options:
         config: 'node_modules/mofo-style/linters/.jscsrc'
 
@@ -195,5 +208,23 @@ module.exports = (grunt) ->
     "less:production"
     "uglify"
     "autoprefixer:build"
+  ]
+
+  # This is needed to suppress the exit code returned
+  #  from testing until the server is killed
+  grunt.registerTask "exit",
+    "Make a proper exit based on test results",
+    () ->
+      if !testsPassed then grunt.fail.warn("Tests failed!", 1)
+
+  # Test
+  grunt.registerTask "test", [
+    "build"
+    "validate"
+    "shell:server"
+    "shell:sleep" # Allow server to get completely ready
+    "shell:test"
+    "shell:server:kill"
+    "exit"
   ]
   return

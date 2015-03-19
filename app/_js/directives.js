@@ -50,6 +50,8 @@ angular.module('wmProfile.directives', [])
         scope: false,
         templateUrl: '/user/_partials/login.html',
         link: function ($scope, el, attrs) {
+          window.TEST.wmpLoginScope = $scope;
+
           $scope.userInfo = undefined;
           $scope.userLoggedIn = false; // No user info means not logged in
 
