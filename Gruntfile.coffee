@@ -7,7 +7,7 @@ module.exports = (grunt) ->
     $: false
 
   testsPassed = false
-  scriptsToLint = ["app/_js/**/*.js", "test/phantom.js", "test/reporter.js", "test/runner.js", "test/login.js"]
+  scriptsToLint = ["app/_js/**/*.js", "test/*.js"]
 
   # Declare all non-minified scripts in load order here:
   scripts =
