@@ -1,3 +1,10 @@
+var page = require('webpage').create();
+
+// Keep the console quiet
+page.onConsoleMessage = function () {};
+page.onResourceReceived = function () {};
+page.onError = function () {};
+
 module.exports = (function () {
   /**
    * Test Class
@@ -14,15 +21,21 @@ module.exports = (function () {
   };
 
   Test.prototype = {
+    page: page,
     /**
      * Run the test
      */
     run: function () {
       var self = this;
 
-      page.open(self.url, function (status) {
+      self.page.viewportSize = {
+        width: 960,
+        height: 800
+      };
+
+      self.page.open(self.url, function (status) {
         if (self.injectedJS) {
-          page.injectJs(self.injectedJS);
+          self.page.injectJs(self.injectedJS);
 
           setTimeout(function () {
             self.testBody.call(self);

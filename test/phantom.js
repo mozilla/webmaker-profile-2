@@ -1,13 +1,6 @@
-var page = require('webpage').create();
-
 var reporter = require('./reporter');
 var runner = require('./runner');
 var Test = require('./test-object');
-
-// Keep the console quiet
-page.onConsoleMessage = function () {};
-page.onResourceReceived = function () {};
-page.onError = function () {};
 
 // TESTS ----------------------------------------------------------------------
 
@@ -17,7 +10,7 @@ var tests = [
     'http://localhost:1969/user/mike_danton',
     'login.js',
     function () {
-      var isVisible = page.evaluate(function () {
+      var isVisible = this.page.evaluate(function () {
         return $('[data-test-id="avatar-img"]')[0].clientHeight > 0;
       });
 
@@ -29,7 +22,7 @@ var tests = [
     'http://localhost:1969/user/mike_danton',
     null,
     function () {
-      var title = page.evaluate(function () {
+      var title = this.page.evaluate(function () {
         return document.title;
       });
 
@@ -44,13 +37,13 @@ var tests = [
       var self = this;
 
       // Click "badge" tab
-      page.evaluate(function () {
+      self.page.evaluate(function () {
         $('[data-test-id="btn-badges"]').click();
       });
 
       // Allow DOM to finish updating after click
       setTimeout(function () {
-        var result = page.evaluate(function () {
+        var result = self.page.evaluate(function () {
           return $('[data-test-id="view-badges"]')[0].clientHeight > 0;
         });
 
@@ -65,12 +58,12 @@ var tests = [
     function () {
       var self = this;
 
-      page.evaluate(function () {
+      self.page.evaluate(function () {
         $('[data-test-id="edit-button"]').click();
       });
 
       setTimeout(function () {
-        var linkHeight = page.evaluate(function () {
+        var linkHeight = self.page.evaluate(function () {
           return $('[data-test-id="gravatar-metadata"]')[0].clientHeight;
         });
 
@@ -85,12 +78,12 @@ var tests = [
     function () {
       var self = this;
 
-      page.evaluate(function () {
+      self.page.evaluate(function () {
         $('[data-test-id="edit-button"]').click();
       });
 
       setTimeout(function () {
-        var linkExists = page.evaluate(function () {
+        var linkExists = self.page.evaluate(function () {
           $('[data-test-id="link-input"]')
             .val('www.linkedin.com/in/mikedanton')
             .trigger('input');
@@ -107,8 +100,12 @@ var tests = [
 ];
 
 // Decorate Test instances with an `onComplete` method to trigger the reporter and runner
-tests.forEach(function (test) {
+tests.forEach(function (test, index) {
   test.onComplete = function (didPass) {
+    if (!didPass) {
+      this.page.render('test/screenshots/' + index + '-FAIL.png');
+    }
+
     reporter.report(this.description, didPass);
     runner.onTestComplete();
   };
