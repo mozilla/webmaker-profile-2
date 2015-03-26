@@ -5,7 +5,8 @@
   "main": "app/js/app.js",
   "scripts": {
     "test": "grunt test",
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "phantom": "phantomjs test/phantom.js"
   },
   "keywords": [],
   "author": "author",
