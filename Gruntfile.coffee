@@ -73,7 +73,7 @@ module.exports = (grunt) ->
           callback: (exitCode, stdOutStr, stdErrStr, done) ->
             testsPassed = if exitCode > 0 then false else true
             done()
-        command: 'phantomjs test/phantom.js'
+        command: 'npm run phantom'
 
     watch:
       options:

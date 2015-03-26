@@ -33,15 +33,11 @@ Any patch should be tested in as many of our [supported browsers](LINK HERE) as 
 
 ### Running Tests
 
-To run tests you need a [global install of Phantom JS](http://phantomjs.org/download.html).
-
-*Warning:* If you're running OSX Yosemite you'll need to get a binary [here](https://github.com/eugene1g/phantomjs/releases). Hopefully this will be fixed soon!
-
-Once PhantomJS is installed, simply execute `npm test`.
+Simply run `npm test` to perform all functional tests.
 
 ### Adding Tests
 
-Any patch for this repo should be accompanied by one or more automated tests to detect and avoid regressions introduced by future code changes.
+Any patch for this repo should be accompanied by one or more automated tests to avoid regressions introduced by future code changes.
 
 Currently we use PhantomJS for functional testing in a headless browser. To add a new test, edit `test/phantom.js` and append a new `Test` object to the `tests` array.
 

@@ -1,10 +1,7 @@
-var reporter = require('./reporter');
-var runner = require('./runner');
-var Test = require('./test-object');
+var mofoPhantom = require('mofo-phantom');
+var Test = mofoPhantom.Test;
 
-// TESTS ----------------------------------------------------------------------
-
-var tests = [
+mofoPhantom.runTests([
   new Test(
     'Avatar image is visible.',
     'http://localhost:1969/user/mike_danton',
@@ -97,20 +94,4 @@ var tests = [
       }, 100);
     }
   )
-];
-
-// Decorate Test instances with an `onComplete` method to trigger the reporter and runner
-tests.forEach(function (test, index) {
-  test.onComplete = function (didPass) {
-    if (!didPass) {
-      this.page.render('test/screenshots/' + index + '-FAIL.png');
-    }
-
-    reporter.report(this.description, didPass);
-    runner.onTestComplete();
-  };
-});
-
-runner.start(tests, function allTestsDone() {
-  reporter.summarize();
-});
+]);
