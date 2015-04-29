@@ -18,7 +18,7 @@
     "cson": "1.6.2",
     "csurf": "1.2.2",
     "express": "4.2.0",
-    "grunt-shell-spawn": "0.3.0",
+    "frameguard": "^0.2.2",
     "messina": "0.1.2",
     "morgan": "1.0.1",
     "newrelic": "1.5.5",

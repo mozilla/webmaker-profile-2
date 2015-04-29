@@ -4,6 +4,7 @@ module.exports = function (config) {
   var bodyParser = require('body-parser');
   var morgan = require('morgan');
   var csrf = require('csurf');
+  var frameguard = require('frameguard');
   var messina = require('messina')('webmaker-profile-2-' + config.nodeEnv);
   var WebmakerAuth = require('webmaker-auth');
   var path = require('path');
@@ -34,6 +35,8 @@ module.exports = function (config) {
   app.use(compress({
     threshold: 0
   }));
+
+  app.use(frameguard('deny'));
 
   if (config.enableGELFLogs) {
     app.use(messina.middleware());
